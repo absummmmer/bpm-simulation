@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BPM Simulator</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            dark: {
+              900: '#111827',
+              800: '#1f2937',
+              700: '#374151',
+              600: '#4b5563',
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-dark-900 text-white min-h-screen p-4 sm:p-8 flex flex-col justify-center">
+  <!-- Help Modal -->
+  <div id="help_modal" class="fixed inset-0 bg-black/70 z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-dark-800 rounded-xl max-w-2xl w-full max-h-[80vh] overflow-hidden flex flex-col">
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between p-4 border-b border-dark-700">
+        <div class="flex items-center gap-2">
+          <button id="lang_en" class="px-3 py-1 text-sm rounded-lg bg-blue-600 text-white">English</button>
+          <button id="lang_zh" class="px-3 py-1 text-sm rounded-lg bg-dark-700 text-gray-300">中文</button>
+        </div>
+        <button id="close_help"
+          class="w-8 h-8 flex items-center justify-center rounded-lg bg-dark-700 hover:bg-dark-600 transition">
+          &#10005;
+        </button>
+      </div>
+      <!-- Modal Content -->
+      <div class="p-4 overflow-y-auto">
+        <!-- English Content -->
+        <div id="help_en" class="space-y-4">
+          <h2 class="text-xl font-bold">What is this?</h2>
+          <p class="text-gray-300">
+            This is a web-based simulator that perfectly replicates the audio signal format of the <strong>BPM Shortwave
+              Time Station</strong> operated by the National Time Service Center of China.
+          </p>
+  
+          <h3 class="text-lg font-bold mt-4">How to use</h3>
+          <p class="text-gray-300">
+            Click the <button class="w-6 h-6 bg-green-600 text-white font-mono rounded transition text-center"
+              disabled="true">&minus;</button> button. When the button changes to <button
+              class="w-6 h-6 bg-red-600 text-white font-mono rounded transition text-center"
+              disabled="true">&acd;</button>, you will hear the simulated BPM signal.
+          </p>
+  
+          <div class="bg-yellow-900/30 border border-yellow-600/50 p-2 rounded text-yellow-200 text-xs">
+            <strong>Note:</strong> When this page runs in the background (e.g., another browser tab is active), browsers
+            may reduce timer precision and throttle audio processing to save resources. This can cause audible delay or
+            glitches. <strong>Please keep this page in the foreground</strong> for the best experience.
+          </div>
+  
+          <div class="bg-dark-700/30 p-3 rounded-lg">
+            <h4 class="font-bold text-blue-400">What you hear</h4>
+            <p class="text-gray-300 text-sm mt-1">The BPM signal repeats every half hour. The chart and table below give
+              you a quick overview.</p>
+            <!-- SVG pie chart -->
+            <div class="flex justify-center my-2">
+              <svg width="280" height="280" viewBox="0 0 280 280">
+                <path d="M 140 10 A 130 130 0 0 1 252.58 75 L 140 140 Z" fill="#4a6fe3" />
+                <path d="M 270 140 A 130 130 0 0 1 205 252.58 L 140 140 Z" fill="#4a6fe3" />
+                <path d="M 140 270 A 130 130 0 0 1 27.42 205 L 140 140 Z" fill="#4a6fe3" />
+                <path d="M 10 140 A 130 130 0 0 1 75 27.42 L 140 140 Z" fill="#4a6fe3" />
+                <path d="M 252.58 75 A 130 130 0 0 1 270 140 L 140 140 Z" fill="#8ab4f8" />
+                <path d="M 27.42 205 A 130 130 0 0 1 10 140 L 140 140 Z" fill="#8ab4f8" />
+                <path d="M 205 252.58 A 130 130 0 0 1 153.585 269.285 L 140 140 Z" fill="#f57c00" />
+                <path d="M 75 27.42 A 130 130 0 0 1 126.415 10.715 L 140 140 Z" fill="#f57c00" />
+                <path d="M 153.585 269.285 A 130 130 0 0 1 140 270 L 140 140 Z" fill="#4caf50" />
+                <path d="M 126.415 10.715 A 130 130 0 0 1 140 10 L 140 140 Z" fill="#4caf50" />
+                <circle cx="140" cy="140" r="70" fill="white" />
+                <text x="140" y="145" text-anchor="middle" font-size="18" font-weight="bold" fill="#d32f2f">BPM</text>
+                <text x="140" y="25" text-anchor="middle" font-size="10" fill="white">00</text>
+                <text x="241" y="85" text-anchor="middle" font-size="10" fill="white">10</text>
+                <text x="258" y="143" text-anchor="middle" font-size="10" fill="white">15</text>
+                <text x="198" y="243" text-anchor="middle" font-size="10" fill="white">25</text>
+                <text x="152" y="253" text-anchor="middle" font-size="10" fill="white">29</text>
+                <text x="140" y="262" text-anchor="middle" font-size="10" fill="white">30</text>
+                <text x="39" y="201" text-anchor="middle" font-size="10" fill="white">40</text>
+                <text x="22" y="143" text-anchor="middle" font-size="10" fill="white">45</text>
+                <text x="82" y="42" text-anchor="middle" font-size="10" fill="white">55</text>
+                <text x="128" y="34" text-anchor="middle" font-size="10" fill="white">59</text>
+              </svg>
+            </div>
+            <!-- Legend -->
+            <div class="flex flex-wrap justify-center gap-4 text-sm text-gray-300 mb-3">
+              <div class="flex items-center gap-2">
+                <div class="w-4 h-4 bg-[#4a6fe3]"></div><span>UTC + Time Code</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="w-4 h-4 bg-[#8ab4f8]"></div><span>Carrier</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="w-4 h-4 bg-[#f57c00]"></div><span>UT1</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="w-4 h-4 bg-[#4caf50]"></div><span>Station ID</span>
+              </div>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm text-gray-300 border-collapse">
+                <thead>
+                  <tr class="border-b border-dark-600">
+                    <th class="text-left py-1 pr-2">Minutes (UTC)</th>
+                    <th class="text-left py-1">Signal Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="py-1 pr-2">00–10, 30–40</td>
+                    <td class="py-1">UTC + Time Code: 1 kHz second ticks (10 ms, 300 ms on the minute), with a 125 Hz
+                      subcarrier for time code between pulses (if enabled – see the <strong>TimeCode</strong> checkbox
+                      below the start/stop button).</td>
+                  </tr>
+                  <tr>
+                    <td class="py-1 pr-2">10–15, 40–45</td>
+                    <td class="py-1">Carrier only (no modulation) – completely silent.</td>
+                  </tr>
+                  <tr>
+                    <td class="py-1 pr-2">15–25, 45–55</td>
+                    <td class="py-1">UTC + Time Code (same as above).</td>
+                  </tr>
+                  <tr>
+                    <td class="py-1 pr-2">25–29, 55–59</td>
+                    <td class="py-1">UT1: 1 kHz second ticks (100 ms, 300 ms on the minute), no time code, shifted by the
+                      DUT1 value. <span class="text-green-400">(Accuracy depends on the DUT1 setting in the panel
+                        below.)</span></td>
+                  </tr>
+                  <tr>
+                    <td class="py-1 pr-2">29–30, 59–60</td>
+                    <td class="py-1">Station ID: First 40 seconds: Morse code "BPM". Last 20 seconds: voice announcement
+                      "BPM标准时间标准频率发播台" ("BPM standard time, standard frequency transmission station").</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="text-gray-400 text-xs mt-2">
+              <p>For the exact time code encoding, please refer to the reference below.</p>
+            </div>
+          </div>
+  
+          <!-- Control options (with UI indicators) -->
+          <div class="bg-dark-700/30 p-3 rounded-lg">
+            <h4 class="font-bold text-blue-400">Control options &amp; UI indicators</h4>
+            <p class="text-gray-300 text-sm mt-1">
+              Below the start/stop button, you will find two checkboxes:
+            </p>
+            <ul class="list-disc list-inside text-gray-300 text-sm space-y-1">
+              <li><strong>TimeCode<sup>[1]</sup></strong> – Enable or disable the 125Hz time code subcarrier. When
+                unchecked, you will only hear the second pulses (1kHz) without the low‑frequency “hum”.</li>
+              <li><strong>&#13235;</strong> – Show or hide milliseconds on the main UTC time display and the UT1 time
+                display.
+              </li>
+            </ul>
+            <p class="text-gray-300 text-sm mt-2">
+              In addition, the page also shows:
+            </p>
+            <ul class="list-disc list-inside text-gray-300 text-sm space-y-1">
+              <li><span class="text-purple-400">&#128251;Current signal type</span> – helps you identify the ongoing
+                broadcast period.</li>
+              <li><span class="text-green-400">&#127760;UT1 time</span> – the time corrected by the DUT1 value
+                (astronomical time).</li>
+            </ul>
+            <p class="text-gray-400 text-xs mt-2">All settings are saved automatically and restored when you revisit the
+              page.</p>
+          </div>
+  
+          <h3 class="text-lg font-bold mt-4">About Time Service & BPM Shortwave Time Station</h3>
+          <p class="text-gray-300">
+            Time service is one of the core infrastructures of modern society. Precise time synchronization is the
+            foundation for the normal operation of satellite navigation, 5G communication, financial transactions, deep
+            space exploration and other fields.
+          </p>
+          <p class="text-gray-300">
+            BPM Shortwave Time Station is China's national shortwave time service station, similar to the WWV/WWVH
+            stations in the United States.
+            It broadcasts precise time signals on multiple shortwave frequencies, allowing anyone with a
+            shortwave radio to sync their clocks to national standard time for free.
+          </p>
+  
+          <!-- Frequency Schedule Table (with UTC column) -->
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm text-left text-gray-300 border border-dark-700 rounded-lg">
+              <thead class="text-xs uppercase bg-dark-700">
+                <tr>
+                  <th class="px-4 py-2">Frequency</th>
+                  <th class="px-4 py-2">UTC Time</th>
+                  <th class="px-4 py-2">China Standard Time (UTC+8)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-b border-dark-700">
+                  <td class="px-4 py-2">2.5 MHz</td>
+                  <td class="px-4 py-2">07:30 - 01:00</td>
+                  <td class="px-4 py-2">15:30 - 09:00</td>
+                </tr>
+                <tr class="border-b border-dark-700">
+                  <td class="px-4 py-2">5.0 MHz</td>
+                  <td class="px-4 py-2">00:00 - 24:00</td>
+                  <td class="px-4 py-2">00:00 - 24:00</td>
+                </tr>
+                <tr class="border-b border-dark-700">
+                  <td class="px-4 py-2">10.0 MHz</td>
+                  <td class="px-4 py-2">00:00 - 24:00</td>
+                  <td class="px-4 py-2">00:00 - 24:00</td>
+                </tr>
+                <tr class="border-b border-dark-700">
+                  <td class="px-4 py-2">15.0 MHz</td>
+                  <td class="px-4 py-2">01:00 - 09:00</td>
+                  <td class="px-4 py-2">09:00 - 17:00</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+  
+          <p class="text-yellow-400 text-sm">
+            Please note that this is only a simulation and demonstration tool, it cannot replace the real BPM shortwave
+            time service broadcast. All simulation results are for reference only.
+          </p>
+  
+          <!-- Settings Guide -->
+          <h3 class="text-lg font-bold mt-4"><button class="w-8 h-8 bg-dark-700 rounded transition"
+              disabled="true">&#128295;</button> Settings Guide</h3>
+          <div class="space-y-3 text-gray-300">
+            <p>
+              By adjusting the three parameters below, you can make the simulator's output <strong
+                class="text-green-400">match the real BPM time signal perfectly</strong> – including UTC, time code, UT1,
+              and station ID.
+            </p>
+            <p>
+              <strong class="text-blue-400">Local Clock Offset <span class="text-white">&#9201;</span>:</strong> The
+              accuracy of UTC signals depends on your
+              device's clock. Your device's clock frequency may not be perfectly aligned with the real world, causing
+              drift over time. Networked devices usually use NTP to sync time, but this sync is not real-time, leaving a
+              random offset. You can adjust this offset manually, or click the <button
+                class="text-sm px-1 bg-blue-600 text-white rounded transition" disabled="true">SYNC</button> button to
+              sync with
+              internet time automatically. <span class="text-pink-400">(Step 1: SYNC your local clock.)</span><br>
+              This offset only affects this webpage, not your system clock. Affected by
+              network randomness, a single sync cannot always get a sufficiently accurate offset, and the network error
+              will be displayed on the page. You can try syncing multiple times until the offset remains stable (only
+              single-digit millisecond changes) in a short period with small enough network error, then the offset is
+              accurate enough.
+            </p>
+            <p>
+              <strong class="text-gray-400">Latency Compensation (ms):</strong> This parameter is used to offset the
+              fixed delay of the audio processing. After you have stably synchronized your local clock with internet
+              time,
+              the simulator's sound output may still have a stable lag, which is usually introduced by factors such as
+              browser audio processing and system rendering pipeline. <span class="text-pink-400">(Step 2: adjust this
+                value until the sound aligns with the real BPM signal.)</span><br>
+            <div class="text-gray-400 text-xs space-y-1">This value remains stable as long as your browser and OS
+              audio output
+              settings do
+              not change. If the audio output device or its configuration changes (e.g., switching to Bluetooth
+              headphones,
+              altering sample rate or buffer size), the delay may shift and you will need to recalibrate this
+              compensation. After
+              all three parameters are properly aligned, if you notice a drift later, simply re‑sync your local clock
+              — it usually restores the alignment without touching latency compensation.</div>
+            </p>
+            <p>
+              <strong class="text-green-400">DUT1:</strong> UT1 correction value. The UTC time we use daily is a uniform
+              time generated by atomic clocks, while UT1 is the astronomical time based on the Earth's rotation. Since
+              the
+              Earth's rotation speed is not uniform, there will be a small difference between the two. To prevent this
+              difference from growing too large, the International Earth Rotation and Reference Systems Service (IERS)
+              adjusts UTC by inserting leap seconds, keeping the difference within 0.9 seconds. The EOP (Earth
+              Orientation
+              Parameters) file records the latest observed value of this difference. With it, we can generate accurate
+              UT1 time service signals, and also embed the correct UT1 correction value in the time code. You can
+              directly
+              click the direct link on the adjustment panel to go to the UT1 Measurement and Service Center of NTSC,
+              download the latest EOP file, and after uploading it here, the page will automatically fill this value for
+              you. <span class="text-pink-400">(Step 3: for UT1 alignment, upload the latest EOP file.)</span><br>
+              It should be noted that the current simulator cannot implement the leap second announcement function
+              in the time code, nor can it simulate the special signals when a leap second occurs.
+            </p>
+          </div>
+  
+          <!-- Copyright & Privacy Statement -->
+          <h3 class="text-lg font-bold mt-4">Copyright & Privacy Statement</h3>
+          <div class="space-y-2 text-gray-400 text-sm">
+            <p>This is a pure HTML page with no backend service. Almost all code is generated by AI.</p>
+            <p>Internet time is obtained from a REST API (gettimeapi.dev).</p>
+            <p>Except for syncing internet time, this page will not perform any other network activities. All your
+              settings are saved locally.</p>
+          </div>
+  
+          <!-- Reference -->
+          <h3 class="text-lg font-bold mt-4">Reference</h3>
+          <div class="text-gray-400 text-sm">
+            <p>[1]蒙智谋.BPM短波时码授时发播技术方案[J].时间频率学报,2014,37(03):145-150.DOI:10.13875/j.issn.1674-0637.2014-03-0145-06.</p>
+          </div>
+        </div>
+  
+        <!-- Chinese Content -->
+        <div id="help_zh" class="space-y-4 hidden">
+          <h2 class="text-xl font-bold">这是什么？</h2>
+          <p class="text-gray-300">
+            这是一个网页版的模拟器，完美复现了中国科学院国家授时中心运营的<strong>BPM短波授时台</strong>的信号格式。
+          </p>
+  
+          <h3 class="text-lg font-bold mt-4">如何使用</h3>
+          <p class="text-gray-300">
+            点击<button class="w-6 h-6 bg-green-600 text-white font-mono rounded transition text-center"
+              disabled="true">&minus;</button>按钮，当按钮变成<button
+              class="w-6 h-6 bg-red-600 text-white font-mono rounded transition text-center"
+              disabled="true">&acd;</button>的时候，你就能听到模拟的BPM信号了。
+          </p>
+  
+          <div class="bg-yellow-900/30 border border-yellow-600/50 p-2 rounded text-yellow-200 text-xs">
+            <strong>注意：</strong>
+            当本页面在后台运行时（例如打开了其他浏览器标签页），浏览器为了节省资源会降低定时器精度并限制音频处理，可能导致声音延迟或卡顿。<strong>请保持本页面在前台运行</strong>以获得最佳体验。
+          </div>
+  
+          <div class="bg-dark-700/30 p-3 rounded-lg">
+            <h4 class="font-bold text-blue-400">你听到的是什么？</h4>
+            <p class="text-gray-300 text-sm mt-1">BPM信号每半小时重复一次。下面的图表和表格可以帮你快速了解信号的全貌。</p>
+            <!-- SVG饼图 -->
+            <div class="flex justify-center my-2">
+              <svg width="280" height="280" viewBox="0 0 280 280">
+                <path d="M 140 10 A 130 130 0 0 1 252.58 75 L 140 140 Z" fill="#4a6fe3" />
+                <path d="M 270 140 A 130 130 0 0 1 205 252.58 L 140 140 Z" fill="#4a6fe3" />
+                <path d="M 140 270 A 130 130 0 0 1 27.42 205 L 140 140 Z" fill="#4a6fe3" />
+                <path d="M 10 140 A 130 130 0 0 1 75 27.42 L 140 140 Z" fill="#4a6fe3" />
+                <path d="M 252.58 75 A 130 130 0 0 1 270 140 L 140 140 Z" fill="#8ab4f8" />
+                <path d="M 27.42 205 A 130 130 0 0 1 10 140 L 140 140 Z" fill="#8ab4f8" />
+                <path d="M 205 252.58 A 130 130 0 0 1 153.585 269.285 L 140 140 Z" fill="#f57c00" />
+                <path d="M 75 27.42 A 130 130 0 0 1 126.415 10.715 L 140 140 Z" fill="#f57c00" />
+                <path d="M 153.585 269.285 A 130 130 0 0 1 140 270 L 140 140 Z" fill="#4caf50" />
+                <path d="M 126.415 10.715 A 130 130 0 0 1 140 10 L 140 140 Z" fill="#4caf50" />
+                <circle cx="140" cy="140" r="70" fill="white" />
+                <text x="140" y="145" text-anchor="middle" font-size="18" font-weight="bold" fill="#d32f2f">BPM</text>
+                <text x="140" y="25" text-anchor="middle" font-size="10" fill="white">00</text>
+                <text x="241" y="85" text-anchor="middle" font-size="10" fill="white">10</text>
+                <text x="258" y="143" text-anchor="middle" font-size="10" fill="white">15</text>
+                <text x="198" y="243" text-anchor="middle" font-size="10" fill="white">25</text>
+                <text x="152" y="253" text-anchor="middle" font-size="10" fill="white">29</text>
+                <text x="140" y="262" text-anchor="middle" font-size="10" fill="white">30</text>
+                <text x="39" y="201" text-anchor="middle" font-size="10" fill="white">40</text>
+                <text x="22" y="143" text-anchor="middle" font-size="10" fill="white">45</text>
+                <text x="82" y="42" text-anchor="middle" font-size="10" fill="white">55</text>
+                <text x="128" y="34" text-anchor="middle" font-size="10" fill="white">59</text>
+              </svg>
+            </div>
+            <!-- 图例 -->
+            <div class="flex flex-wrap justify-center gap-4 text-sm text-gray-300 mb-3">
+              <div class="flex items-center gap-2">
+                <div class="w-4 h-4 bg-[#4a6fe3]"></div><span>UTC+时码</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="w-4 h-4 bg-[#8ab4f8]"></div><span>无调制载波</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="w-4 h-4 bg-[#f57c00]"></div><span>UT1</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="w-4 h-4 bg-[#4caf50]"></div><span>台站呼号</span>
+              </div>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm text-gray-300 border-collapse">
+                <thead>
+                  <tr class="border-b border-dark-600">
+                    <th class="text-left py-1 pr-2">分钟段 (UTC)</th>
+                    <th class="text-left py-1">信号描述</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="py-1 pr-2">00–10, 30–40</td>
+                    <td class="py-1">
+                      UTC+时码：1kHz秒脉冲（普通秒10ms，分钟起始300ms），脉冲间隙发送125Hz副载波时码（如果启用——请勾选播放按钮下方的<strong>TimeCode</strong>复选框）。
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="py-1 pr-2">10–15, 40–45</td>
+                    <td class="py-1">无调制载波：完全无声。</td>
+                  </tr>
+                  <tr>
+                    <td class="py-1 pr-2">15–25, 45–55</td>
+                    <td class="py-1">UTC+时码（同上）。</td>
+                  </tr>
+                  <tr>
+                    <td class="py-1 pr-2">25–29, 55–59</td>
+                    <td class="py-1">UT1：1kHz秒脉冲（普通秒100ms，分钟起始300ms），无时码，按DUT1值整体偏移。<span
+                        class="text-green-400">（准确性依赖下方设置面板中的DUT1参数。）</span></td>
+                  </tr>
+                  <tr>
+                    <td class="py-1 pr-2">29–30, 59–60</td>
+                    <td class="py-1">台站呼号：前40秒摩尔斯电码“BPM”，后20秒语音“BPM标准时间标准频率发播台”。</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="text-gray-400 text-xs mt-2">
+              <p>时码的具体编码规则请参见参考文献。</p>
+            </div>
+          </div>
+  
+          <!-- 控制选项（包含界面指示） -->
+          <div class="bg-dark-700/30 p-3 rounded-lg">
+            <h4 class="font-bold text-blue-400">控制选项与界面指示</h4>
+            <p class="text-gray-300 text-sm mt-1">
+              在播放按钮下方，有两个复选框：
+            </p>
+            <ul class="list-disc list-inside text-gray-300 text-sm space-y-1">
+              <li><strong>TimeCode<sup>[1]</sup></strong> – 开启或关闭125Hz时码副载波。取消勾选后，你将只听到秒脉冲（1kHz），不再有低沉的“嗡嗡”声。</li>
+              <li><strong>&#13235;</strong> – 在主UTC时间显示和UT1时间显示中显示或隐藏毫秒。</li>
+            </ul>
+            <p class="text-gray-300 text-sm mt-2">
+              此外，页面还显示：
+            </p>
+            <ul class="list-disc list-inside text-gray-300 text-sm space-y-1">
+              <li><span class="text-purple-400">&#128251;当前信号类型</span> – 帮助你了解当前发播时段。</li>
+              <li><span class="text-green-400">&#127760;UT1时间</span> – 经DUT1值校正后的时间（天文时间）。</li>
+            </ul>
+            <p class="text-gray-400 text-xs mt-2">所有设置都会自动保存，再次访问页面时恢复。</p>
+          </div>
+  
+          <h3 class="text-lg font-bold mt-4">关于授时与BPM短波授时台</h3>
+          <p class="text-gray-300">
+            授时是现代社会的核心基础设施之一，精确的时间同步是卫星导航、5G通信、金融交易、深空探测等领域正常运行的基础。
+          </p>
+          <p class="text-gray-300">
+            BPM短波授时台是中国的国家级短波授时台，类似美国的WWV/WWVH授时台。它在多个短波频率上广播精确的时间信号，任何人都可以用普通的短波收音机免费接收，校准自己的时钟。
+          </p>
+  
+          <!-- 频率发播时间表（增加UTC列） -->
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm text-left text-gray-300 border border-dark-700 rounded-lg">
+              <thead class="text-xs uppercase bg-dark-700">
+                <tr>
+                  <th class="px-4 py-2">频率</th>
+                  <th class="px-4 py-2">UTC时间</th>
+                  <th class="px-4 py-2">北京时间（UTC+8）</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-b border-dark-700">
+                  <td class="px-4 py-2">2.5 MHz</td>
+                  <td class="px-4 py-2">07:30 - 01:00</td>
+                  <td class="px-4 py-2">15:30 - 09:00</td>
+                </tr>
+                <tr class="border-b border-dark-700">
+                  <td class="px-4 py-2">5.0 MHz</td>
+                  <td class="px-4 py-2">00:00 - 24:00</td>
+                  <td class="px-4 py-2">00:00 - 24:00</td>
+                </tr>
+                <tr class="border-b border-dark-700">
+                  <td class="px-4 py-2">10.0 MHz</td>
+                  <td class="px-4 py-2">00:00 - 24:00</td>
+                  <td class="px-4 py-2">00:00 - 24:00</td>
+                </tr>
+                <tr class="border-b border-dark-700">
+                  <td class="px-4 py-2">15.0 MHz</td>
+                  <td class="px-4 py-2">01:00 - 09:00</td>
+                  <td class="px-4 py-2">09:00 - 17:00</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+  
+          <p class="text-yellow-400 text-sm">
+            请注意，这只是一个模拟演示工具，无法替代真实的BPM短波授时广播。所有模拟结果仅供参考。
+          </p>
+  
+          <!-- 设置界面说明 -->
+          <h3 class="text-lg font-bold mt-4"><button class="w-8 h-8 bg-dark-700 rounded transition"
+              disabled="true">&#128295;</button> 设置界面说明</h3>
+          <div class="space-y-3 text-gray-300">
+            <p>
+              通过调整以下三个参数，你可以让模拟器的输出<strong class="text-green-400">与真实的BPM授时信号完全一致</strong>——包括UTC、时码、UT1和台站呼号。
+            </p>
+            <p>
+              <strong class="text-blue-400">本地时钟偏移<span
+                  class="text-white">&#9201;</span>：</strong>UTC信号的准确性取决于你的设备时钟。一般而言，你使用设备的时钟频率与现实世界的频率并不完全一致，这会导致设备时钟长时间运行后与真实时间产生偏移。联网设备一般会使用NTP协议与互联网进行时间同步消除这个偏移，但这个同步动作并不是实时的，这仍然会导致你设备的时钟和真实时间存在随机偏移。你可以通过调整该偏移，或者点击<button
+                class="text-sm px-1 bg-blue-600 text-white rounded transition"
+                disabled="true">SYNC</button>按钮实时地与互联网时间进行同步。<span class="text-pink-400">（第一步：同步本地时钟。）</span><br>
+              该偏移同步只影响网页展示与你收听到的脉冲信号，不会更改你设备上的时钟。受网络连接的随机性影响，单次同步并不总能获取足够精确的偏移量，同步结果会附带显示网络误差。你可以多次尝试同步，直到短时间内多次同步的偏移量保持稳定（仅个位数毫秒的变动），且网络误差足够小，此时的偏移量才足够准确。
+            </p>
+            <p>
+              <strong
+                class="text-gray-400">延迟补偿(ms)：</strong>该参数用于抵消音频链路的固定延迟。在你完成本地时钟与互联网时间的稳定同步后，模拟器的声音输出仍可能存在一个稳定的滞后，这一般由浏览器音频处理、系统渲染链路等因素共同引入。<span
+                class="text-pink-400">（第二步：调整此值，直到声音与真实BPM信号对齐。）</span><br>
+            <div class="text-gray-400 text-xs space-y-1">
+              只要浏览器和操作系统的音频输出设置不变，该值通常不需要频繁调整。如果音频输出设备或其配置发生变化（例如改用蓝牙耳机、更改采样率或缓冲区大小等），延迟可能会改变，需要重新校准。三个参数都调整到位后，如果日后发现信号再次偏移，通常只需重新同步本地时钟即可恢复对齐，无需改动延迟补偿。
+            </div>
+            </p>
+            <p>
+              <strong
+                class="text-green-400">DUT1：</strong>UT1改正值。我们日常使用的UTC时间是原子钟生成的均匀时间，而UT1是基于地球自转的天文时间，由于地球自转速度并不均匀，两者之间会存在微小的差异。为了避免这个差异持续扩大，国际地球自转服务（IERS）会通过插入闰秒的方式调整UTC，将两者的差值控制在0.9秒以内。EOP（地球定向参数）文件就记录了这个差异的最新观测值，通过它我们可以生成准确的UT1授时信号，同时也能在时码中嵌入正确的UT1改正值。你可以直接点击调整面板上的直达链接，前往国家授时中心的UT1测量与服务中心，下载最新的EOP文件，上传到这里后网页会自动填充该数值。<span
+                class="text-pink-400">（第三步：如需对齐UT1信号，上传最新的EOP文件。）</span><br>
+              需要说明的是，当前模拟器无法实现时码中的闰秒预告功能，也无法模拟闰秒发生时的特殊信号。
+            </p>
+          </div>
+  
+          <!-- 版权与隐私声明 -->
+          <h3 class="text-lg font-bold mt-4">版权与隐私声明</h3>
+          <div class="space-y-2 text-gray-400 text-sm">
+            <p>本页面为纯HTML，无后端服务。代码几乎全部由AI生成。</p>
+            <p>互联网时间通过REST API（gettimeapi.dev）获得。</p>
+            <p>除同步互联网时间外，本页面不会进行任何网络活动。你的所有设置均保存在本地。</p>
+          </div>
+  
+          <!-- 参考文献 -->
+          <h3 class="text-lg font-bold mt-4">参考文献</h3>
+          <div class="text-gray-400 text-sm">
+            <p>[1]蒙智谋.BPM短波时码授时发播技术方案[J].时间频率学报,2014,37(03):145-150.DOI:10.13875/j.issn.1674-0637.2014-03-0145-06.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="max-w-2xl mx-auto w-full">
+    <!-- Centered time display -->
+    <div class="text-center mb-6">
+      <div id="time_display"
+        class="text-5xl sm:text-6xl md:text-7xl font-mono font-bold text-white mb-4 whitespace-nowrap">
+        --:--:--<span id="ms_display" class="text-3xl sm:text-4xl text-gray-400">.---</span>
+      </div>
+      <!-- Start/Stop button -->
+      <div class="flex justify-center gap-4 mb-4">
+        <button id="start_btn"
+          class="w-16 px-0 py-3 bg-green-600 text-white font-mono rounded-lg hover:bg-green-500 transition text-3xl text-center">
+          &minus;
+        </button>
+        <button id="stop_btn"
+          class="w-16 px-0 py-3 bg-red-600 text-white font-mono rounded-lg hover:bg-red-500 transition text-3xl text-center hidden">
+          &acd;
+        </button>
+      </div>
+      <div class="flex flex-wrap justify-center gap-4 items-center">
+        <label class="flex items-center gap-1 cursor-pointer">
+          <input type="checkbox" id="play_low_freq" checked class="w-4 h-4 rounded">
+          <span class="text-gray-400 text-sm">TimeCode<sup>[1]</sup></span>
+        </label>
+        <label class="flex items-center gap-1 cursor-pointer">
+          <input type="checkbox" id="show_ms" checked class="w-4 h-4 rounded">
+          <span class="text-gray-400 text-sm">&#13235;</span>
+        </label>
+        <button id="toggle_settings"
+          class="w-8 h-8 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-lg flex items-center justify-center">
+          &#128295;
+        </button>
+        <button id="open_help"
+          class="w-8 h-8 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-lg flex items-center justify-center">
+          &#10068;
+        </button>
+      </div>
+      <!-- Volume slider -->
+      <div class="flex justify-center items-center gap-2 mt-3">
+        <span class="text-gray-400 text-sm">&#128264;</span>
+        <input type="range" id="volume_slider" min="0" max="1" step="0.01" value="1"
+          class="w-48 sm:w-64 h-2 bg-dark-700 rounded-lg appearance-none cursor-pointer accent-blue-500">
+        <span id="volume_val" class="text-gray-400 text-sm w-8 text-center font-mono">100</span>
+      </div>
+    </div>
+    <!-- Status display -->
+    <div class="text-xs flex justify-between mb-4">
+      <div class="flex items-center gap-1 text-gray-400">
+        <span>&#128251;</span>
+        <span class="text-sm font-mono">BPM</span>
+        <span id="current_period" class="text-purple-400">--</span>
+      </div>
+      <div class="flex items-center gap-1 text-gray-400">
+        <span id="ut1_time" class="text-green-400 font-mono">--:--:--</span>
+        <span>&#127760;</span>
+      </div>
+    </div>
+    <!-- Collapsible settings panel -->
+    <div id="settings_panel" class="hidden space-y-4 bg-dark-800 p-4 sm:p-6 rounded-xl">
+      <!-- Local UTC offset -->
+      <div>
+        <div class="text-lg font-bold mb-3 flex items-center gap-2 flex-wrap">
+          <span>&#9201;</span>
+          <span id="local_offset_val" class="text-blue-400 font-mono">+0.000</span>
+          <span id="network_comp_val" class="text-xs text-gray-400 font-mono">(+0ms)</span>
+          <button data-offset="local" data-delta="reset"
+            class="text-sm px-2 py-1 bg-dark-700 rounded hover:bg-dark-600 transition text-blue-400 text-center font-mono">&#8634;</button>
+          <button id="sync_btn"
+            class="text-sm px-2 py-1 bg-blue-600 text-white rounded hover:bg-blue-500 transition flex items-center gap-1">
+            SYNC
+          </button>
+          <span id="sync_error" class="text-xs text-gray-400 font-mono"></span>
+        </div>
+        <div class="grid grid-cols-3 gap-2">
+          <button data-offset="local" data-delta="100"
+            class="text-blue-400 px-3 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono">+0.1</button>
+          <button data-offset="local" data-delta="10"
+            class="text-blue-400 px-3 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono">+0.01</button>
+          <button data-offset="local" data-delta="1"
+            class="text-blue-400 px-3 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono">+0.001</button>
+          <button data-offset="local" data-delta="-100"
+            class="text-blue-400 px-3 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono">-0.1</button>
+          <button data-offset="local" data-delta="-10"
+            class="text-blue-400 px-3 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono">-0.01</button>
+          <button data-offset="local" data-delta="-1"
+            class="text-blue-400 px-3 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono">-0.001</button>
+        </div>
+        <!-- Network compensation adjustment buttons -->
+        <div class="grid grid-cols-5 gap-2 mt-2">
+          <button data-offset="comp" data-delta="10"
+            class="text-gray-400 px-2 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono text-sm">+10ms</button>
+          <button data-offset="comp" data-delta="1"
+            class="text-gray-400 px-2 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono text-sm">+1ms</button>
+          <button data-offset="comp" data-delta="reset"
+            class="text-gray-400 px-2 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono text-sm">&#8634;</button>
+          <button data-offset="comp" data-delta="-1"
+            class="text-gray-400 px-2 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono text-sm">-1ms</button>
+          <button data-offset="comp" data-delta="-10"
+            class="text-gray-400 px-2 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono text-sm">-10ms</button>
+        </div>
+      </div>
+      <!-- DUT1 offset -->
+      <div>
+        <div class="text-lg font-bold mb-3 flex items-center gap-2 flex-wrap">
+          <span>DUT1</span>
+          <span id="dut1_val" class="text-green-400 font-mono">+0.000</span>
+          <button data-offset="dut1" data-delta="reset"
+            class="text-sm px-2 py-1 bg-dark-700 rounded hover:bg-dark-600 transition text-green-400 text-center font-mono">&#8634;</button>
+          <a id="eop_hint" href="http://www.ut1.ntsc.ac.cn/" target="_blank" rel="noopener noreferrer"
+            class="text-xs text-blue-400 hover:text-blue-300 flex items-center font-mono">
+            &#128269;NTSC_EOP_<i>yyyyMMdd</i>.txt
+          </a>
+          <input type="file" id="eop_file" accept=".txt"
+            class="text-xs text-gray-400 file:mr-2 file:py-1 file:px-2 file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-500">
+          <span id="eop_status" class="text-xs font-mono text-gray-500"></span>
+        </div>
+        <div class="grid grid-cols-3 gap-2">
+          <button data-offset="dut1" data-delta="100"
+            class="text-green-400 px-3 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono">+0.1</button>
+          <button data-offset="dut1" data-delta="10"
+            class="text-green-400 px-3 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono">+0.01</button>
+          <button data-offset="dut1" data-delta="1"
+            class="text-green-400 px-3 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono">+0.001</button>
+          <button data-offset="dut1" data-delta="-100"
+            class="text-green-400 px-3 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono">-0.1</button>
+          <button data-offset="dut1" data-delta="-10"
+            class="text-green-400 px-3 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono">-0.01</button>
+          <button data-offset="dut1" data-delta="-1"
+            class="text-green-400 px-3 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono">-0.001</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Present polyfill for high resolution time
+    function present() {
+      if (window.performance && window.performance.now) {
+        return window.performance.now();
+      }
+      return Date.now();
+    }
+    // Driftless implementation from https://github.com/dbkaplun/driftless
+    const DEFAULT_THRESHOLD_MS = 1;
+    const DEFAULT_AGGRESSION = 1.1;
+    const DEFAULT_NOW_FN = (...args) => present(...args);
+    const DEFAULT_SET_TIMEOUT = (...args) => setTimeout(...args);
+    const DEFAULT_CLEAR_TIMEOUT = (...args) => clearTimeout(...args);
+    const timerHandles = {};
+    let nextId = 0;
+    function tryDriftless(id, opts) {
+      const {
+        atMs,
+        fn,
+        thresholdMs = DEFAULT_THRESHOLD_MS,
+        aggression = DEFAULT_AGGRESSION,
+        customNow = DEFAULT_NOW_FN,
+        customSetTimeout = DEFAULT_SET_TIMEOUT,
+      } = opts;
+      const delayMs = atMs - customNow();
+      const handle = delayMs > thresholdMs
+        ? (
+          customSetTimeout(() => {
+            tryDriftless.apply(this, arguments);
+          }, delayMs / aggression)
+        )
+        : (
+          customSetTimeout(() => {
+            fn();
+          }, 0)
+        );
+      timerHandles[id] = handle;
+    }
+    function setDriftless(opts) {
+      const id = nextId;
+      nextId += 1;
+      tryDriftless(id, opts);
+      return id;
+    }
+    function clearDriftless(id, opts = {}) {
+      const {
+        customClearTimeout = DEFAULT_CLEAR_TIMEOUT,
+      } = opts;
+      customClearTimeout(timerHandles[id]);
+    }
+    function clearDriftlessInterval(id, opts = {}) {
+      clearDriftless(id, opts);
+    }
+    function castToFn(fn) {
+      return typeof fn === 'function'
+        ? fn
+        : new Function(fn);
+    }
+    function setDriftlessTimeout(fn, delayMs, ...params) {
+      const callFn = castToFn(fn);
+      return setDriftless({
+        atMs: DEFAULT_NOW_FN() + delayMs,
+        fn(...args) {
+          return callFn.call(this, ...args, ...params);
+        },
+      });
+    }
+    function setDriftlessInterval(fn, delayMs, ...params) {
+      const callFn = castToFn(fn);
+      let id;
+      const opts = {
+        atMs: DEFAULT_NOW_FN() + delayMs,
+        fn(...args) {
+          opts.atMs += delayMs;
+          tryDriftless(id, opts);
+          return callFn.call(this, ...args, ...params);
+        },
+      };
+      id = setDriftless(opts);
+      return id;
+    }
+    // Global variables
+    let audioContext = null;
+    let updateTimer = null;
+    let voiceBuffer = null; // Voice audio buffer, loaded via Web Audio
+    let voiceSource = null; // Current voice playback source
+    let voiceGain = null; // Voice gain node, for realtime volume control
+    let volume = 1.0; // Global volume, default 100%
+    let isRunning = false;
+    // Track active oscillators to ensure clean start/end
+    let active1kHz = null;
+    let active125Hz = null;
+    let last1kHzState = false;
+    let last125HzState = false;
+    // Offset configuration (internal unit: milliseconds)
+    let localOffset = 0; // Local UTC offset, ms
+    let networkCompensation = 0; // Network fixed delay compensation, ms, always >=0
+    window.bpmDUT1 = 0; // DUT1 default 0, ms precision
+    // EOP auto update related
+    window.eopData = null; // Saved EOP data map, key: year-month-day, value: ut1utc
+    window.isAutoDUT1 = false; // Whether DUT1 is in auto update mode
+    // Morse code sequence for BPM
+    const morseSequence = [
+      { type: 'dash', duration: 300 },
+      { type: 'space', duration: 100 },
+      { type: 'dot', duration: 100 },
+      { type: 'space', duration: 100 },
+      { type: 'dot', duration: 100 },
+      { type: 'space', duration: 100 },
+      { type: 'dot', duration: 100 },
+      { type: 'space', duration: 300 },
+      { type: 'dot', duration: 100 },
+      { type: 'space', duration: 100 },
+      { type: 'dash', duration: 300 },
+      { type: 'space', duration: 100 },
+      { type: 'dash', duration: 300 },
+      { type: 'space', duration: 100 },
+      { type: 'dot', duration: 100 },
+      { type: 'space', duration: 300 },
+      { type: 'dash', duration: 300 },
+      { type: 'space', duration: 100 },
+      { type: 'dash', duration: 300 },
+    ];
+    const MORSE_CYCLE = 4000;
+    const MORSE_START_DELAY = 400; // Morse starts at 29:00.400
+    // Save settings to localStorage
+    function saveSettings() {
+      const settings = {
+        show_ms: document.getElementById('show_ms').checked,
+        play_low_freq: document.getElementById('play_low_freq').checked,
+        volume: volume,
+        localOffset: localOffset,
+        networkCompensation: networkCompensation,
+        dut1: window.bpmDUT1,
+      };
+      try {
+        localStorage.setItem('bpm_simulator_settings', JSON.stringify(settings));
+      } catch (e) {
+        // Ignore if localStorage is not available
+      }
+    }
+    // Load settings from localStorage
+    function loadSettings() {
+      try {
+        const saved = localStorage.getItem('bpm_simulator_settings');
+        if (saved) {
+          const settings = JSON.parse(saved);
+          // Restore show_ms
+          if (typeof settings.show_ms === 'boolean') {
+            document.getElementById('show_ms').checked = settings.show_ms;
+          }
+          // Restore play_low_freq
+          if (typeof settings.play_low_freq === 'boolean') {
+            document.getElementById('play_low_freq').checked = settings.play_low_freq;
+          }
+          // Restore volume
+          if (typeof settings.volume === 'number' && settings.volume >= 0 && settings.volume <= 1) {
+            volume = settings.volume;
+            document.getElementById('volume_slider').value = volume;
+            document.getElementById('volume_val').textContent = Math.round(volume * 100);
+          }
+          // Restore local offset
+          if (typeof settings.localOffset === 'number') {
+            localOffset = settings.localOffset;
+          }
+          // Restore network compensation
+          if (typeof settings.networkCompensation === 'number') {
+            networkCompensation = settings.networkCompensation;
+            networkCompensation = Math.max(0, networkCompensation);
+          }
+          // Restore DUT1
+          if (typeof settings.dut1 === 'number') {
+            window.bpmDUT1 = settings.dut1;
+            window.bpmDUT1 = Math.max(-999, Math.min(999, window.bpmDUT1));
+          }
+        }
+      } catch (e) {
+        console.log('Failed to load settings, using defaults:', e);
+      }
+    }
+    // Time code bit definition (fully implemented according to paper's BCD rule)
+    function generateTimeCode(date) {
+      const bits = new Array(60).fill(0);
+      const dut1InSeconds = window.bpmDUT1 / 1000;
+      const dut1ForCode = Math.round(dut1InSeconds * 10) / 10;
+      const minute = date.getUTCMinutes();
+      const min_unit = minute % 10;
+      const min_tens = Math.floor(minute / 10);
+      bits[1] = (min_unit & 1) ? 1 : 0;
+      bits[2] = (min_unit & 2) ? 1 : 0;
+      bits[3] = (min_unit & 4) ? 1 : 0;
+      bits[4] = (min_unit & 8) ? 1 : 0;
+      bits[6] = (min_tens & 1) ? 1 : 0;
+      bits[7] = (min_tens & 2) ? 1 : 0;
+      bits[8] = (min_tens & 4) ? 1 : 0;
+      bits[9] = 2;
+      const hour = date.getUTCHours();
+      const hour_unit = hour % 10;
+      const hour_tens = Math.floor(hour / 10);
+      bits[10] = (hour_unit & 1) ? 1 : 0;
+      bits[11] = (hour_unit & 2) ? 1 : 0;
+      bits[12] = (hour_unit & 4) ? 1 : 0;
+      bits[13] = (hour_unit & 8) ? 1 : 0;
+      bits[15] = (hour_tens & 1) ? 1 : 0;
+      bits[16] = (hour_tens & 2) ? 1 : 0;
+      bits[19] = 2;
+      const day = date.getUTCDate();
+      const day_unit = day % 10;
+      const day_tens = Math.floor(day / 10);
+      bits[20] = (day_unit & 1) ? 1 : 0;
+      bits[21] = (day_unit & 2) ? 1 : 0;
+      bits[22] = (day_unit & 4) ? 1 : 0;
+      bits[23] = (day_unit & 8) ? 1 : 0;
+      bits[25] = (day_tens & 1) ? 1 : 0;
+      bits[26] = (day_tens & 2) ? 1 : 0;
+      bits[29] = 2;
+      const month = date.getUTCMonth() + 1;
+      const month_unit = month % 10;
+      const month_tens = Math.floor(month / 10);
+      bits[30] = (month_unit & 1) ? 1 : 0;
+      bits[31] = (month_unit & 2) ? 1 : 0;
+      bits[32] = (month_unit & 4) ? 1 : 0;
+      bits[33] = (month_unit & 8) ? 1 : 0;
+      bits[35] = (month_tens & 1) ? 1 : 0;
+      bits[39] = 2;
+      const year = date.getUTCFullYear() % 100;
+      const year_unit = year % 10;
+      const year_tens = Math.floor(year / 10);
+      bits[40] = (year_unit & 1) ? 1 : 0;
+      bits[41] = (year_unit & 2) ? 1 : 0;
+      bits[42] = (year_unit & 4) ? 1 : 0;
+      bits[43] = (year_unit & 8) ? 1 : 0;
+      bits[45] = (year_tens & 1) ? 1 : 0;
+      bits[46] = (year_tens & 2) ? 1 : 0;
+      bits[47] = (year_tens & 4) ? 1 : 0;
+      bits[48] = (year_tens & 8) ? 1 : 0;
+      bits[49] = 2;
+      bits[50] = dut1ForCode >= 0 ? 1 : 0;
+      const absDut1 = Math.abs(dut1ForCode);
+      const dut1_unit = Math.round(absDut1 * 10);
+      bits[51] = (dut1_unit & 1) ? 1 : 0;
+      bits[52] = (dut1_unit & 2) ? 1 : 0;
+      bits[53] = (dut1_unit & 4) ? 1 : 0;
+      bits[54] = (dut1_unit & 8) ? 1 : 0;
+      bits[57] = 0;
+      bits[59] = 2;
+      return bits;
+    }
+    function isInTimeCodePeriod(minute) {
+      return (minute >= 0 && minute < 10) ||
+        (minute >= 15 && minute < 25) ||
+        (minute >= 30 && minute < 40) ||
+        (minute >= 45 && minute < 55);
+    }
+    function getPeriodType(utcMinute, utcSecond, utcMs) {
+      const secondOfHour = utcMinute * 60 + utcSecond + utcMs / 1000;
+      if (utcMinute == 29 || utcMinute == 59) {
+        return 'call';
+      }
+      if ((utcMinute >= 10 && utcMinute < 15) ||
+        (utcMinute >= 40 && utcMinute < 45)) {
+        return 'carrier';
+      }
+      if ((secondOfHour >= 24 * 60 + 59 && secondOfHour < 28 * 60 + 59.1) ||
+        (secondOfHour >= 54 * 60 + 59 && secondOfHour < 58 * 60 + 59.1)) {
+        return 'ut1';
+      }
+      if ((secondOfHour >= 28 * 60 + 59.1 && secondOfHour < 29 * 60) ||
+        (secondOfHour >= 58 * 60 + 59.1 && secondOfHour < 59 * 60)) {
+        return 'silent';
+      }
+      return 'utc';
+    }
+    function play1kHz(durationMs) {
+      if (!audioContext) return;
+      if (active1kHz) {
+        try { active1kHz.stop(); } catch (e) { }
+        active1kHz = null;
+      }
+      const osc = audioContext.createOscillator();
+      const gain = audioContext.createGain();
+      osc.type = 'sine';
+      osc.frequency.value = 1000;
+      const now = audioContext.currentTime;
+      const fadeTime = 0.001;
+      gain.gain.setValueAtTime(0, now);
+      gain.gain.linearRampToValueAtTime(0.7 * volume, now + fadeTime);
+      gain.gain.setValueAtTime(0.7 * volume, now + durationMs / 1000 - fadeTime);
+      gain.gain.linearRampToValueAtTime(0, now + durationMs / 1000);
+      osc.connect(gain);
+      gain.connect(audioContext.destination);
+      osc.start();
+      osc.stop(now + durationMs / 1000);
+      active1kHz = osc;
+      osc.onended = function () {
+        if (active1kHz === osc) active1kHz = null;
+      };
+    }
+    function play125Hz(durationMs) {
+      if (!audioContext) return;
+      if (active125Hz) {
+        try { active125Hz.stop(); } catch (e) { }
+        active125Hz = null;
+      }
+      const osc = audioContext.createOscillator();
+      const gain = audioContext.createGain();
+      osc.type = 'sine';
+      osc.frequency.value = 125;
+      const now = audioContext.currentTime;
+      const fadeTime = 0.001;
+      gain.gain.setValueAtTime(0, now);
+      gain.gain.linearRampToValueAtTime(0.5 * volume, now + fadeTime);
+      gain.gain.setValueAtTime(0.5 * volume, now + durationMs / 1000 - fadeTime);
+      gain.gain.linearRampToValueAtTime(0, now + durationMs / 1000);
+      osc.connect(gain);
+      gain.connect(audioContext.destination);
+      osc.start();
+      osc.stop(now + durationMs / 1000);
+      active125Hz = osc;
+      osc.onended = function () {
+        if (active125Hz === osc) active125Hz = null;
+      };
+    }
+    // Preload voice audio via Data URL (base64)
+    function preloadVoiceAudio() {
+      if (!audioContext || voiceBuffer) return;
+      const voiceBase64 = 'data:audio/mpeg;base64,SUQzBAAAAAAAIlRTU0UAAAAOAAADTGF2ZjYxLjMuMTA0AAAAAAAAAAAAAAD/4zjAAAAAAAAAAAAASW5mbwAAAA8AAAEYAACeWAAEBgkMDxATFhkbHSAjJSgqLS8yNTc5PD9BQ0ZJS05QU1VYW11fYmVoaWxvcnR2eXx+gYOGiIuOkJKVmJucn6Klp6msr7G0trm7vsHDxcjLzc/S1dfa3N/h5Ofp6+7x9PX4+/4AAAAATGF2YzYxLjUuAAAAAAAAAAAAAAAAJALAAAAAAAAAnliM/vzPAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/4yjEAAAAA0gAAAAATEFNRVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/4yjEfAAAA0gAAAAAVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/4yjEfAAAA0gAAAAAVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/4yjEfAAAA0gAAAAAVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/4yjEfAAAA0gAAAAAVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/4yjEfAAAA0gAAAAAVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/4yjEfAAAA0gAAAAAVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/4yjEfAAAA0gAAAAAVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/4yjEfAAAA0gAAAAAVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/4yjEfAAAA0gAAAAAVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/4yjEfAAAA0gAAAAAVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV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MKqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqr/4yjEfAAAA0gAAAAAqqqqqqqqqkxBTUUzLjEwMKqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqr/4yjEfAAAA0gAAAAAqqqqqqqqqkxBTUUzLjEwMKqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqr/4yjEfAAAA0gAAAAAqqqqqqqqqkxBTUUzLjEwMKqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqr/4yjEfAAAA0gAAAAAqqqqqqqqqkxBTUUzLjEwMKqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqr/4yjEfAAAA0gAAAAAqqqqqqqqqkxBTUUzLjEwMKqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqr/4yjEfAAAA0gAAAAAqqqqqqqqqkxBTUUzLjEwMKqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqr/4yjEfAAAA0gAAAAAqqqqqqqqqkxBTUUzLjEwMKqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqr/4yjEfAAAA0gAAAAAqqqqqqqqqkxBTUUzLjEwMKqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqr/4yjEfAAAA0gAAAAAqqqqqqqqqkxBTUUzLjEwMKqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqr/4yjEfAAAA0gAAAAAqqqqqqqqqkxBTUUzLjEwMKqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqr/4yjEfAAAA0gAAAAAqqqqqqqqqkxBTUUzLjEwMKqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqr/4yjEfAAAA0gAAAAAqqqqqqqqqkxBTUUzLjEwMKqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqr/4yjEfAAAA0gAAAAAqqqqqqqqqkxBTUUzLjEwMKqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqr/4yjEfAAAA0gAAAAAqqqqqqqqqkxBTUUzLjEwMKqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqr/4yjEfAAAA0gAAAAAqqqqqqqqqkxBTUUzLjEwMKqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqr/4yjEfAAAA0gAAAAAqqqqqqqqqkxBTUUzLjEwMKqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqr/4yjEfAAAA0gAAAAAqqqqqqqqqkxBTUUzLjEwMKqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqr/4yjEfAAAA0gAAAAAqqqqqqqqqkxBTUUzLjEwMKqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq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qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqr/4yjEXwAAA0gAAAAAqqqqqqqqqkxBTUUzLjEwMKqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqr/4yjEfAAAA0gAAAAAqqqqqqqqqkxBTUUzLjEwMKqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqr/4yjEfAAAA0gAAAAAqqqqqqqqqkxBTUUzLjEwMKqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqr/4yjEfAAAA0gAAAAAqqqqqqqqqkxBTUUzLjEwMKqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqr/4yjEfAAAA0gAAAAAqqqqqqqqqkxBTUUzLjEwMKqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqr/4yjEfAAAA0gAAAAAqqqqqqqqqkxBTUUzLjEwMKqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqr/4yjEfAAAA0gAAAAAqqqqqqqqqkxBTUUzLjEwMKqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqr/4yjEfAAAA0gAAAAAqqqqqqqqqkxBTUUzLjEwMKqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqr/4yjEfAAAA0gAAAAAqqqqqqqqqkxBTUUzLjEwMKqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqr/4yjEfAAAA0gAAAAAqqqqqqqqqkxBTUUzLjEwMKqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqr/4yjEfAAAA0gAAAAAqqqqqqqqqkxBTUUzLjEwMKqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqr/4yjEfAAAA0gAAAAAqqqqqqqqqkxBTUUzLjEwMKqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqr/4yjEfAAAA0gAAAAAqqqqqqqqqkxBTUUzLjEwMKqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqr/4yjEfAAAA0gAAAAAqqqqqqqqqkxBTUUzLjEwMKqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqr/4yjEfAAAA0gAAAAAqqqqqqqqqkxBTUUzLjEwMKqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqr/4yjEfAAAA0gAAAAAqqqqqqqqqkxBTUUzLjEwMKqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqr/4yjEfAAAA0gAAAAAqqqqqqqqqkxBTUUzLjEwMKqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqr/4yjEfAAAA0gAAAAAqqqqqqqqqkxBTUUzLjEwMKqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqr/4yjEfAAAA0gAAAAAqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqo=';
+      fetch(voiceBase64)
+        .then(response => response.arrayBuffer())
+        .then(arrayBuffer => audioContext.decodeAudioData(arrayBuffer, (buffer) => {
+          voiceBuffer = buffer;
+          console.log('Voice audio loaded from Data URL');
+        }, (e) => {
+          console.log('Voice audio decode failed:', e);
+        }))
+        .catch(e => console.log('Voice audio fetch failed:', e));
+    }
+    function playVoiceCall(utcMinute, utcSecond, utcMs) {
+      if (!voiceBuffer || !audioContext) return;
+      const voiceStartSecond = 40;
+      const currentSecondOfMinute = utcSecond + utcMs / 1000;
+      const offset = currentSecondOfMinute - voiceStartSecond;
+      if (offset >= 20 || offset < 0) return;
+      if (voiceSource) return;
+      voiceSource = audioContext.createBufferSource();
+      voiceSource.buffer = voiceBuffer;
+      voiceGain = audioContext.createGain();
+      voiceGain.gain.value = volume;
+      voiceSource.connect(voiceGain);
+      voiceGain.connect(audioContext.destination);
+      voiceSource.start(0, offset);
+      voiceSource.onended = function () {
+        voiceSource = null;
+        voiceGain = null;
+      };
+    }
+    function updateAudio() {
+      if (!isRunning) return;
+      const now = new Date();
+      const totalOffset = localOffset + networkCompensation;
+      const utcNow = new Date(now.getTime() + totalOffset);
+      const second = utcNow.getUTCSeconds();
+      const ms = utcNow.getUTCMilliseconds();
+      const minute = utcNow.getUTCMinutes();
+      const period = getPeriodType(minute, second, ms);
+      let target1kHz = false;
+      let target125Hz = false;
+      if (period === 'utc') {
+        const pulseSecond = second + Math.floor((ms + 20) / 1000);
+        const pulseSecondMod = pulseSecond % 60;
+        let pulseDuration;
+        if (pulseSecondMod == 0) {
+          if ((minute == 9 && second == 59) || (minute == 39 && second == 59)) {
+            target1kHz = false;
+            last1kHzState = false;
+            last125HzState = false;
+            last1kHzState = target1kHz;
+            last125HzState = target125Hz;
+            return;
+          } else {
+            pulseDuration = 300;
+          }
+        } else {
+          pulseDuration = 10;
+        }
+        const isPulse = (ms + 20) % 1000 < pulseDuration;
+        if (isPulse && !last1kHzState) {
+          play1kHz(pulseDuration);
+        }
+        target1kHz = isPulse;
+      } else if (period === 'ut1') {
+        const ut1Ms = ms + window.bpmDUT1;
+        let adjustedMs = ut1Ms;
+        let adjustedSecond = second;
+        if (adjustedMs >= 1000) {
+          adjustedMs -= 1000;
+          adjustedSecond += 1;
+        }
+        const pulseSecond = adjustedSecond + Math.floor((adjustedMs + 20) / 1000);
+        const pulseSecondMod = pulseSecond % 60;
+        const pulseDuration = pulseSecondMod == 0 ? 300 : 100;
+        const isPulse = (adjustedMs + 20) % 1000 < pulseDuration;
+        if (isPulse && !last1kHzState) {
+          play1kHz(pulseDuration);
+        }
+        target1kHz = isPulse;
+      } else if (period === 'call') {
+        if (second < 40) {
+          const totalMs = minute * 60000 + second * 1000 + ms;
+          const morseMs = totalMs - MORSE_START_DELAY;
+          if (morseMs >= 0) {
+            const cycleMs = morseMs % MORSE_CYCLE;
+            let currentPos = 0;
+            let isOn = false;
+            let itemDuration = 0;
+            for (const item of morseSequence) {
+              currentPos += item.duration;
+              if (cycleMs < currentPos) {
+                if (item.type != 'space') {
+                  isOn = true;
+                  itemDuration = item.duration;
+                }
+                break;
+              }
+            }
+            if (isOn && !last1kHzState) {
+              play1kHz(itemDuration);
+            }
+            target1kHz = isOn;
+          }
+        } else {
+          playVoiceCall(minute, second, ms);
+        }
+      }
+      if (isInTimeCodePeriod(minute) && period !== 'silent' && period !== 'call' && period !== 'carrier') {
+        if (second == 0) {
+          target125Hz = false;
+        } else {
+          const bits = generateTimeCode(utcNow);
+          const bit = bits[second];
+          let bitDuration = 0;
+          let isCode = false;
+          if (bit == 0) {
+            bitDuration = 200;
+            isCode = ms < bitDuration;
+          } else if (bit == 1) {
+            bitDuration = 480;
+            isCode = ms < bitDuration;
+          } else if (bit == 2) {
+            bitDuration = 800;
+            isCode = ms < bitDuration;
+          }
+          if (isCode && !last125HzState) {
+            if (document.getElementById('play_low_freq').checked) {
+              play125Hz(bitDuration);
+            }
+          }
+          target125Hz = isCode;
+        }
+      }
+      last1kHzState = target1kHz;
+      last125HzState = target125Hz;
+    }
+    function updateTimeDisplay() {
+      const now = new Date();
+      const totalOffset = localOffset + networkCompensation;
+      const utcNow = new Date(now.getTime() + totalOffset);
+      const hours = String(utcNow.getUTCHours()).padStart(2, '0');
+      const mins = String(utcNow.getUTCMinutes()).padStart(2, '0');
+      const secs = String(utcNow.getUTCSeconds()).padStart(2, '0');
+      const msStr = String(utcNow.getUTCMilliseconds()).padStart(3, '0');
+      const showMs = document.getElementById('show_ms').checked;
+      const playLowFreq = document.getElementById('play_low_freq').checked;
+      document.getElementById('time_display').innerHTML =
+        `${hours}:${mins}:${secs}` +
+        (showMs ? `<span id="ms_display" class="text-3xl sm:text-4xl text-gray-400">.${msStr}</span>` : '');
+      const ut1Now = new Date(utcNow.getTime() + window.bpmDUT1);
+      if (showMs) {
+        document.getElementById('ut1_time').textContent = ut1Now.toISOString().substr(11, 12);
+      } else {
+        document.getElementById('ut1_time').textContent = ut1Now.toISOString().substr(11, 8);
+      }
+      const second = utcNow.getUTCSeconds();
+      const ms = utcNow.getUTCMilliseconds();
+      const minute = utcNow.getUTCMinutes();
+      let periodName = '';
+      const period = getPeriodType(minute, second, ms);
+      if (period === 'utc') periodName = playLowFreq ? 'UTC+TimeCode' : 'UTC';
+      else if (period === 'carrier') periodName = 'Carrier';
+      else if (period === 'ut1') periodName = 'UT1';
+      else if (period === 'silent') periodName = 'UT1';
+      else if (period === 'call') {
+        if (second < 40) periodName = 'MorseCodeStationID';
+        else periodName = '标准时间标准频率发播台';
+      }
+      document.getElementById('current_period').textContent = periodName;
+      if (window.isAutoDUT1 && window.eopData) {
+        const currentKey = `${utcNow.getUTCFullYear()}-${utcNow.getUTCMonth() + 1}-${utcNow.getUTCDate()}`;
+        if (window.eopData[currentKey]) {
+          const expectedDut1 = window.eopData[currentKey] * 1000;
+          const expectedStatusText = `${String(utcNow.getUTCFullYear()).padStart(4, '0')}${String(utcNow.getUTCMonth() + 1).padStart(2, '0')}${String(utcNow.getUTCDate()).padStart(2, '0')}`;
+          if (window.bpmDUT1 !== expectedDut1 || document.getElementById('eop_status').textContent !== expectedStatusText) {
+            window.bpmDUT1 = expectedDut1;
+            updateOffsetDisplay();
+            const eopStatus = document.getElementById('eop_status');
+            eopStatus.textContent = expectedStatusText;
+            eopStatus.classList.remove('text-red-400');
+            eopStatus.classList.add('text-green-400');
+            document.getElementById('eop_hint').innerHTML = '&#128279;www.ut1.ntsc.ac.cn';
+          }
+        }
+      }
+    }
+    function updateOffsetDisplay() {
+      const localSec = localOffset / 1000;
+      const dut1Sec = window.bpmDUT1 / 1000;
+      document.getElementById('local_offset_val').textContent = (localSec >= 0 ? '+' : '') + localSec.toFixed(3);
+      document.getElementById('network_comp_val').textContent = `(+${networkCompensation}ms)`;
+      document.getElementById('dut1_val').textContent = (dut1Sec >= 0 ? '+' : '') + dut1Sec.toFixed(3);
+      saveSettings();
+    }
+    async function autoSyncTime() {
+      const syncBtn = document.getElementById('sync_btn');
+      const syncError = document.getElementById('sync_error');
+      syncError.textContent = '';
+      syncBtn.disabled = true;
+      syncBtn.textContent = 'SYNCING...';
+      try {
+        const requestTime1 = Date.now();
+        const res1 = await fetch('https://gettimeapi.dev/v1/time?timezone=UTC');
+        const responseTime1 = Date.now();
+        await new Promise((resolve) => setTimeout(() => resolve(), Math.random() * 1000));
+        const requestTime2 = Date.now();
+        const res2 = await fetch('https://gettimeapi.dev/v1/time?timezone=UTC');
+        const responseTime2 = Date.now();
+        if (!res1.ok || !res2.ok) throw new Error('API request failed');
+        const data1 = await res1.json();
+        const data2 = await res2.json();
+        const serverTime1 = new Date(`${data1.date}T${data1.time}Z`).getTime();
+        const serverTime2 = new Date(`${data2.date}T${data2.time}Z`).getTime();
+        const latency1 = responseTime1 - requestTime1;
+        const latency2 = responseTime2 - requestTime2;
+        const timeDiff1 = requestTime1 - serverTime1 + Math.round(latency1 / 2);
+        const timeDiff2 = requestTime2 - serverTime2 + Math.round(latency2 / 2);
+        localOffset = -(latency1 < latency2 ? timeDiff1 : timeDiff2);
+        updateOffsetDisplay();
+        const errorMs = (latency1 < latency2 ? latency1 : latency2) / 2;
+        const syncTime = new Date(latency1 < latency2 ? serverTime1 : serverTime2);
+        syncError.innerHTML = `±${(errorMs / 1000).toFixed(3)}s via <a href="https://gettimeapi.dev" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300">gettimeapi.dev</a> @ ${String(syncTime.getUTCFullYear()).padStart(4, '0')}${String(syncTime.getUTCMonth() + 1).padStart(2, '0')}${String(syncTime.getUTCDate()).padStart(2, '0')}T${String(syncTime.getUTCHours()).padStart(2, '0')}${String(syncTime.getUTCMinutes()).padStart(2, '0')}${String(syncTime.getUTCSeconds()).padStart(2, '0')}Z`;
+        syncBtn.textContent = 'DONE!';
+        setTimeout(() => {
+          syncBtn.textContent = 'SYNC';
+          syncBtn.disabled = false;
+        }, 3000);
+      } catch (e) {
+        console.error('Sync failed:', e);
+        syncError.innerHTML = '<span class="text-red-400">via <a href="https://gettimeapi.dev" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300">gettimeapi.dev</a> failed, please try again later.</span>';
+        syncBtn.textContent = 'SYNC';
+        syncBtn.disabled = false;
+      }
+    }
+    function start() {
+      try {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        isRunning = true;
+        active1kHz = null;
+        active125Hz = null;
+        last1kHzState = false;
+        last125HzState = false;
+        voiceSource = null;
+        voiceGain = null;
+        preloadVoiceAudio();
+        updateTimer = setDriftlessInterval(updateAudio, 1);
+        document.getElementById('start_btn').classList.add('hidden');
+        document.getElementById('stop_btn').classList.remove('hidden');
+        console.log('Simulator started successfully');
+      } catch (e) {
+        console.error('Start failed:', e);
+        alert('Start failed: ' + e.message);
+        document.getElementById('start_btn').classList.remove('hidden');
+        document.getElementById('stop_btn').classList.add('hidden');
+      }
+    }
+    function stop() {
+      isRunning = false;
+      if (updateTimer) {
+        clearDriftlessInterval(updateTimer);
+        updateTimer = null;
+      }
+      if (active1kHz) { try { active1kHz.stop(); } catch (e) { } active1kHz = null; }
+      if (active125Hz) { try { active125Hz.stop(); } catch (e) { } active125Hz = null; }
+      if (voiceSource) { try { voiceSource.stop(); } catch (e) { } voiceSource = null; voiceGain = null; }
+      if (audioContext) { audioContext.close(); audioContext = null; }
+      document.getElementById('start_btn').classList.remove('hidden');
+      document.getElementById('stop_btn').classList.add('hidden');
+    }
+    document.addEventListener('DOMContentLoaded', function () {
+      loadSettings();
+      if (navigator.mediaSession) {
+        try {
+          navigator.mediaSession.metadata = null;
+          navigator.mediaSession.setActionHandler('play', null);
+          navigator.mediaSession.setActionHandler('pause', null);
+          navigator.mediaSession.setActionHandler('seekbackward', null);
+          navigator.mediaSession.setActionHandler('seekforward', null);
+          navigator.mediaSession.setActionHandler('previoustrack', null);
+          navigator.mediaSession.setActionHandler('nexttrack', null);
+        } catch (e) { }
+      }
+      setDriftlessInterval(updateTimeDisplay, 10);
+      document.getElementById('open_help').addEventListener('click', function () {
+        document.getElementById('help_modal').classList.remove('hidden');
+      });
+      document.getElementById('close_help').addEventListener('click', function () {
+        document.getElementById('help_modal').classList.add('hidden');
+      });
+      document.getElementById('help_modal').addEventListener('click', function (e) {
+        if (e.target === this) this.classList.add('hidden');
+      });
+      document.getElementById('lang_en').addEventListener('click', function () {
+        document.getElementById('help_en').classList.remove('hidden');
+        document.getElementById('help_zh').classList.add('hidden');
+        this.classList.add('bg-blue-600', 'text-white');
+        this.classList.remove('bg-dark-700', 'text-gray-300');
+        document.getElementById('lang_zh').classList.remove('bg-blue-600', 'text-white');
+        document.getElementById('lang_zh').classList.add('bg-dark-700', 'text-gray-300');
+      });
+      document.getElementById('lang_zh').addEventListener('click', function () {
+        document.getElementById('help_zh').classList.remove('hidden');
+        document.getElementById('help_en').classList.add('hidden');
+        this.classList.add('bg-blue-600', 'text-white');
+        this.classList.remove('bg-dark-700', 'text-gray-300');
+        document.getElementById('lang_en').classList.remove('bg-blue-600', 'text-white');
+        document.getElementById('lang_en').classList.add('bg-dark-700', 'text-gray-300');
+      });
+      document.getElementById('start_btn').addEventListener('click', start);
+      document.getElementById('stop_btn').addEventListener('click', stop);
+      document.getElementById('show_ms').addEventListener('change', function () {
+        updateTimeDisplay();
+        saveSettings();
+      });
+      document.getElementById('play_low_freq').addEventListener('change', function () {
+        saveSettings();
+      });
+      document.getElementById('volume_slider').addEventListener('input', function () {
+        volume = parseFloat(this.value);
+        document.getElementById('volume_val').textContent = Math.round(volume * 100);
+        if (voiceGain) voiceGain.gain.value = volume;
+        saveSettings();
+      });
+      document.getElementById('toggle_settings').addEventListener('click', function () {
+        const panel = document.getElementById('settings_panel');
+        if (panel.classList.contains('hidden')) {
+          panel.classList.remove('hidden');
+        } else {
+          panel.classList.add('hidden');
+        }
+        saveSettings();
+      });
+      document.getElementById('sync_btn').addEventListener('click', autoSyncTime);
+      document.querySelectorAll('[data-offset]').forEach(btn => {
+        btn.addEventListener('click', function () {
+          const type = this.dataset.offset;
+          const deltaStr = this.dataset.delta;
+          if (deltaStr === 'reset') {
+            if (type === 'local') {
+              localOffset = 0;
+              document.getElementById('sync_error').textContent = '';
+            } else if (type === 'comp') {
+              networkCompensation = 0;
+            } else if (type === 'dut1') {
+              window.bpmDUT1 = 0;
+              const eopStatus = document.getElementById('eop_status');
+              eopStatus.textContent = '';
+              eopStatus.classList.remove('text-green-400', 'text-red-400');
+              eopStatus.classList.add('text-gray-500');
+              document.getElementById('eop_file').value = '';
+              document.getElementById('eop_hint').innerHTML = '&#128269;NTSC_EOP_<i>yyyyMMdd</i>.txt';
+              window.isAutoDUT1 = false;
+            }
+          } else {
+            const delta = parseInt(deltaStr);
+            if (!isNaN(delta)) {
+              if (type === 'local') {
+                localOffset += delta;
+                document.getElementById('sync_error').textContent = '';
+              } else if (type === 'comp') {
+                networkCompensation += delta;
+                networkCompensation = Math.max(0, networkCompensation);
+              } else if (type === 'dut1') {
+                window.bpmDUT1 += delta;
+                window.bpmDUT1 = Math.max(-999, Math.min(999, window.bpmDUT1));
+                const eopStatus = document.getElementById('eop_status');
+                eopStatus.textContent = '';
+                eopStatus.classList.remove('text-green-400', 'text-red-400');
+                eopStatus.classList.add('text-gray-500');
+                document.getElementById('eop_file').value = '';
+                document.getElementById('eop_hint').innerHTML = '&#128269;NTSC_EOP_<i>yyyyMMdd</i>.txt';
+                window.isAutoDUT1 = false;
+              }
+            }
+          }
+          updateOffsetDisplay();
+        });
+      });
+      document.getElementById('eop_file').addEventListener('change', function (e) {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function (event) {
+          try {
+            const content = event.target.result;
+            const lines = content.split('\n');
+            const eopMap = {};
+            for (const line of lines) {
+              const trimmed = line.trim();
+              if (!trimmed || trimmed.startsWith('#')) continue;
+              const parts = trimmed.split(/\s+/);
+              if (parts.length < 7) continue;
+              const year = parseInt(parts[0]);
+              const month = parseInt(parts[1]);
+              const day = parseInt(parts[2]);
+              const ut1utc = parseFloat(parts[6]);
+              if (!isNaN(year) && !isNaN(month) && !isNaN(day) && !isNaN(ut1utc)) {
+                const key = `${year}-${month}-${day}`;
+                eopMap[key] = ut1utc;
+              }
+            }
+            const now = new Date();
+            const totalOffset = localOffset + networkCompensation;
+            const utcNow = new Date(now.getTime() + totalOffset);
+            const currentKey = `${utcNow.getUTCFullYear()}-${utcNow.getUTCMonth() + 1}-${utcNow.getUTCDate()}`;
+            if (eopMap[currentKey]) {
+              const ut1utc = eopMap[currentKey];
+              window.bpmDUT1 = ut1utc * 1000;
+              window.eopData = eopMap;
+              window.isAutoDUT1 = true;
+              updateOffsetDisplay();
+              document.getElementById('eop_status').textContent = `${String(utcNow.getUTCFullYear()).padStart(4, '0')}${String(utcNow.getUTCMonth() + 1).padStart(2, '0')}${String(utcNow.getUTCDate()).padStart(2, '0')}`;
+              document.getElementById('eop_status').classList.remove('text-red-400');
+              document.getElementById('eop_status').classList.add('text-green-400');
+              document.getElementById('eop_hint').innerHTML = '&#128279;www.ut1.ntsc.ac.cn';
+            } else {
+              document.getElementById('eop_status').textContent = 'Err';
+              document.getElementById('eop_status').classList.remove('text-green-400');
+              document.getElementById('eop_status').classList.add('text-red-400');
+              document.getElementById('eop_hint').innerHTML = '&#128269;NTSC_EOP_<i>yyyyMMdd</i>.txt';
+            }
+          } catch (err) {
+            console.error('Parse error:', err);
+            document.getElementById('eop_status').textContent = 'Err';
+            document.getElementById('eop_status').classList.remove('text-green-400');
+            document.getElementById('eop_status').classList.add('text-red-400');
+            document.getElementById('eop_hint').innerHTML = '&#128269;NTSC_EOP_<i>yyyyMMdd</i>.txt';
+          }
+        };
+        reader.readAsText(file);
+      });
+      updateOffsetDisplay();
+      updateTimeDisplay();
+    });
+  </script>
+</body>
+
+</html>

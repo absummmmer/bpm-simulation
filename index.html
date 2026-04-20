@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BPM Simulator</title>
+  <title>BPM Shortwave Time Station Broadcast Simulator</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -48,7 +48,7 @@
             This is a web-based simulator that perfectly replicates the audio signal format of the <strong>BPM Shortwave
               Time Station</strong> operated by the National Time Service Center of China.
           </p>
-  
+
           <h3 class="text-lg font-bold mt-4">How to use</h3>
           <p class="text-gray-300">
             Click the <button class="w-6 h-6 bg-green-600 text-white font-mono rounded transition text-center"
@@ -56,13 +56,13 @@
               class="w-6 h-6 bg-red-600 text-white font-mono rounded transition text-center"
               disabled="true">&acd;</button>, you will hear the simulated BPM signal.
           </p>
-  
+
           <div class="bg-yellow-900/30 border border-yellow-600/50 p-2 rounded text-yellow-200 text-xs">
             <strong>Note:</strong> When this page runs in the background (e.g., another browser tab is active), browsers
             may reduce timer precision and throttle audio processing to save resources. This can cause audible delay or
             glitches. <strong>Please keep this page in the foreground</strong> for the best experience.
           </div>
-  
+
           <div class="bg-dark-700/30 p-3 rounded-lg">
             <h4 class="font-bold text-blue-400">What you hear</h4>
             <p class="text-gray-300 text-sm mt-1">The BPM signal repeats every half hour. The chart and table below give
@@ -134,7 +134,8 @@
                   </tr>
                   <tr>
                     <td class="py-1 pr-2">25–29, 55–59</td>
-                    <td class="py-1">UT1: 1 kHz second ticks (100 ms, 300 ms on the minute), no time code, shifted by the
+                    <td class="py-1">UT1: 1 kHz second ticks (100 ms, 300 ms on the minute), no time code, shifted by
+                      the
                       DUT1 value. <span class="text-green-400">(Accuracy depends on the DUT1 setting in the panel
                         below.)</span></td>
                   </tr>
@@ -150,7 +151,7 @@
               <p>For the exact time code encoding, please refer to the reference below.</p>
             </div>
           </div>
-  
+
           <!-- Control options (with UI indicators) -->
           <div class="bg-dark-700/30 p-3 rounded-lg">
             <h4 class="font-bold text-blue-400">Control options &amp; UI indicators</h4>
@@ -158,10 +159,10 @@
               Below the start/stop button, you will find two checkboxes:
             </p>
             <ul class="list-disc list-inside text-gray-300 text-sm space-y-1">
-              <li><strong>TimeCode<sup>[1]</sup></strong> – Enable or disable the 125Hz time code subcarrier. When
-                unchecked, you will only hear the second pulses (1kHz) without the low‑frequency “hum”.</li>
-              <li><strong>&#13235;</strong> – Show or hide milliseconds on the main UTC time display and the UT1 time
-                display.
+              <li><strong>TimeCode<sup>[1]</sup></strong> – Enable or disable the 125Hz time code subcarrier. If you
+                find the low‑frequency hum a bit annoying, just uncheck this – you'll only hear the second pulses
+                (1kHz), and the subcarrier will be muted.</li>
+              <li><strong>&#13235;</strong> – Show or hide milliseconds on the time display. If the rapidly changing digits feel distracting, just uncheck this to keep the display clean at second resolution.</li>
               </li>
             </ul>
             <p class="text-gray-300 text-sm mt-2">
@@ -176,7 +177,7 @@
             <p class="text-gray-400 text-xs mt-2">All settings are saved automatically and restored when you revisit the
               page.</p>
           </div>
-  
+
           <h3 class="text-lg font-bold mt-4">About Time Service & BPM Shortwave Time Station</h3>
           <p class="text-gray-300">
             Time service is one of the core infrastructures of modern society. Precise time synchronization is the
@@ -189,7 +190,7 @@
             It broadcasts precise time signals on multiple shortwave frequencies, allowing anyone with a
             shortwave radio to sync their clocks to national standard time for free.
           </p>
-  
+
           <!-- Frequency Schedule Table (with UTC column) -->
           <div class="overflow-x-auto">
             <table class="w-full text-sm text-left text-gray-300 border border-dark-700 rounded-lg">
@@ -224,21 +225,38 @@
               </tbody>
             </table>
           </div>
-  
+
           <p class="text-yellow-400 text-sm">
             Please note that this is only a simulation and demonstration tool, it cannot replace the real BPM shortwave
             time service broadcast. All simulation results are for reference only.
           </p>
-  
+
           <!-- Settings Guide -->
           <h3 class="text-lg font-bold mt-4"><button class="w-8 h-8 bg-dark-700 rounded transition"
               disabled="true">&#128295;</button> Settings Guide</h3>
           <div class="space-y-3 text-gray-300">
             <p>
-              By adjusting the three parameters below, you can make the simulator's output <strong
-                class="text-green-400">match the real BPM time signal perfectly</strong> – including UTC, time code, UT1,
-              and station ID.
+              By adjusting the three parameters below, you can make the simulator's output match the real BPM signal as
+              closely as possible – including UTC, time code<strong>*</strong>, UT1, and station ID.
             </p>
+            <div class="bg-dark-800/50 p-2 rounded text-xs text-gray-400 border-blue-500">
+              <strong>* Author's note:</strong> To be honest, I've never actually heard the real BPM time code signal
+              myself – or rather, it was almost always drowned
+              out by the time code subcarrier of WWV/H. This
+              simulator is built strictly according to the published paper (see reference [1]) – translating the
+              encoding and
+              broadcast rules into sound. The main goal is simple: to <strong>hear what the time code of BPM actually
+                sounds
+                like</strong> – that low 125 Hz hum between the second ticks – and get a feel for how it works.<br><br>
+              Rest assured, once you set the parameters below correctly, what comes out of your browser will be
+              identical to the real
+              BPM broadcast. If you can actually hear the time code subcarrier on 5 MHz, I'd love for you to help verify
+              the accuracy of this
+              simulator. Feel free to <a href="https://github.com/absummmmer/bpm-simulation/issues" target="_blank"
+                rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300">drop by here</a> and share your
+              feedback
+              anytime!
+            </div>
             <p>
               <strong class="text-blue-400">Local Clock Offset <span class="text-white">&#9201;</span>:</strong> The
               accuracy of UTC signals depends on your
@@ -289,7 +307,7 @@
               in the time code, nor can it simulate the special signals when a leap second occurs.
             </p>
           </div>
-  
+
           <!-- Copyright & Privacy Statement -->
           <h3 class="text-lg font-bold mt-4">Copyright & Privacy Statement</h3>
           <div class="space-y-2 text-gray-400 text-sm">
@@ -298,21 +316,21 @@
             <p>Except for syncing internet time, this page will not perform any other network activities. All your
               settings are saved locally.</p>
           </div>
-  
+
           <!-- Reference -->
           <h3 class="text-lg font-bold mt-4">Reference</h3>
           <div class="text-gray-400 text-sm">
             <p>[1]蒙智谋.BPM短波时码授时发播技术方案[J].时间频率学报,2014,37(03):145-150.DOI:10.13875/j.issn.1674-0637.2014-03-0145-06.</p>
           </div>
         </div>
-  
+
         <!-- Chinese Content -->
         <div id="help_zh" class="space-y-4 hidden">
           <h2 class="text-xl font-bold">这是什么？</h2>
           <p class="text-gray-300">
             这是一个网页版的模拟器，完美复现了中国科学院国家授时中心运营的<strong>BPM短波授时台</strong>的信号格式。
           </p>
-  
+
           <h3 class="text-lg font-bold mt-4">如何使用</h3>
           <p class="text-gray-300">
             点击<button class="w-6 h-6 bg-green-600 text-white font-mono rounded transition text-center"
@@ -320,12 +338,12 @@
               class="w-6 h-6 bg-red-600 text-white font-mono rounded transition text-center"
               disabled="true">&acd;</button>的时候，你就能听到模拟的BPM信号了。
           </p>
-  
+
           <div class="bg-yellow-900/30 border border-yellow-600/50 p-2 rounded text-yellow-200 text-xs">
             <strong>注意：</strong>
             当本页面在后台运行时（例如打开了其他浏览器标签页），浏览器为了节省资源会降低定时器精度并限制音频处理，可能导致声音延迟或卡顿。<strong>请保持本页面在前台运行</strong>以获得最佳体验。
           </div>
-  
+
           <div class="bg-dark-700/30 p-3 rounded-lg">
             <h4 class="font-bold text-blue-400">你听到的是什么？</h4>
             <p class="text-gray-300 text-sm mt-1">BPM信号每半小时重复一次。下面的图表和表格可以帮你快速了解信号的全貌。</p>
@@ -410,7 +428,7 @@
               <p>时码的具体编码规则请参见参考文献。</p>
             </div>
           </div>
-  
+
           <!-- 控制选项（包含界面指示） -->
           <div class="bg-dark-700/30 p-3 rounded-lg">
             <h4 class="font-bold text-blue-400">控制选项与界面指示</h4>
@@ -418,8 +436,9 @@
               在播放按钮下方，有两个复选框：
             </p>
             <ul class="list-disc list-inside text-gray-300 text-sm space-y-1">
-              <li><strong>TimeCode<sup>[1]</sup></strong> – 开启或关闭125Hz时码副载波。取消勾选后，你将只听到秒脉冲（1kHz），不再有低沉的“嗡嗡”声。</li>
-              <li><strong>&#13235;</strong> – 在主UTC时间显示和UT1时间显示中显示或隐藏毫秒。</li>
+              <li><strong>TimeCode<sup>[1]</sup></strong> – 开启或关闭125Hz时码副载波。如果你觉得低频嗡嗡声有些烦躁，可以取消勾选 ——
+                此时你只会听到秒脉冲（1kHz），不再有时码副载波的声音。</li>
+              <li><strong>&#13235;</strong> – 在时间显示中显示或隐藏毫秒。如果毫秒数字跳得太快让你觉得眼花，可以取消勾选它，只保留秒级显示。</li>
             </ul>
             <p class="text-gray-300 text-sm mt-2">
               此外，页面还显示：
@@ -430,7 +449,7 @@
             </ul>
             <p class="text-gray-400 text-xs mt-2">所有设置都会自动保存，再次访问页面时恢复。</p>
           </div>
-  
+
           <h3 class="text-lg font-bold mt-4">关于授时与BPM短波授时台</h3>
           <p class="text-gray-300">
             授时是现代社会的核心基础设施之一，精确的时间同步是卫星导航、5G通信、金融交易、深空探测等领域正常运行的基础。
@@ -438,7 +457,7 @@
           <p class="text-gray-300">
             BPM短波授时台是中国的国家级短波授时台，类似美国的WWV/WWVH授时台。它在多个短波频率上广播精确的时间信号，任何人都可以用普通的短波收音机免费接收，校准自己的时钟。
           </p>
-  
+
           <!-- 频率发播时间表（增加UTC列） -->
           <div class="overflow-x-auto">
             <table class="w-full text-sm text-left text-gray-300 border border-dark-700 rounded-lg">
@@ -473,18 +492,25 @@
               </tbody>
             </table>
           </div>
-  
+
           <p class="text-yellow-400 text-sm">
             请注意，这只是一个模拟演示工具，无法替代真实的BPM短波授时广播。所有模拟结果仅供参考。
           </p>
-  
+
           <!-- 设置界面说明 -->
           <h3 class="text-lg font-bold mt-4"><button class="w-8 h-8 bg-dark-700 rounded transition"
               disabled="true">&#128295;</button> 设置界面说明</h3>
           <div class="space-y-3 text-gray-300">
             <p>
-              通过调整以下三个参数，你可以让模拟器的输出<strong class="text-green-400">与真实的BPM授时信号完全一致</strong>——包括UTC、时码、UT1和台站呼号。
+              通过调整以下三个参数，你可以让模拟器的输出尽可能贴近真实的BPM信号——包括UTC、时码<strong>*</strong>、UT1和台站呼号。
             </p>
+            <div class="text-gray-400 text-xs space-y-1">
+              <strong>*作者注：</strong>
+              说实话，我自己也从未真正听到过真实的BPM时码信号——或者说，它几乎总是被WWV/H的时码副载波淹没了。这个模拟器完全是照着已发表的论文（参考文献[1]）把时码的编码和发播规则“翻译”成声音的。做它的初衷也很简单——就是想<strong>亲耳听听BPM的时码到底长什么样</strong>，也就是秒脉冲之间那125Hz的低频“嗡嗡”声，顺便了解一下它的工作原理。<br><br>
+              不过可以放心，只要你把下面几个参数设置正确，浏览器里播出来的声音和真实的BPM广播就是完全一样的。如果你真能收听到5MHz上的时码副载波，非常期待你能帮我验证一下这个模拟器的准确性。欢迎<a
+                href="https://github.com/absummmmer/bpm-simulation/issues" target="_blank" rel="noopener noreferrer"
+                class="text-blue-400 hover:text-blue-300">来这里</a>随时交流！
+            </div>
             <p>
               <strong class="text-blue-400">本地时钟偏移<span
                   class="text-white">&#9201;</span>：</strong>UTC信号的准确性取决于你的设备时钟。一般而言，你使用设备的时钟频率与现实世界的频率并不完全一致，这会导致设备时钟长时间运行后与真实时间产生偏移。联网设备一般会使用NTP协议与互联网进行时间同步消除这个偏移，但这个同步动作并不是实时的，这仍然会导致你设备的时钟和真实时间存在随机偏移。你可以通过调整该偏移，或者点击<button
@@ -507,7 +533,7 @@
               需要说明的是，当前模拟器无法实现时码中的闰秒预告功能，也无法模拟闰秒发生时的特殊信号。
             </p>
           </div>
-  
+
           <!-- 版权与隐私声明 -->
           <h3 class="text-lg font-bold mt-4">版权与隐私声明</h3>
           <div class="space-y-2 text-gray-400 text-sm">
@@ -515,7 +541,7 @@
             <p>互联网时间通过REST API（gettimeapi.dev）获得。</p>
             <p>除同步互联网时间外，本页面不会进行任何网络活动。你的所有设置均保存在本地。</p>
           </div>
-  
+
           <!-- 参考文献 -->
           <h3 class="text-lg font-bold mt-4">参考文献</h3>
           <div class="text-gray-400 text-sm">

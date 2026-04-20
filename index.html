@@ -1217,6 +1217,7 @@
             const eopStatus = document.getElementById('eop_status');
             eopStatus.textContent = expectedStatusText;
             eopStatus.classList.remove('text-red-400');
+            eopStatus.classList.remove('text-yellow-400');
             eopStatus.classList.add('text-green-400');
           }
         }
@@ -1450,7 +1451,7 @@
                 window.bpmDUT1 = Math.max(-999, Math.min(999, window.bpmDUT1));
                 const eopStatus = document.getElementById('eop_status');
                 eopStatus.textContent = '';
-                eopStatus.classList.remove('text-green-400', 'text-red-400');
+                eopStatus.classList.remove('text-green-400', 'text-red-400', 'text-yellow-400');
                 eopStatus.classList.add('text-gray-500');
                 document.getElementById('eop_file').value = '';
                 window.isAutoDUT1 = false;
@@ -1487,6 +1488,7 @@
             if (!eopMap || eopMap.size === 0) {
               document.getElementById('eop_status').textContent = 'Err: Unrecognized format';
               document.getElementById('eop_status').classList.remove('text-green-400');
+              document.getElementById('eop_status').classList.remove('text-yellow-400');
               document.getElementById('eop_status').classList.add('text-red-400');
               return;
             }
@@ -1510,9 +1512,11 @@
               updateOffsetDisplay();
               document.getElementById('eop_status').textContent = `${sourceType} @ ${currentKey.replace(/-/g, '')}`;
               document.getElementById('eop_status').classList.remove('text-red-400');
+              document.getElementById('eop_status').classList.remove('text-yellow-400');
               document.getElementById('eop_status').classList.add('text-green-400');
             } else {
               document.getElementById('eop_status').textContent = `${sourceType}: no data for today`;
+              document.getElementById('eop_status').classList.remove('text-red-400');
               document.getElementById('eop_status').classList.remove('text-green-400');
               document.getElementById('eop_status').classList.add('text-yellow-400');
             }
@@ -1520,6 +1524,7 @@
             console.error('Parse error:', err);
             document.getElementById('eop_status').textContent = 'Err';
             document.getElementById('eop_status').classList.remove('text-green-400');
+            document.getElementById('eop_status').classList.remove('text-yellow-400');
             document.getElementById('eop_status').classList.add('text-red-400');
           }
         };

@@ -688,7 +688,7 @@
           </div>
           <div class="flex items-center gap-2 flex-wrap">
             <input type="file" id="eop_file" accept=".txt"
-              class="text-xs text-gray-400 file:mr-2 file:py-1 file:px-2 file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-500">
+              class="text-xs text-gray-400 file:mr-2 file:py-1 file:px-2 file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-500"/>
             <span id="eop_status" class="text-xs font-mono text-gray-500"></span>
           </div>
         </div>
@@ -1232,6 +1232,54 @@
       document.getElementById('dut1_val').textContent = (dut1Sec >= 0 ? '+' : '') + dut1Sec.toFixed(3);
       saveSettings();
     }
+    function parseNtscEop(content) {
+      const lines = content.split('\n');
+      const eopMap = new Map();
+      for (const line of lines) {
+        const trimmed = line.trim();
+        if (!trimmed || trimmed.startsWith('#')) continue;
+        const parts = trimmed.split(/\s+/);
+        if (parts.length != 16) continue;
+        const year = parseInt(parts[0]);
+        const month = parseInt(parts[1]);
+        const day = parseInt(parts[2]);
+        const ut1utc = parseFloat(parts[6]);
+        if (!isNaN(year) && !isNaN(month) && !isNaN(day) && !isNaN(ut1utc)) {
+          const key = `${year.toString().padStart(4, '0')}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+          eopMap.set(key, ut1utc);
+        }
+      }
+      return eopMap;
+    }
+    // Parse IERS Bulletin A format (skip header, locate data lines)
+    function parseIersBulletinA(content) {
+      const lines = content.split('\n');
+      const eopMap = new Map();
+      let inData = false, inDataPredict = false;
+      for (const line of lines) {
+        // Look for header line that indicates start of data
+        if (line.includes('MJD') && line.includes('UT1-UTC')) {
+          inData = true;
+          inDataPredict = !line.includes('error') && line.includes('UT1-UTC(sec)');
+          continue;
+        }
+        if (!inData || !inDataPredict) continue;
+        const trimmed = line.trim();
+        if (trimmed.length === 0) continue;
+        // Data lines are space-separated: year month day MJD x y UT1-UTC
+        const parts = trimmed.split(/\s+/);
+        if (parts.length != (inDataPredict ? 7 : 10)) continue;
+        const year = parseInt(parts[0]);
+        const month = parseInt(parts[1]);
+        const day = parseInt(parts[2]);
+        const ut1utc = parseFloat(parts[6]);
+        if (!isNaN(year) && !isNaN(month) && !isNaN(day) && !isNaN(ut1utc)) {
+          const key = `${year.toString().padStart(4, '0')}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+          eopMap.set(key, ut1utc); // store in seconds (will be multiplied by 1000 later)
+        }
+      }
+      return eopMap;
+    }
     async function autoSyncTime() {
       const syncBtn = document.getElementById('sync_btn');
       const syncError = document.getElementById('sync_error');
@@ -1425,43 +1473,61 @@
         reader.onload = function (event) {
           try {
             const content = event.target.result;
-            const lines = content.split('\n');
-            const eopMap = {};
-            for (const line of lines) {
-              const trimmed = line.trim();
-              if (!trimmed || trimmed.startsWith('#')) continue;
-              const parts = trimmed.split(/\s+/);
-              if (parts.length < 7) continue;
-              const year = parseInt(parts[0]);
-              const month = parseInt(parts[1]);
-              const day = parseInt(parts[2]);
-              const ut1utc = parseFloat(parts[6]);
-              if (!isNaN(year) && !isNaN(month) && !isNaN(day) && !isNaN(ut1utc)) {
-                const key = `${year}-${month}-${day}`;
-                eopMap[key] = ut1utc;
+            let eopMap = null;
+            let sourceType = '';
+
+            // Try NTSC format first
+            const ntscMap = parseNtscEop(content);
+            if (ntscMap.size > 0) {
+              eopMap = ntscMap;
+              sourceType = 'NTSC';
+            } else {
+              // Try IERS Bulletin A format
+              const iersMap = parseIersBulletinA(content);
+              if (iersMap.size > 0) {
+                eopMap = iersMap;
+                sourceType = 'IERS';
               }
             }
+
+            if (!eopMap || eopMap.size === 0) {
+              document.getElementById('eop_status').textContent = 'Err: Unrecognized format';
+              document.getElementById('eop_status').classList.remove('text-green-400');
+              document.getElementById('eop_status').classList.add('text-red-400');
+              return;
+            }
+
+            // Store as milliseconds for internal use (convert from seconds)
+            const eopDataMs = new Map();
+            for (const [key, value] of eopMap.entries()) {
+              eopDataMs.set(key, value * 1000);
+            }
+            window.eopData = eopDataMs;
+            window.isAutoDUT1 = true;
+            window.currentDataSource = sourceType;
+
             const now = new Date();
             const totalOffset = localOffset + networkCompensation;
             const utcNow = new Date(now.getTime() + totalOffset);
-            const currentKey = `${utcNow.getUTCFullYear()}-${utcNow.getUTCMonth() + 1}-${utcNow.getUTCDate()}`;
-            if (eopMap[currentKey]) {
-              const ut1utc = eopMap[currentKey];
-              window.bpmDUT1 = ut1utc * 1000;
-              window.eopData = eopMap;
-              window.isAutoDUT1 = true;
+            const currentKey = `${utcNow.getUTCFullYear().toString().padStart(4, '0')}-${(utcNow.getUTCMonth() + 1).toString().padStart(2, '0')}-${utcNow.getUTCDate().toString().padStart(2, '0')}`;
+
+            if (eopDataMs.has(currentKey)) {
+              window.bpmDUT1 = eopDataMs.get(currentKey);
               updateOffsetDisplay();
-              document.getElementById('eop_status').textContent = `${String(utcNow.getUTCFullYear()).padStart(4, '0')}${String(utcNow.getUTCMonth() + 1).padStart(2, '0')}${String(utcNow.getUTCDate()).padStart(2, '0')}`;
+              document.getElementById('eop_status').textContent = `${sourceType} @ ${currentKey.replace(/-/g, '')}`;
               document.getElementById('eop_status').classList.remove('text-red-400');
               document.getElementById('eop_status').classList.add('text-green-400');
-              document.getElementById('eop_hint_ntsc').innerHTML = '&#128279;www.ut1.ntsc.ac.cn';
-              document.getElementById('eop_hint_iers').innerHTML = '&#9989;IERS/BULLETIN-A';
+              if (sourceType === 'NTSC') {
+                document.getElementById('eop_hint_ntsc').innerHTML = '&#128279;www.ut1.ntsc.ac.cn';
+                document.getElementById('eop_hint_iers').innerHTML = '&#128190;IERS/BULLETIN-A';
+              } else {
+                document.getElementById('eop_hint_ntsc').innerHTML = '&#128269;NTSC_EOP_<i>yyyyMMdd</i>.txt';
+                document.getElementById('eop_hint_iers').innerHTML = '&#9989;IERS/BULLETIN-A';
+              }
             } else {
-              document.getElementById('eop_status').textContent = 'Err';
+              document.getElementById('eop_status').textContent = `${sourceType}: no data for today`;
               document.getElementById('eop_status').classList.remove('text-green-400');
-              document.getElementById('eop_status').classList.add('text-red-400');
-              document.getElementById('eop_hint_ntsc').innerHTML = '&#128269;NTSC_EOP_<i>yyyyMMdd</i>.txt';
-              document.getElementById('eop_hint_iers').innerHTML = '&#128190;IERS/BULLETIN-A';
+              document.getElementById('eop_status').classList.add('text-yellow-400');
             }
           } catch (err) {
             console.error('Parse error:', err);

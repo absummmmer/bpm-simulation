@@ -677,11 +677,11 @@
               class="text-sm px-2 py-1 bg-dark-700 rounded hover:bg-dark-600 transition text-green-400 text-center font-mono">&#8634;</button>
           </div>
           <div class="flex flex-col gap-1">
-            <a id="eop_hint_ntsc" href="http://www.ut1.ntsc.ac.cn/" target="_blank" rel="noopener noreferrer"
+            <a href="http://www.ut1.ntsc.ac.cn/" target="_blank" rel="noopener noreferrer"
               class="text-xs text-blue-400 hover:text-blue-300 flex items-center font-mono whitespace-nowrap">
               &#128269;NTSC_EOP_<i>yyyyMMdd</i>.txt
             </a>
-            <a id="eop_hint_iers" href="https://datacenter.iers.org/data/latestVersion/bulletinA.txt" target="_blank" rel="noopener noreferrer"
+            <a href="https://datacenter.iers.org/data/latestVersion/bulletinA.txt" target="_blank" rel="noopener noreferrer"
               class="text-xs text-blue-400 hover:text-blue-300 flex items-center font-mono whitespace-nowrap">
               &#128190;IERS/BULLETIN-A
             </a>
@@ -1218,8 +1218,6 @@
             eopStatus.textContent = expectedStatusText;
             eopStatus.classList.remove('text-red-400');
             eopStatus.classList.add('text-green-400');
-            document.getElementById('eop_hint_ntsc').innerHTML = '&#128279;www.ut1.ntsc.ac.cn';
-            document.getElementById('eop_hint_iers').innerHTML = '&#9989;IERS/BULLETIN-A';
           }
         }
       }
@@ -1436,8 +1434,6 @@
               eopStatus.classList.remove('text-green-400', 'text-red-400');
               eopStatus.classList.add('text-gray-500');
               document.getElementById('eop_file').value = '';
-              document.getElementById('eop_hint_ntsc').innerHTML = '&#128269;NTSC_EOP_<i>yyyyMMdd</i>.txt';
-              document.getElementById('eop_hint_iers').innerHTML = '&#128190;IERS/BULLETIN-A';
               window.isAutoDUT1 = false;
             }
           } else {
@@ -1457,8 +1453,6 @@
                 eopStatus.classList.remove('text-green-400', 'text-red-400');
                 eopStatus.classList.add('text-gray-500');
                 document.getElementById('eop_file').value = '';
-                document.getElementById('eop_hint_ntsc').innerHTML = '&#128269;NTSC_EOP_<i>yyyyMMdd</i>.txt';
-                document.getElementById('eop_hint_iers').innerHTML = '&#128190;IERS/BULLETIN-A';
                 window.isAutoDUT1 = false;
               }
             }
@@ -1517,13 +1511,6 @@
               document.getElementById('eop_status').textContent = `${sourceType} @ ${currentKey.replace(/-/g, '')}`;
               document.getElementById('eop_status').classList.remove('text-red-400');
               document.getElementById('eop_status').classList.add('text-green-400');
-              if (sourceType === 'NTSC') {
-                document.getElementById('eop_hint_ntsc').innerHTML = '&#128279;www.ut1.ntsc.ac.cn';
-                document.getElementById('eop_hint_iers').innerHTML = '&#128190;IERS/BULLETIN-A';
-              } else {
-                document.getElementById('eop_hint_ntsc').innerHTML = '&#128269;NTSC_EOP_<i>yyyyMMdd</i>.txt';
-                document.getElementById('eop_hint_iers').innerHTML = '&#9989;IERS/BULLETIN-A';
-              }
             } else {
               document.getElementById('eop_status').textContent = `${sourceType}: no data for today`;
               document.getElementById('eop_status').classList.remove('text-green-400');
@@ -1534,8 +1521,6 @@
             document.getElementById('eop_status').textContent = 'Err';
             document.getElementById('eop_status').classList.remove('text-green-400');
             document.getElementById('eop_status').classList.add('text-red-400');
-            document.getElementById('eop_hint_ntsc').innerHTML = '&#128269;NTSC_EOP_<i>yyyyMMdd</i>.txt';
-            document.getElementById('eop_hint_iers').innerHTML = '&#128190;IERS/BULLETIN-A';
           }
         };
         reader.readAsText(file);

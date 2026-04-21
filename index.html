@@ -12,10 +12,7 @@
         extend: {
           colors: {
             dark: {
-              900: '#111827',
-              800: '#1f2937',
-              700: '#374151',
-              600: '#4b5563',
+              900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563',
             }
           }
         }
@@ -30,13 +27,10 @@
     <div class="bg-dark-800 rounded-xl max-w-2xl w-full max-h-[80vh] overflow-hidden flex flex-col">
       <!-- Modal Header -->
       <div class="flex items-center justify-between p-4 border-b border-dark-700">
-        <div class="flex items-center gap-2">
-          <button id="lang_en" class="px-3 py-1 text-sm rounded-lg bg-blue-600 text-white">English</button>
-          <button id="lang_zh" class="px-3 py-1 text-sm rounded-lg bg-dark-700 text-gray-300">中文</button>
-        </div>
-        <button id="close_help"
-          class="w-8 h-8 flex items-center justify-center rounded-lg bg-dark-700 hover:bg-dark-600 transition">
-          &#10005;
+        <div class="flex items-center gap-2"> <button id="lang_en"
+            class="px-3 py-1 text-sm rounded-lg bg-blue-600 text-white">English</button> <button id="lang_zh"
+            class="px-3 py-1 text-sm rounded-lg bg-dark-700 text-gray-300">中文</button> </div> <button id="close_help"
+          class="w-8 h-8 flex items-center justify-center rounded-lg bg-dark-700 hover:bg-dark-600 transition"> &#10005;
         </button>
       </div>
       <!-- Modal Content -->
@@ -44,32 +38,25 @@
         <!-- English Content -->
         <div id="help_en" class="space-y-4">
           <h2 class="text-xl font-bold">What is this?</h2>
-          <p class="text-gray-300">
-            This is a web-based simulator that perfectly replicates the audio signal format of the <strong>BPM Shortwave
-              Time Station</strong> operated by the National Time Service Center of China.
-          </p>
-  
+          <p class="text-gray-300"> This is a web-based simulator that perfectly replicates the audio signal format of
+            the <strong>BPM Shortwave Time Station</strong> operated by the National Time Service Center of China. </p>
           <h3 class="text-lg font-bold mt-4">How to use</h3>
-          <p class="text-gray-300">
-            Click the <button class="w-6 h-6 bg-green-600 text-white font-mono rounded transition text-center"
+          <p class="text-gray-300"> Click the <button
+              class="w-6 h-6 bg-green-600 text-white font-mono rounded transition text-center"
               disabled="true">&minus;</button> button. When the button changes to <button
               class="w-6 h-6 bg-red-600 text-white font-mono rounded transition text-center"
-              disabled="true">&acd;</button>, you will hear the simulated BPM signal.
-          </p>
-  
+              disabled="true">&acd;</button>, you will hear the simulated BPM signal. </p>
           <div class="bg-yellow-900/30 border border-yellow-600/50 p-2 rounded text-yellow-200 text-xs">
             <strong>Note:</strong> When this page runs in the background (e.g., another browser tab is active), browsers
             may reduce timer precision and throttle audio processing to save resources. This can cause audible delay or
             glitches. <strong>Please keep this page in the foreground</strong> for the best experience.
           </div>
-  
           <div class="bg-dark-700/30 p-3 rounded-lg">
             <h4 class="font-bold text-blue-400">What you hear</h4>
             <p class="text-gray-300 text-sm mt-1">The BPM signal repeats every half hour. The chart and table below give
               you a quick overview.</p>
             <!-- SVG pie chart -->
-            <div class="flex justify-center my-2">
-              <svg width="280" height="280" viewBox="0 0 280 280">
+            <div class="flex justify-center my-2"> <svg width="280" height="280" viewBox="0 0 280 280">
                 <path d="M 140 10 A 130 130 0 0 1 252.58 75 L 140 140 Z" fill="#4a6fe3" />
                 <path d="M 270 140 A 130 130 0 0 1 205 252.58 L 140 140 Z" fill="#4a6fe3" />
                 <path d="M 140 270 A 130 130 0 0 1 27.42 205 L 140 140 Z" fill="#4a6fe3" />
@@ -80,20 +67,18 @@
                 <path d="M 75 27.42 A 130 130 0 0 1 126.415 10.715 L 140 140 Z" fill="#f57c00" />
                 <path d="M 153.585 269.285 A 130 130 0 0 1 140 270 L 140 140 Z" fill="#4caf50" />
                 <path d="M 126.415 10.715 A 130 130 0 0 1 140 10 L 140 140 Z" fill="#4caf50" />
-                <circle cx="140" cy="140" r="70" fill="white" />
-                <text x="140" y="145" text-anchor="middle" font-size="18" font-weight="bold" fill="#d32f2f">BPM</text>
-                <text x="140" y="25" text-anchor="middle" font-size="10" fill="white">00</text>
-                <text x="241" y="85" text-anchor="middle" font-size="10" fill="white">10</text>
-                <text x="258" y="143" text-anchor="middle" font-size="10" fill="white">15</text>
-                <text x="198" y="243" text-anchor="middle" font-size="10" fill="white">25</text>
-                <text x="152" y="253" text-anchor="middle" font-size="10" fill="white">29</text>
-                <text x="140" y="262" text-anchor="middle" font-size="10" fill="white">30</text>
-                <text x="39" y="201" text-anchor="middle" font-size="10" fill="white">40</text>
-                <text x="22" y="143" text-anchor="middle" font-size="10" fill="white">45</text>
-                <text x="82" y="42" text-anchor="middle" font-size="10" fill="white">55</text>
-                <text x="128" y="34" text-anchor="middle" font-size="10" fill="white">59</text>
-              </svg>
-            </div>
+                <circle cx="140" cy="140" r="70" fill="white" /> <text x="140" y="145" text-anchor="middle"
+                  font-size="18" font-weight="bold" fill="#d32f2f">BPM</text> <text x="140" y="25" text-anchor="middle"
+                  font-size="10" fill="white">00</text> <text x="241" y="85" text-anchor="middle" font-size="10"
+                  fill="white">10</text> <text x="258" y="143" text-anchor="middle" font-size="10"
+                  fill="white">15</text> <text x="198" y="243" text-anchor="middle" font-size="10"
+                  fill="white">25</text> <text x="152" y="253" text-anchor="middle" font-size="10"
+                  fill="white">29</text> <text x="140" y="262" text-anchor="middle" font-size="10"
+                  fill="white">30</text> <text x="39" y="201" text-anchor="middle" font-size="10" fill="white">40</text>
+                <text x="22" y="143" text-anchor="middle" font-size="10" fill="white">45</text> <text x="82" y="42"
+                  text-anchor="middle" font-size="10" fill="white">55</text> <text x="128" y="34" text-anchor="middle"
+                  font-size="10" fill="white">59</text>
+              </svg> </div>
             <!-- Legend -->
             <div class="flex flex-wrap justify-center gap-4 text-sm text-gray-300 mb-3">
               <div class="flex items-center gap-2">
@@ -150,13 +135,10 @@
               <p>For the exact time code encoding, please refer to the reference below.</p>
             </div>
           </div>
-  
           <!-- Control options (with UI indicators) -->
           <div class="bg-dark-700/30 p-3 rounded-lg">
             <h4 class="font-bold text-blue-400">Control options &amp; UI indicators</h4>
-            <p class="text-gray-300 text-sm mt-1">
-              Below the start/stop button, you will find two checkboxes:
-            </p>
+            <p class="text-gray-300 text-sm mt-1"> Below the start/stop button, you will find two checkboxes: </p>
             <ul class="list-disc list-inside text-gray-300 text-sm space-y-1">
               <li><strong>TimeCode<sup>[1]</sup></strong> – Enable or disable the 125Hz time code subcarrier. If you
                 find the low‑frequency hum a bit annoying, just uncheck this – you'll only hear the second pulses
@@ -164,9 +146,7 @@
               <li><strong>&#13235;</strong> – Show or hide milliseconds on the time display. If the rapidly changing
                 digits feel distracting, just uncheck this to keep the display clean at second resolution.</li>
             </ul>
-            <p class="text-gray-300 text-sm mt-2">
-              In addition, the page also shows:
-            </p>
+            <p class="text-gray-300 text-sm mt-2"> In addition, the page also shows: </p>
             <ul class="list-disc list-inside text-gray-300 text-sm space-y-1">
               <li><span class="text-purple-400">&#128251;Current signal type</span> – helps you identify the ongoing
                 broadcast period.</li>
@@ -176,20 +156,14 @@
             <p class="text-gray-400 text-xs mt-2">All settings are saved automatically and restored when you revisit the
               page.</p>
           </div>
-  
           <h3 class="text-lg font-bold mt-4">About Time Service & BPM Shortwave Time Station</h3>
-          <p class="text-gray-300">
-            Time service is one of the core infrastructures of modern society. Precise time synchronization is the
-            foundation for the normal operation of satellite navigation, 5G communication, financial transactions, deep
-            space exploration and other fields.
-          </p>
-          <p class="text-gray-300">
-            BPM Shortwave Time Station is China's national shortwave time service station, similar to the WWV/WWVH
-            stations in the United States.
-            It broadcasts precise time signals on multiple shortwave frequencies, allowing anyone with a
-            shortwave radio to sync their clocks to national standard time for free.
-          </p>
-  
+          <p class="text-gray-300"> Time service is one of the core infrastructures of modern society. Precise time
+            synchronization is the foundation for the normal operation of satellite navigation, 5G communication,
+            financial transactions, deep space exploration and other fields. </p>
+          <p class="text-gray-300"> BPM Shortwave Time Station is China's national shortwave time service station,
+            similar to the WWV/WWVH stations in the United States. It broadcasts precise time signals on multiple
+            shortwave frequencies, allowing anyone with a shortwave radio to sync their clocks to national standard time
+            for free. </p>
           <!-- Frequency Schedule Table (with UTC column) -->
           <div class="overflow-x-auto">
             <table class="w-full text-sm text-left text-gray-300 border border-dark-700 rounded-lg">
@@ -224,98 +198,73 @@
               </tbody>
             </table>
           </div>
-  
-          <p class="text-yellow-400 text-sm">
-            Please note that this is only a simulation and demonstration tool, it cannot replace the real BPM shortwave
-            time service broadcast. All simulation results are for reference only.
+          <p class="text-yellow-400 text-sm"> Please note that this is only a simulation and demonstration tool, it
+            cannot replace the real BPM shortwave time service broadcast. All simulation results are for reference only.
           </p>
-  
           <!-- Settings Guide -->
           <h3 class="text-lg font-bold mt-4"><button class="w-8 h-8 bg-dark-700 rounded transition"
               disabled="true">&#128295;</button> Settings Guide</h3>
           <div class="space-y-3 text-gray-300">
-            <p>
-              By adjusting the three parameters below, you can make the simulator's output match the real BPM signal as
-              closely as possible – including UTC, time code<strong>*</strong>, UT1, and station ID.
-            </p>
-            <div class="bg-dark-800/50 p-2 rounded text-xs text-gray-400 border-blue-500">
-              <strong>* Author's note:</strong> To be honest, I've never actually heard the real BPM time code signal
-              myself – or rather, it was almost always drowned
-              out by the time code subcarrier of WWV/H. This
-              simulator is built strictly according to the published paper (see reference [1]) – translating the
-              encoding and
-              broadcast rules into sound. The main goal is simple: to <strong>hear what the time code of BPM actually
-                sounds
-                like</strong> – that low 125 Hz hum between the second ticks – and get a feel for how it works.<br><br>
-              Rest assured, once you set the parameters below correctly, what comes out of your browser will be
-              identical to the real
-              BPM broadcast. If you can actually hear the time code subcarrier on 5 MHz, I'd love for you to help verify
-              the accuracy of this
-              simulator. Feel free to <a href="https://github.com/absummmmer/bpm-simulation/issues" target="_blank"
-                rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300">drop by here</a> and share your
-              feedback
-              anytime!
-            </div>
-            <p>
-              <strong class="text-blue-400">Local Clock Offset <span class="text-white">&#9201;</span>:</strong> The
-              accuracy of UTC signals depends on your
-              device's clock. Your device's clock frequency may not be perfectly aligned with the real world, causing
-              drift over time. Networked devices usually use NTP to sync time, but this sync is not real-time, leaving a
-              random offset. You can adjust this offset manually, or click the <button
-                class="text-sm px-1 bg-blue-600 text-white rounded transition" disabled="true">SYNC</button> button to
-              sync with
-              internet time automatically. <span class="text-pink-400">(Step 1: SYNC your local clock.)</span><br>
-              This offset only affects this webpage, not your system clock. Affected by
-              network randomness, a single sync cannot always get a sufficiently accurate offset, and the network error
-              will be displayed on the page. You can try syncing multiple times until the offset remains stable (only
+            <p> By adjusting the three parameters below, you can make the simulator's output match the real BPM signal
+              as closely as possible – including UTC, time code<strong>*</strong>, UT1, and station ID. </p>
+            <div class="bg-dark-800/50 p-2 rounded text-xs text-gray-400 border-blue-500"> <strong>* Author's
+                note:</strong> To be honest, I've never actually heard the real BPM time code signal myself – or rather,
+              it was almost always drowned out by the time code subcarrier of WWV/H. This simulator is built strictly
+              according to the published paper (see reference [1]) – translating the encoding and broadcast rules into
+              sound. The main goal is simple: to <strong>hear what the time code of BPM actually sounds like</strong> –
+              that low 125 Hz hum between the second ticks – and get a feel for how it works.<br><br> Rest assured, once
+              you set the parameters below correctly, what comes out of your browser will be identical to the real BPM
+              broadcast – at least to the ear. If you can actually hear the time code subcarrier on 5 MHz, I'd love for
+              you to help verify the accuracy of this simulator. Feel free to <a
+                href="https://github.com/absummmmer/bpm-simulation/issues" target="_blank" rel="noopener noreferrer"
+                class="text-blue-400 hover:text-blue-300">drop by here</a> and share your feedback anytime! </div>
+            <p> <strong class="text-blue-400">Local Clock Offset <span class="text-white">&#9201;</span>:</strong> The
+              accuracy of UTC signals depends on your device's clock. Your device's clock frequency may not be perfectly
+              aligned with the real world, causing drift over time. Networked devices usually use NTP to sync time, but
+              this sync is not real-time, leaving a random offset. You can adjust this offset manually, or click the
+              <button class="text-sm px-1 bg-blue-600 text-white rounded transition" disabled="true">SYNC</button>
+              button to sync with internet time automatically. <span class="text-pink-400">(Step 1: SYNC your local
+                clock.)</span><br> This offset only affects this webpage, not your system clock. Affected by network
+              randomness, a single sync cannot always get a sufficiently accurate offset, and the network error will be
+              displayed on the page. You can try syncing multiple times until the offset remains stable (only
               single-digit millisecond changes) in a short period with small enough network error, then the offset is
               accurate enough.
             </p>
-            <p>
-              <strong class="text-gray-400">Latency Compensation (ms):</strong> This parameter is used to offset the
+            <p> <strong class="text-gray-400">Latency Compensation (ms):</strong> This parameter is used to offset the
               fixed delay of the audio processing. After you have stably synchronized your local clock with internet
-              time,
-              the simulator's sound output may still have a stable lag, which is usually introduced by factors such as
-              browser audio processing and system rendering pipeline. <span class="text-pink-400">(Step 2: adjust this
-                value until the sound aligns with the real BPM signal.)</span><br>
-            <div class="text-gray-400 text-xs space-y-1">This value remains stable as long as your browser and OS
-              audio output
-              settings do
-              not change. If the audio output device or its configuration changes (e.g., switching to Bluetooth
-              headphones,
-              altering sample rate or buffer size), the delay may shift and you will need to recalibrate this
-              compensation. After
-              all three parameters are properly aligned, if you notice a drift later, simply re‑sync your local clock
-              — it usually restores the alignment without touching latency compensation.</div>
+              time, the simulator's sound output may still have a stable lag, which is usually introduced by factors
+              such as browser audio processing and system rendering pipeline. <span class="text-pink-400">(Step 2:
+                adjust this value until the sound aligns with the real BPM signal.)</span><br>
+            <div class="text-gray-400 text-xs space-y-1">This value remains stable as long as your browser and OS audio
+              output settings do not change. If the audio output device or its configuration changes (e.g., switching to
+              Bluetooth headphones, altering sample rate or buffer size), the delay may shift and you will need to
+              recalibrate this compensation. After all three parameters are properly aligned, if you notice a drift
+              later, simply re‑sync your local clock — it usually restores the alignment without touching latency
+              compensation.</div>
             </p>
-            <p>
-              <strong class="text-green-400">DUT1:</strong> UT1 correction value. The UTC time we use daily is a uniform
-              time generated by atomic clocks, while UT1 is the astronomical time based on the Earth's rotation. Since
-              the
-              Earth's rotation speed is not uniform, there will be a small difference between the two. To prevent this
-              difference from growing too large, the International Earth Rotation and Reference Systems Service (IERS)
-              adjusts UTC by inserting leap seconds, keeping the difference within 0.9 seconds. The EOP (Earth
-              Orientation
-              Parameters) file records the latest observed value of this difference. With it, we can generate accurate
-              UT1 time service signals, and also embed the correct UT1 correction value in the time code.<br>
-              You can obtain the latest DUT1 value in two ways:
+            <p> <strong class="text-green-400">DUT1:</strong> UT1 correction value. The UTC time we use daily is a
+              uniform time generated by atomic clocks, while UT1 is the astronomical time based on the Earth's rotation.
+              Since the Earth's rotation speed is not uniform, there will be a small difference between the two. To
+              prevent this difference from growing too large, the International Earth Rotation and Reference Systems
+              Service (IERS) adjusts UTC by inserting leap seconds, keeping the difference within 0.9 seconds. The EOP
+              (Earth Orientation Parameters) file records the latest observed value of this difference. With it, we can
+              generate accurate UT1 time service signals, and also embed the correct UT1 correction value in the time
+              code.<br> You can obtain the latest DUT1 value in two ways:
             <ul class="list-disc list-inside ml-4 text-sm space-y-1 mt-1">
               <li><strong>From NTSC:</strong> Click the <strong>NTSC_EOP_<i>yyyyMMdd</i>.txt</strong> link on the
                 adjustment panel – this will take you to the UT1 Measurement and Service Center of NTSC. Look for the
                 latest file that matches the format shown on the page, download it, and then upload it using the file
                 picker. The page will automatically fill the DUT1 value for you.</li>
-              <li><strong>From IERS:</strong> Click the <strong>IERS/BULLETIN-A</strong> link – this is a direct
-                link to the latest IERS Bulletin A (a rapid service/prediction bulletin containing Earth orientation
-                parameters including UT1-UTC). You can either save it directly (right-click → Save as) or open it and save
-                the content as a text file, then upload it using the same file picker. The simulator recognizes both NTSC
+              <li><strong>From IERS:</strong> Click the <strong>IERS/BULLETIN-A</strong> link – this is a direct link to
+                the latest IERS Bulletin A (a rapid service/prediction bulletin containing Earth orientation parameters
+                including UT1-UTC). You can either save it directly (right-click → Save as) or open it and save the
+                content as a text file, then upload it using the same file picker. The simulator recognizes both NTSC
                 and IERS formats and will update DUT1 automatically.</li>
-            </ul>
-            <span class="text-pink-400">(Step 3: for UT1 alignment, download either file and upload it.)</span><br>
-            It should be noted that the current simulator cannot implement the leap second announcement function
-            in the time code, nor can it simulate the special signals when a leap second occurs.
+            </ul> <span class="text-pink-400">(Step 3: for UT1 alignment, download either file and upload
+              it.)</span><br> It should be noted that the current simulator cannot implement the leap second
+            announcement function in the time code, nor can it simulate the special signals when a leap second occurs.
             </p>
           </div>
-  
           <!-- Copyright & Privacy Statement -->
           <h3 class="text-lg font-bold mt-4">Copyright & Privacy Statement</h3>
           <div class="space-y-2 text-gray-400 text-sm">
@@ -324,40 +273,31 @@
             <p>Except for syncing internet time, this page will not perform any other network activities. All your
               settings are saved locally.</p>
           </div>
-  
           <!-- Reference -->
           <h3 class="text-lg font-bold mt-4">Reference</h3>
           <div class="text-gray-400 text-sm">
             <p>[1]蒙智谋.BPM短波时码授时发播技术方案[J].时间频率学报,2014,37(03):145-150.DOI:10.13875/j.issn.1674-0637.2014-03-0145-06.</p>
           </div>
         </div>
-  
         <!-- Chinese Content -->
         <div id="help_zh" class="space-y-4 hidden">
           <h2 class="text-xl font-bold">这是什么？</h2>
-          <p class="text-gray-300">
-            这是一个网页版的模拟器，完美复现了中国科学院国家授时中心运营的<strong>BPM短波授时台</strong>的信号格式。
-          </p>
-  
+          <p class="text-gray-300"> 这是一个网页版的模拟器，完美复现了中国科学院国家授时中心运营的<strong>BPM短波授时台</strong>的信号格式。 </p>
           <h3 class="text-lg font-bold mt-4">如何使用</h3>
-          <p class="text-gray-300">
-            点击<button class="w-6 h-6 bg-green-600 text-white font-mono rounded transition text-center"
+          <p class="text-gray-300"> 点击<button
+              class="w-6 h-6 bg-green-600 text-white font-mono rounded transition text-center"
               disabled="true">&minus;</button>按钮，当按钮变成<button
               class="w-6 h-6 bg-red-600 text-white font-mono rounded transition text-center"
-              disabled="true">&acd;</button>的时候，你就能听到模拟的BPM信号了。
-          </p>
-  
+              disabled="true">&acd;</button>的时候，你就能听到模拟的BPM信号了。 </p>
           <div class="bg-yellow-900/30 border border-yellow-600/50 p-2 rounded text-yellow-200 text-xs">
             <strong>注意：</strong>
             当本页面在后台运行时（例如打开了其他浏览器标签页），浏览器为了节省资源会降低定时器精度并限制音频处理，可能导致声音延迟或卡顿。<strong>请保持本页面在前台运行</strong>以获得最佳体验。
           </div>
-  
           <div class="bg-dark-700/30 p-3 rounded-lg">
             <h4 class="font-bold text-blue-400">你听到的是什么？</h4>
             <p class="text-gray-300 text-sm mt-1">BPM信号每半小时重复一次。下面的图表和表格可以帮你快速了解信号的全貌。</p>
             <!-- SVG饼图 -->
-            <div class="flex justify-center my-2">
-              <svg width="280" height="280" viewBox="0 0 280 280">
+            <div class="flex justify-center my-2"> <svg width="280" height="280" viewBox="0 0 280 280">
                 <path d="M 140 10 A 130 130 0 0 1 252.58 75 L 140 140 Z" fill="#4a6fe3" />
                 <path d="M 270 140 A 130 130 0 0 1 205 252.58 L 140 140 Z" fill="#4a6fe3" />
                 <path d="M 140 270 A 130 130 0 0 1 27.42 205 L 140 140 Z" fill="#4a6fe3" />
@@ -368,20 +308,18 @@
                 <path d="M 75 27.42 A 130 130 0 0 1 126.415 10.715 L 140 140 Z" fill="#f57c00" />
                 <path d="M 153.585 269.285 A 130 130 0 0 1 140 270 L 140 140 Z" fill="#4caf50" />
                 <path d="M 126.415 10.715 A 130 130 0 0 1 140 10 L 140 140 Z" fill="#4caf50" />
-                <circle cx="140" cy="140" r="70" fill="white" />
-                <text x="140" y="145" text-anchor="middle" font-size="18" font-weight="bold" fill="#d32f2f">BPM</text>
-                <text x="140" y="25" text-anchor="middle" font-size="10" fill="white">00</text>
-                <text x="241" y="85" text-anchor="middle" font-size="10" fill="white">10</text>
-                <text x="258" y="143" text-anchor="middle" font-size="10" fill="white">15</text>
-                <text x="198" y="243" text-anchor="middle" font-size="10" fill="white">25</text>
-                <text x="152" y="253" text-anchor="middle" font-size="10" fill="white">29</text>
-                <text x="140" y="262" text-anchor="middle" font-size="10" fill="white">30</text>
-                <text x="39" y="201" text-anchor="middle" font-size="10" fill="white">40</text>
-                <text x="22" y="143" text-anchor="middle" font-size="10" fill="white">45</text>
-                <text x="82" y="42" text-anchor="middle" font-size="10" fill="white">55</text>
-                <text x="128" y="34" text-anchor="middle" font-size="10" fill="white">59</text>
-              </svg>
-            </div>
+                <circle cx="140" cy="140" r="70" fill="white" /> <text x="140" y="145" text-anchor="middle"
+                  font-size="18" font-weight="bold" fill="#d32f2f">BPM</text> <text x="140" y="25" text-anchor="middle"
+                  font-size="10" fill="white">00</text> <text x="241" y="85" text-anchor="middle" font-size="10"
+                  fill="white">10</text> <text x="258" y="143" text-anchor="middle" font-size="10"
+                  fill="white">15</text> <text x="198" y="243" text-anchor="middle" font-size="10"
+                  fill="white">25</text> <text x="152" y="253" text-anchor="middle" font-size="10"
+                  fill="white">29</text> <text x="140" y="262" text-anchor="middle" font-size="10"
+                  fill="white">30</text> <text x="39" y="201" text-anchor="middle" font-size="10" fill="white">40</text>
+                <text x="22" y="143" text-anchor="middle" font-size="10" fill="white">45</text> <text x="82" y="42"
+                  text-anchor="middle" font-size="10" fill="white">55</text> <text x="128" y="34" text-anchor="middle"
+                  font-size="10" fill="white">59</text>
+              </svg> </div>
             <!-- 图例 -->
             <div class="flex flex-wrap justify-center gap-4 text-sm text-gray-300 mb-3">
               <div class="flex items-center gap-2">
@@ -436,36 +374,26 @@
               <p>时码的具体编码规则请参见参考文献。</p>
             </div>
           </div>
-  
           <!-- 控制选项（包含界面指示） -->
           <div class="bg-dark-700/30 p-3 rounded-lg">
             <h4 class="font-bold text-blue-400">控制选项与界面指示</h4>
-            <p class="text-gray-300 text-sm mt-1">
-              在播放按钮下方，有两个复选框：
-            </p>
+            <p class="text-gray-300 text-sm mt-1"> 在播放按钮下方，有两个复选框： </p>
             <ul class="list-disc list-inside text-gray-300 text-sm space-y-1">
               <li><strong>TimeCode<sup>[1]</sup></strong> – 开启或关闭125Hz时码副载波。如果你觉得低频嗡嗡声有些烦躁，可以取消勾选 ——
                 此时你只会听到秒脉冲（1kHz），不再有时码副载波的声音。</li>
               <li><strong>&#13235;</strong> – 在时间显示中显示或隐藏毫秒。如果毫秒数字跳得太快让你觉得眼花，可以取消勾选它，只保留秒级显示。</li>
             </ul>
-            <p class="text-gray-300 text-sm mt-2">
-              此外，页面还显示：
-            </p>
+            <p class="text-gray-300 text-sm mt-2"> 此外，页面还显示： </p>
             <ul class="list-disc list-inside text-gray-300 text-sm space-y-1">
               <li><span class="text-purple-400">&#128251;当前信号类型</span> – 帮助你了解当前发播时段。</li>
               <li><span class="text-green-400">&#127760;UT1时间</span> – 经DUT1值校正后的时间（天文时间）。</li>
             </ul>
             <p class="text-gray-400 text-xs mt-2">所有设置都会自动保存，再次访问页面时恢复。</p>
           </div>
-  
           <h3 class="text-lg font-bold mt-4">关于授时与BPM短波授时台</h3>
+          <p class="text-gray-300"> 授时是现代社会的核心基础设施之一，精确的时间同步是卫星导航、5G通信、金融交易、深空探测等领域正常运行的基础。 </p>
           <p class="text-gray-300">
-            授时是现代社会的核心基础设施之一，精确的时间同步是卫星导航、5G通信、金融交易、深空探测等领域正常运行的基础。
-          </p>
-          <p class="text-gray-300">
-            BPM短波授时台是中国的国家级短波授时台，类似美国的WWV/WWVH授时台。它在多个短波频率上广播精确的时间信号，任何人都可以用普通的短波收音机免费接收，校准自己的时钟。
-          </p>
-  
+            BPM短波授时台是中国的国家级短波授时台，类似美国的WWV/WWVH授时台。它在多个短波频率上广播精确的时间信号，任何人都可以用普通的短波收音机免费接收，校准自己的时钟。 </p>
           <!-- 频率发播时间表（增加UTC列） -->
           <div class="overflow-x-auto">
             <table class="w-full text-sm text-left text-gray-300 border border-dark-700 rounded-lg">
@@ -500,56 +428,42 @@
               </tbody>
             </table>
           </div>
-  
-          <p class="text-yellow-400 text-sm">
-            请注意，这只是一个模拟演示工具，无法替代真实的BPM短波授时广播。所有模拟结果仅供参考。
-          </p>
-  
+          <p class="text-yellow-400 text-sm"> 请注意，这只是一个模拟演示工具，无法替代真实的BPM短波授时广播。所有模拟结果仅供参考。 </p>
           <!-- 设置界面说明 -->
           <h3 class="text-lg font-bold mt-4"><button class="w-8 h-8 bg-dark-700 rounded transition"
               disabled="true">&#128295;</button> 设置界面说明</h3>
           <div class="space-y-3 text-gray-300">
-            <p>
-              通过调整以下三个参数，你可以让模拟器的输出尽可能贴近真实的BPM信号——包括UTC、时码<strong>*</strong>、UT1和台站呼号。
-            </p>
-            <div class="text-gray-400 text-xs space-y-1">
-              <strong>*作者注：</strong>
+            <p> 通过调整以下三个参数，你可以让模拟器的输出尽可能贴近真实的BPM信号——包括UTC、时码<strong>*</strong>、UT1和台站呼号。 </p>
+            <div class="text-gray-400 text-xs space-y-1"> <strong>*作者注：</strong>
               说实话，我自己也从未真正听到过真实的BPM时码信号——或者说，它几乎总是被WWV/H的时码副载波淹没了。这个模拟器完全是照着已发表的论文（参考文献[1]）把时码的编码和发播规则“翻译”成声音的。做它的初衷也很简单——就是想<strong>亲耳听听BPM的时码到底长什么样</strong>，也就是秒脉冲之间那125Hz的低频“嗡嗡”声，顺便了解一下它的工作原理。<br><br>
-              不过可以放心，只要你把下面几个参数设置正确，浏览器里播出来的声音和真实的BPM广播就是完全一样的。如果你真能收听到5MHz上的时码副载波，非常期待你能帮我验证一下这个模拟器的准确性。欢迎<a
+              不过可以放心，只要你把下面几个参数设置正确，浏览器里播出来的声音和真实的BPM广播就是完全一样的——至少听起来是。如果你真能收听到5MHz上的时码副载波，非常期待你能帮我验证一下这个模拟器的准确性。欢迎<a
                 href="https://github.com/absummmmer/bpm-simulation/issues" target="_blank" rel="noopener noreferrer"
-                class="text-blue-400 hover:text-blue-300">来这里</a>随时交流！
-            </div>
-            <p>
-              <strong class="text-blue-400">本地时钟偏移<span
+                class="text-blue-400 hover:text-blue-300">来这里</a>随时交流！ </div>
+            <p> <strong class="text-blue-400">本地时钟偏移<span
                   class="text-white">&#9201;</span>：</strong>UTC信号的准确性取决于你的设备时钟。一般而言，你使用设备的时钟频率与现实世界的频率并不完全一致，这会导致设备时钟长时间运行后与真实时间产生偏移。联网设备一般会使用NTP协议与互联网进行时间同步消除这个偏移，但这个同步动作并不是实时的，这仍然会导致你设备的时钟和真实时间存在随机偏移。你可以通过调整该偏移，或者点击<button
                 class="text-sm px-1 bg-blue-600 text-white rounded transition"
                 disabled="true">SYNC</button>按钮实时地与互联网时间进行同步。<span class="text-pink-400">（第一步：同步本地时钟。）</span><br>
               该偏移同步只影响网页展示与你收听到的脉冲信号，不会更改你设备上的时钟。受网络连接的随机性影响，单次同步并不总能获取足够精确的偏移量，同步结果会附带显示网络误差。你可以多次尝试同步，直到短时间内多次同步的偏移量保持稳定（仅个位数毫秒的变动），且网络误差足够小，此时的偏移量才足够准确。
             </p>
-            <p>
-              <strong
+            <p> <strong
                 class="text-gray-400">延迟补偿(ms)：</strong>该参数用于抵消音频链路的固定延迟。在你完成本地时钟与互联网时间的稳定同步后，模拟器的声音输出仍可能存在一个稳定的滞后，这一般由浏览器音频处理、系统渲染链路等因素共同引入。<span
                 class="text-pink-400">（第二步：调整此值，直到声音与真实BPM信号对齐。）</span><br>
             <div class="text-gray-400 text-xs space-y-1">
               只要浏览器和操作系统的音频输出设置不变，该值通常不需要频繁调整。如果音频输出设备或其配置发生变化（例如改用蓝牙耳机、更改采样率或缓冲区大小等），延迟可能会改变，需要重新校准。三个参数都调整到位后，如果日后发现信号再次偏移，通常只需重新同步本地时钟即可恢复对齐，无需改动延迟补偿。
             </div>
             </p>
-            <p>
-              <strong
+            <p> <strong
                 class="text-green-400">DUT1：</strong>UT1改正值。我们日常使用的UTC时间是原子钟生成的均匀时间，而UT1是基于地球自转的天文时间，由于地球自转速度并不均匀，两者之间会存在微小的差异。为了避免这个差异持续扩大，国际地球自转服务（IERS）会通过插入闰秒的方式调整UTC，将两者的差值控制在0.9秒以内。EOP（地球定向参数）文件就记录了这个差异的最新观测值，通过它我们可以生成准确的UT1授时信号，同时也能在时码中嵌入正确的UT1改正值。<br>
               你可以通过以下两种方式获取最新的DUT1值：
             <ul class="list-disc list-inside ml-4 text-sm space-y-1 mt-1">
               <li><strong>来自国家授时中心（NTSC）：</strong> 点击调整面板上的 <strong>NTSC_EOP_<i>yyyyMMdd</i>.txt</strong>
                 链接，会跳转到NTSC的UT1测量与服务中心。在页面上找到符合页面显示格式的最新发布文件，下载后使用文件选择器上传，页面会自动填充DUT1值。</li>
-              <li><strong>来自国际地球自转服务（IERS）：</strong> 点击 <strong>IERS/BULLETIN-A</strong> 链接，这是直达最新 IERS Bulletin
-                A 公报的链接。Bulletin A 是 IERS 发布的快速服务/预测公报，包含地球定向参数（包括
+              <li><strong>来自国际地球自转服务（IERS）：</strong> 点击 <strong>IERS/BULLETIN-A</strong> 链接，这是直达最新 IERS Bulletin A
+                公报的链接。Bulletin A 是 IERS 发布的快速服务/预测公报，包含地球定向参数（包括
                 UT1-UTC）的测量值和未来预测。你可以直接保存该文件（右键另存为），或者打开后保存内容为文本文件，然后用同一个文件选择器上传。模拟器能自动识别两种格式，并更新DUT1。</li>
-            </ul>
-            <span class="text-pink-400">（第三步：如需对齐UT1信号，下载任一文件并上传。）</span><br>
-            需要说明的是，当前模拟器无法实现时码中的闰秒预告功能，也无法模拟闰秒发生时的特殊信号。
-            </p>
+            </ul> <span class="text-pink-400">（第三步：如需对齐UT1信号，下载任一文件并上传。）</span><br>
+            需要说明的是，当前模拟器无法实现时码中的闰秒预告功能，也无法模拟闰秒发生时的特殊信号。 </p>
           </div>
-  
           <!-- 版权与隐私声明 -->
           <h3 class="text-lg font-bold mt-4">版权与隐私声明</h3>
           <div class="space-y-2 text-gray-400 text-sm">
@@ -557,7 +471,6 @@
             <p>互联网时间通过REST API（gettimeapi.dev）获得。</p>
             <p>除同步互联网时间外，本页面不会进行任何网络活动。你的所有设置均保存在本地。</p>
           </div>
-  
           <!-- 参考文献 -->
           <h3 class="text-lg font-bold mt-4">参考文献</h3>
           <div class="text-gray-400 text-sm">
@@ -571,76 +484,51 @@
     <!-- Centered time display -->
     <div class="text-center mb-6">
       <div id="time_display"
-        class="text-5xl sm:text-6xl md:text-7xl font-mono font-bold text-white mb-4 whitespace-nowrap">
-        --:--:--<span id="ms_display" class="text-3xl sm:text-4xl text-gray-400">.---</span>
-      </div>
+        class="text-5xl sm:text-6xl md:text-7xl font-mono font-bold text-white mb-4 whitespace-nowrap"> --:--:--<span
+          id="ms_display" class="text-3xl sm:text-4xl text-gray-400">.---</span> </div>
       <!-- Start/Stop button -->
-      <div class="flex justify-center gap-4 mb-4">
-        <button id="start_btn"
+      <div class="flex justify-center gap-4 mb-4"> <button id="start_btn"
           class="w-16 px-0 py-3 bg-green-600 text-white font-mono rounded-lg hover:bg-green-500 transition text-3xl text-center">
-          &minus;
-        </button>
-        <button id="stop_btn"
+          &minus; </button> <button id="stop_btn"
           class="w-16 px-0 py-3 bg-red-600 text-white font-mono rounded-lg hover:bg-red-500 transition text-3xl text-center hidden">
-          &acd;
-        </button>
-      </div>
-      <div class="flex flex-wrap justify-center gap-4 items-center">
-        <label class="flex items-center gap-1 cursor-pointer">
-          <input type="checkbox" id="play_low_freq" checked class="w-4 h-4 rounded">
-          <span class="text-gray-400 text-sm">TimeCode<sup>[1]</sup></span>
-        </label>
-        <label class="flex items-center gap-1 cursor-pointer">
-          <input type="checkbox" id="show_ms" checked class="w-4 h-4 rounded">
-          <span class="text-gray-400 text-sm">&#13235;</span>
-        </label>
-        <button id="toggle_settings"
+          &acd; </button> </div>
+      <div class="flex flex-wrap justify-center gap-4 items-center"> <label
+          class="flex items-center gap-1 cursor-pointer"> <input type="checkbox" id="play_low_freq" checked
+            class="w-4 h-4 rounded"> <span class="text-gray-400 text-sm">TimeCode<sup>[1]</sup></span> </label> <label
+          class="flex items-center gap-1 cursor-pointer"> <input type="checkbox" id="show_ms" checked
+            class="w-4 h-4 rounded"> <span class="text-gray-400 text-sm">&#13235;</span> </label> <button
+          id="toggle_settings"
           class="w-8 h-8 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-lg flex items-center justify-center">
-          &#128295;
-        </button>
-        <button id="open_help"
+          &#128295; </button> <button id="open_help"
           class="w-8 h-8 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-lg flex items-center justify-center">
-          &#10068;
-        </button>
-      </div>
+          &#10068; </button> </div>
       <!-- Volume slider -->
-      <div class="flex justify-center items-center gap-2 mt-3">
-        <span class="text-gray-400 text-sm">&#128264;</span>
-        <input type="range" id="volume_slider" min="0" max="1" step="0.01" value="1"
-          class="w-48 sm:w-64 h-2 bg-dark-700 rounded-lg appearance-none cursor-pointer accent-blue-500">
-        <span id="volume_val" class="text-gray-400 text-sm w-8 text-center font-mono">100</span>
-      </div>
+      <div class="flex justify-center items-center gap-2 mt-3"> <span
+          class="text-gray-400 text-sm text-left w-6">&#128264;</span> <input type="range" id="volume_slider" min="0"
+          max="1" step="0.01" value="1"
+          class="w-48 sm:w-64 h-2 bg-dark-700 rounded-lg appearance-none cursor-pointer accent-blue-500"> <span
+          id="volume_val" class="text-gray-400 text-sm w-12 px-2 text-right font-mono">100%</span> </div>
     </div>
     <!-- Status display -->
     <div class="text-xs flex justify-between mb-4">
-      <div class="flex items-center gap-1 text-gray-400">
-        <span>&#128251;</span>
-        <span class="text-sm font-mono">BPM</span>
-        <span id="current_period" class="text-purple-400">--</span>
-      </div>
-      <div class="flex items-center gap-1 text-gray-400">
-        <span id="ut1_time" class="text-green-400 font-mono">--:--:--</span>
-        <span>&#127760;</span>
-      </div>
+      <div class="flex items-center gap-1 text-gray-400"> <span>&#128251;</span> <span
+          class="text-sm font-mono">BPM</span> <span id="current_period" class="text-purple-400">--</span> </div>
+      <div class="flex items-center gap-1 text-gray-400"> <span id="ut1_time"
+          class="text-green-400 font-mono">--:--:--</span> <span>&#127760;</span> </div>
     </div>
     <!-- Collapsible settings panel -->
     <div id="settings_panel" class="hidden space-y-4 bg-dark-800 p-4 sm:p-6 rounded-xl">
       <!-- Local UTC offset -->
       <div>
-        <div class="text-lg mb-3 flex items-center gap-2 flex-wrap">
-          <span>&#9201;</span>
-          <span id="local_offset_val" class="text-blue-400 font-mono">+0.000</span>
-          <span id="network_comp_val" class="text-xs text-gray-400 font-mono">(+0ms)</span>
-          <button data-offset="local" data-delta="reset"
+        <div class="text-lg mb-3 font-bold flex items-center gap-2 flex-wrap"> <span>&#9201;</span> <span
+            id="local_offset_val" class="text-blue-400 font-mono">+0.000</span> <span id="network_comp_val"
+            class="text-xs text-gray-400 font-mono">(+0ms)</span> <button data-offset="local" data-delta="reset"
             class="text-sm px-2 py-1 bg-dark-700 rounded hover:bg-dark-600 transition text-blue-400 text-center font-mono">&#8634;</button>
           <button id="sync_btn"
             class="text-sm px-2 py-1 bg-blue-600 text-white rounded hover:bg-blue-500 transition flex items-center gap-1">
-            SYNC
-          </button>
-          <span id="sync_error" class="text-xs text-gray-400 font-mono"></span>
+            SYNC </button> <span id="sync_error" class="text-xs text-gray-400 font-mono"></span>
         </div>
-        <div class="grid grid-cols-3 gap-2">
-          <button data-offset="local" data-delta="100"
+        <div class="grid grid-cols-3 gap-2"> <button data-offset="local" data-delta="100"
             class="text-blue-400 px-3 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono">+0.1</button>
           <button data-offset="local" data-delta="10"
             class="text-blue-400 px-3 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono">+0.01</button>
@@ -654,8 +542,7 @@
             class="text-blue-400 px-3 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono">-0.001</button>
         </div>
         <!-- Network compensation adjustment buttons -->
-        <div class="grid grid-cols-5 gap-2 mt-2">
-          <button data-offset="comp" data-delta="10"
+        <div class="grid grid-cols-5 gap-2 mt-2"> <button data-offset="comp" data-delta="10"
             class="text-gray-400 px-2 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono text-sm">+10ms</button>
           <button data-offset="comp" data-delta="1"
             class="text-gray-400 px-2 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono text-sm">+1ms</button>
@@ -670,30 +557,24 @@
       <!-- DUT1 offset -->
       <div>
         <div class="flex items-start gap-3 flex-wrap mb-3">
-          <div class="flex items-center gap-2">
-            <span class="text-lg font-bold">DUT1</span>
-            <span id="dut1_val" class="text-green-400 font-mono">+0.000</span>
-            <button data-offset="dut1" data-delta="reset"
+          <div class="flex items-center gap-2"> <span class="text-lg font-bold">DUT1</span> <span id="dut1_val"
+              class="text-green-400 font-mono">+0.000</span> <button data-offset="dut1" data-delta="reset"
               class="text-sm px-2 py-1 bg-dark-700 rounded hover:bg-dark-600 transition text-green-400 text-center font-mono">&#8634;</button>
           </div>
-          <div class="flex flex-col gap-1">
-            <a href="http://www.ut1.ntsc.ac.cn/" target="_blank" rel="noopener noreferrer"
+          <div class="flex flex-col gap-1"> <a href="http://www.ut1.ntsc.ac.cn/" target="_blank"
+              rel="noopener noreferrer"
               class="text-xs text-blue-400 hover:text-blue-300 flex items-center font-mono whitespace-nowrap">
-              &#128269;NTSC_EOP_<i>yyyyMMdd</i>.txt
-            </a>
-            <a href="https://datacenter.iers.org/data/latestVersion/bulletinA.txt" target="_blank" rel="noopener noreferrer"
+              &#128269;NTSC_EOP_<i>yyyyMMdd</i>.txt </a> <a
+              href="https://datacenter.iers.org/data/latestVersion/bulletinA.txt" target="_blank"
+              rel="noopener noreferrer"
               class="text-xs text-blue-400 hover:text-blue-300 flex items-center font-mono whitespace-nowrap">
-              &#128190;IERS/BULLETIN-A
-            </a>
-          </div>
-          <div class="flex items-center gap-2 flex-wrap">
-            <input type="file" id="eop_file" accept=".txt"
-              class="text-xs text-gray-400 file:mr-2 file:py-1 file:px-2 file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-500"/>
+              &#128190;IERS/BULLETIN-A </a> </div>
+          <div class="flex items-center gap-2 flex-wrap"> <input type="file" id="eop_file" accept=".txt"
+              class="text-xs text-gray-400 file:mr-2 file:py-1 file:px-2 file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-500" />
             <span id="eop_status" class="text-xs font-mono text-gray-500"></span>
           </div>
         </div>
-        <div class="grid grid-cols-3 gap-2">
-          <button data-offset="dut1" data-delta="100"
+        <div class="grid grid-cols-3 gap-2"> <button data-offset="dut1" data-delta="100"
             class="text-green-400 px-3 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono">+0.1</button>
           <button data-offset="dut1" data-delta="10"
             class="text-green-400 px-3 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono">+0.01</button>
@@ -869,7 +750,7 @@
           if (typeof settings.volume === 'number' && settings.volume >= 0 && settings.volume <= 1) {
             volume = settings.volume;
             document.getElementById('volume_slider').value = volume;
-            document.getElementById('volume_val').textContent = Math.round(volume * 100);
+            document.getElementById('volume_val').innerHTML = (Math.round(volume * 100).toString().padStart(3, ' ') + '% ');
           }
           // Restore local offset
           if (typeof settings.localOffset === 'number') {
@@ -1404,7 +1285,7 @@
       });
       document.getElementById('volume_slider').addEventListener('input', function () {
         volume = parseFloat(this.value);
-        document.getElementById('volume_val').textContent = Math.round(volume * 100);
+        document.getElementById('volume_val').innerHTML = (Math.round(volume * 100).toString().padStart(3, ' ') + '% ');
         if (voiceGain) voiceGain.gain.value = volume;
         saveSettings();
       });
@@ -1470,7 +1351,6 @@
             const content = event.target.result;
             let eopMap = null;
             let sourceType = '';
-
             // Try NTSC format first
             const ntscMap = parseNtscEop(content);
             if (ntscMap.size > 0) {
@@ -1484,7 +1364,6 @@
                 sourceType = 'IERS';
               }
             }
-
             if (!eopMap || eopMap.size === 0) {
               document.getElementById('eop_status').textContent = 'Err: Unrecognized format';
               document.getElementById('eop_status').classList.remove('text-green-400');
@@ -1492,7 +1371,6 @@
               document.getElementById('eop_status').classList.add('text-red-400');
               return;
             }
-
             // Store as milliseconds for internal use (convert from seconds)
             const eopDataMs = new Map();
             for (const [key, value] of eopMap.entries()) {
@@ -1501,12 +1379,10 @@
             window.eopData = eopDataMs;
             window.isAutoDUT1 = true;
             window.currentDataSource = sourceType;
-
             const now = new Date();
             const totalOffset = localOffset + networkCompensation;
             const utcNow = new Date(now.getTime() + totalOffset);
             const currentKey = `${utcNow.getUTCFullYear().toString().padStart(4, '0')}${(utcNow.getUTCMonth() + 1).toString().padStart(2, '0')}${utcNow.getUTCDate().toString().padStart(2, '0')}`;
-
             if (eopDataMs.has(currentKey)) {
               window.bpmDUT1 = eopDataMs.get(currentKey);
               updateOffsetDisplay();

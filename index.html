@@ -505,9 +505,9 @@
       <!-- Volume slider -->
       <div class="flex justify-center items-center gap-2 mt-3"> <span
           class="text-gray-400 text-sm text-left w-6">&#128264;</span> <input type="range" id="volume_slider" min="0"
-          max="1" step="0.01" value="1"
+          max="1" step="0.01" value="0.5"
           class="w-48 sm:w-64 h-2 bg-dark-700 rounded-lg appearance-none cursor-pointer accent-blue-500"> <span
-          id="volume_val" class="text-gray-400 text-sm w-12 px-2 text-right font-mono">100%</span> </div>
+          id="volume_val" class="text-gray-400 text-sm w-8 text-right font-mono"> 50%</span> </div>
     </div>
     <!-- Status display -->
     <div class="text-xs flex justify-between mb-4">
@@ -750,7 +750,7 @@
           if (typeof settings.volume === 'number' && settings.volume >= 0 && settings.volume <= 1) {
             volume = settings.volume;
             document.getElementById('volume_slider').value = volume;
-            document.getElementById('volume_val').innerHTML = (Math.round(volume * 100).toString().padStart(3, ' ') + '% ');
+            document.getElementById('volume_val').innerHTML = (Math.round(volume * 100).toString().padStart(3, ' ') + '%');
           }
           // Restore local offset
           if (typeof settings.localOffset === 'number') {
@@ -1285,7 +1285,7 @@
       });
       document.getElementById('volume_slider').addEventListener('input', function () {
         volume = parseFloat(this.value);
-        document.getElementById('volume_val').innerHTML = (Math.round(volume * 100).toString().padStart(3, ' ') + '% ');
+        document.getElementById('volume_val').innerHTML = (Math.round(volume * 100).toString().padStart(3, ' ') + '%');
         if (voiceGain) voiceGain.gain.value = volume;
         saveSettings();
       });

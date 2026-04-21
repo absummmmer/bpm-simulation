@@ -627,7 +627,7 @@
     <div id="settings_panel" class="hidden space-y-4 bg-dark-800 p-4 sm:p-6 rounded-xl">
       <!-- Local UTC offset -->
       <div>
-        <div class="text-lg font-bold mb-3 flex items-center gap-2 flex-wrap">
+        <div class="text-lg mb-3 flex items-center gap-2 flex-wrap">
           <span>&#9201;</span>
           <span id="local_offset_val" class="text-blue-400 font-mono">+0.000</span>
           <span id="network_comp_val" class="text-xs text-gray-400 font-mono">(+0ms)</span>
@@ -1207,10 +1207,10 @@
       }
       document.getElementById('current_period').textContent = periodName;
       if (window.isAutoDUT1 && window.eopData) {
-        const currentKey = `${utcNow.getUTCFullYear()}-${utcNow.getUTCMonth() + 1}-${utcNow.getUTCDate()}`;
-        if (window.eopData[currentKey]) {
-          const expectedDut1 = window.eopData[currentKey] * 1000;
-          const expectedStatusText = `${String(utcNow.getUTCFullYear()).padStart(4, '0')}${String(utcNow.getUTCMonth() + 1).padStart(2, '0')}${String(utcNow.getUTCDate()).padStart(2, '0')}`;
+        const currentKey = `${String(utcNow.getUTCFullYear()).padStart(4, '0')}${String(utcNow.getUTCMonth() + 1).padStart(2, '0')}${String(utcNow.getUTCDate()).padStart(2, '0')}`;
+        if (window.eopData.has(currentKey)) {
+          const expectedDut1 = window.eopData.get(currentKey);
+          const expectedStatusText = `${window.currentDataSource ?? ''} @ ${currentKey}`;
           if (window.bpmDUT1 !== expectedDut1 || document.getElementById('eop_status').textContent !== expectedStatusText) {
             window.bpmDUT1 = expectedDut1;
             updateOffsetDisplay();
@@ -1226,9 +1226,9 @@
     function updateOffsetDisplay() {
       const localSec = localOffset / 1000;
       const dut1Sec = window.bpmDUT1 / 1000;
-      document.getElementById('local_offset_val').textContent = (localSec >= 0 ? '+' : '') + localSec.toFixed(3);
+      document.getElementById('local_offset_val').textContent = (localSec > 0 ? '+' : '') + localSec.toFixed(3);
       document.getElementById('network_comp_val').textContent = `(+${networkCompensation}ms)`;
-      document.getElementById('dut1_val').textContent = (dut1Sec >= 0 ? '+' : '') + dut1Sec.toFixed(3);
+      document.getElementById('dut1_val').textContent = (dut1Sec > 0 ? '+' : '') + dut1Sec.toFixed(3);
       saveSettings();
     }
     function parseNtscEop(content) {
@@ -1244,7 +1244,7 @@
         const day = parseInt(parts[2]);
         const ut1utc = parseFloat(parts[6]);
         if (!isNaN(year) && !isNaN(month) && !isNaN(day) && !isNaN(ut1utc)) {
-          const key = `${year.toString().padStart(4, '0')}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+          const key = `${year.toString().padStart(4, '0')}${month.toString().padStart(2, '0')}${day.toString().padStart(2, '0')}`;
           eopMap.set(key, ut1utc);
         }
       }
@@ -1273,7 +1273,7 @@
         const day = parseInt(parts[2]);
         const ut1utc = parseFloat(parts[6]);
         if (!isNaN(year) && !isNaN(month) && !isNaN(day) && !isNaN(ut1utc)) {
-          const key = `${year.toString().padStart(4, '0')}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+          const key = `${year.toString().padStart(4, '0')}${month.toString().padStart(2, '0')}${day.toString().padStart(2, '0')}`;
           eopMap.set(key, ut1utc); // store in seconds (will be multiplied by 1000 later)
         }
       }
@@ -1505,12 +1505,12 @@
             const now = new Date();
             const totalOffset = localOffset + networkCompensation;
             const utcNow = new Date(now.getTime() + totalOffset);
-            const currentKey = `${utcNow.getUTCFullYear().toString().padStart(4, '0')}-${(utcNow.getUTCMonth() + 1).toString().padStart(2, '0')}-${utcNow.getUTCDate().toString().padStart(2, '0')}`;
+            const currentKey = `${utcNow.getUTCFullYear().toString().padStart(4, '0')}${(utcNow.getUTCMonth() + 1).toString().padStart(2, '0')}${utcNow.getUTCDate().toString().padStart(2, '0')}`;
 
             if (eopDataMs.has(currentKey)) {
               window.bpmDUT1 = eopDataMs.get(currentKey);
               updateOffsetDisplay();
-              document.getElementById('eop_status').textContent = `${sourceType} @ ${currentKey.replace(/-/g, '')}`;
+              document.getElementById('eop_status').textContent = `${sourceType} @ ${currentKey}`;
               document.getElementById('eop_status').classList.remove('text-red-400');
               document.getElementById('eop_status').classList.remove('text-yellow-400');
               document.getElementById('eop_status').classList.add('text-green-400');

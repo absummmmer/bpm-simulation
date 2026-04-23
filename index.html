@@ -27,10 +27,13 @@
     <div class="bg-dark-800 rounded-xl max-w-2xl w-full max-h-[80vh] overflow-hidden flex flex-col">
       <!-- Modal Header -->
       <div class="flex items-center justify-between p-4 border-b border-dark-700">
-        <div class="flex items-center gap-2"> <button id="lang_en"
-            class="px-3 py-1 text-sm rounded-lg bg-blue-600 text-white">English</button> <button id="lang_zh"
-            class="px-3 py-1 text-sm rounded-lg bg-dark-700 text-gray-300">中文</button> </div> <button id="close_help"
-          class="w-8 h-8 flex items-center justify-center rounded-lg bg-dark-700 hover:bg-dark-600 transition"> &#10005;
+        <div class="flex items-center gap-2">
+          <button id="lang_en" class="px-3 py-1 text-sm rounded-lg bg-blue-600 text-white">English</button>
+          <button id="lang_zh" class="px-3 py-1 text-sm rounded-lg bg-dark-700 text-gray-300">中文</button>
+        </div>
+        <button id="close_help"
+          class="w-8 h-8 flex items-center justify-center rounded-lg bg-dark-700 hover:bg-dark-600 transition">
+          &#10005;
         </button>
       </div>
       <!-- Modal Content -->
@@ -38,25 +41,32 @@
         <!-- English Content -->
         <div id="help_en" class="space-y-4">
           <h2 class="text-xl font-bold">What is this?</h2>
-          <p class="text-gray-300"> This is a web-based simulator that perfectly replicates the audio signal format of
-            the <strong>BPM Shortwave Time Station</strong> operated by the National Time Service Center of China. </p>
+          <p class="text-gray-300">
+            This is a web-based simulator that perfectly replicates the audio signal format of the <strong>BPM Shortwave
+              Time Station</strong> operated by the National Time Service Center of China.
+          </p>
+  
           <h3 class="text-lg font-bold mt-4">How to use</h3>
-          <p class="text-gray-300"> Click the <button
-              class="w-6 h-6 bg-green-600 text-white font-mono rounded transition text-center"
+          <p class="text-gray-300">
+            Click the <button class="w-6 h-6 bg-green-600 text-white font-mono rounded transition text-center"
               disabled="true">&minus;</button> button. When the button changes to <button
               class="w-6 h-6 bg-red-600 text-white font-mono rounded transition text-center"
-              disabled="true">&acd;</button>, you will hear the simulated BPM signal. </p>
+              disabled="true">&acd;</button>, you will hear the simulated BPM signal.
+          </p>
+  
           <div class="bg-yellow-900/30 border border-yellow-600/50 p-2 rounded text-yellow-200 text-xs">
             <strong>Note:</strong> When this page runs in the background (e.g., another browser tab is active), browsers
             may reduce timer precision and throttle audio processing to save resources. This can cause audible delay or
             glitches. <strong>Please keep this page in the foreground</strong> for the best experience.
           </div>
+  
           <div class="bg-dark-700/30 p-3 rounded-lg">
             <h4 class="font-bold text-blue-400">What you hear</h4>
             <p class="text-gray-300 text-sm mt-1">The BPM signal repeats every half hour. The chart and table below give
               you a quick overview.</p>
             <!-- SVG pie chart -->
-            <div class="flex justify-center my-2"> <svg width="280" height="280" viewBox="0 0 280 280">
+            <div class="flex justify-center my-2">
+              <svg width="280" height="280" viewBox="0 0 280 280">
                 <path d="M 140 10 A 130 130 0 0 1 252.58 75 L 140 140 Z" fill="#4a6fe3" />
                 <path d="M 270 140 A 130 130 0 0 1 205 252.58 L 140 140 Z" fill="#4a6fe3" />
                 <path d="M 140 270 A 130 130 0 0 1 27.42 205 L 140 140 Z" fill="#4a6fe3" />
@@ -67,18 +77,20 @@
                 <path d="M 75 27.42 A 130 130 0 0 1 126.415 10.715 L 140 140 Z" fill="#f57c00" />
                 <path d="M 153.585 269.285 A 130 130 0 0 1 140 270 L 140 140 Z" fill="#4caf50" />
                 <path d="M 126.415 10.715 A 130 130 0 0 1 140 10 L 140 140 Z" fill="#4caf50" />
-                <circle cx="140" cy="140" r="70" fill="white" /> <text x="140" y="145" text-anchor="middle"
-                  font-size="18" font-weight="bold" fill="#d32f2f">BPM</text> <text x="140" y="25" text-anchor="middle"
-                  font-size="10" fill="white">00</text> <text x="241" y="85" text-anchor="middle" font-size="10"
-                  fill="white">10</text> <text x="258" y="143" text-anchor="middle" font-size="10"
-                  fill="white">15</text> <text x="198" y="243" text-anchor="middle" font-size="10"
-                  fill="white">25</text> <text x="152" y="253" text-anchor="middle" font-size="10"
-                  fill="white">29</text> <text x="140" y="262" text-anchor="middle" font-size="10"
-                  fill="white">30</text> <text x="39" y="201" text-anchor="middle" font-size="10" fill="white">40</text>
-                <text x="22" y="143" text-anchor="middle" font-size="10" fill="white">45</text> <text x="82" y="42"
-                  text-anchor="middle" font-size="10" fill="white">55</text> <text x="128" y="34" text-anchor="middle"
-                  font-size="10" fill="white">59</text>
-              </svg> </div>
+                <circle cx="140" cy="140" r="70" fill="white" />
+                <text x="140" y="145" text-anchor="middle" font-size="18" font-weight="bold" fill="#d32f2f">BPM</text>
+                <text x="140" y="25" text-anchor="middle" font-size="10" fill="white">00</text>
+                <text x="241" y="85" text-anchor="middle" font-size="10" fill="white">10</text>
+                <text x="258" y="143" text-anchor="middle" font-size="10" fill="white">15</text>
+                <text x="198" y="243" text-anchor="middle" font-size="10" fill="white">25</text>
+                <text x="152" y="253" text-anchor="middle" font-size="10" fill="white">29</text>
+                <text x="140" y="262" text-anchor="middle" font-size="10" fill="white">30</text>
+                <text x="39" y="201" text-anchor="middle" font-size="10" fill="white">40</text>
+                <text x="22" y="143" text-anchor="middle" font-size="10" fill="white">45</text>
+                <text x="82" y="42" text-anchor="middle" font-size="10" fill="white">55</text>
+                <text x="128" y="34" text-anchor="middle" font-size="10" fill="white">59</text>
+              </svg>
+            </div>
             <!-- Legend -->
             <div class="flex flex-wrap justify-center gap-4 text-sm text-gray-300 mb-3">
               <div class="flex items-center gap-2">
@@ -106,8 +118,8 @@
                   <tr>
                     <td class="py-1 pr-2">00–10, 30–40</td>
                     <td class="py-1">UTC + Time Code: 1 kHz second ticks (10 ms, 300 ms on the minute), with a 125 Hz
-                      subcarrier for time code between pulses (if enabled – see the <strong>TimeCode</strong> checkbox
-                      below the start/stop button).</td>
+                      subcarrier for time code between pulses. The subcarrier volume can be adjusted using the small
+                      slider below the start/stop button (labeled <strong>TimeCode<sup>[1]</sup></strong>).</td>
                   </tr>
                   <tr>
                     <td class="py-1 pr-2">10–15, 40–45</td>
@@ -135,18 +147,24 @@
               <p>For the exact time code encoding, please refer to the reference below.</p>
             </div>
           </div>
+  
           <!-- Control options (with UI indicators) -->
           <div class="bg-dark-700/30 p-3 rounded-lg">
             <h4 class="font-bold text-blue-400">Control options &amp; UI indicators</h4>
-            <p class="text-gray-300 text-sm mt-1"> Below the start/stop button, you will find two checkboxes: </p>
-            <ul class="list-disc list-inside text-gray-300 text-sm space-y-1">
-              <li><strong>TimeCode<sup>[1]</sup></strong> – Enable or disable the 125Hz time code subcarrier. If you
-                find the low‑frequency hum a bit annoying, just uncheck this – you'll only hear the second pulses
-                (1kHz), and the subcarrier will be muted.</li>
+            <p class="text-gray-300 text-sm mt-1">
+              Below the start/stop button, you will find the following controls:
+            </p>
+            <ul class="list-disc list-inside text-gray-300 text-sm space-y-2">
+              <li><strong>TimeCode<sup>[1]</sup> volume slider</strong> – Adjusts the loudness of the 125 Hz time code
+                subcarrier (the low humming sound between second ticks). Slide it to zero to hear only the 1 kHz second
+                pulses; raise it to mix in the subcarrier at the desired level. The current volume percentage appears
+                next to the signal type indicator (e.g., “UTC+80%TimeCode”).</li>
               <li><strong>&#13235;</strong> – Show or hide milliseconds on the time display. If the rapidly changing
                 digits feel distracting, just uncheck this to keep the display clean at second resolution.</li>
             </ul>
-            <p class="text-gray-300 text-sm mt-2"> In addition, the page also shows: </p>
+            <p class="text-gray-300 text-sm mt-2">
+              In addition, the page also shows:
+            </p>
             <ul class="list-disc list-inside text-gray-300 text-sm space-y-1">
               <li><span class="text-purple-400">&#128251;Current signal type</span> – helps you identify the ongoing
                 broadcast period.</li>
@@ -157,14 +175,19 @@
               page.</p>
           </div>
           <h3 class="text-lg font-bold mt-4">About Time Service & BPM Shortwave Time Station</h3>
-          <p class="text-gray-300"> Time service is one of the core infrastructures of modern society. Precise time
-            synchronization is the foundation for the normal operation of satellite navigation, 5G communication,
-            financial transactions, deep space exploration and other fields. </p>
-          <p class="text-gray-300"> BPM Shortwave Time Station is China's national shortwave time service station,
-            similar to the WWV/WWVH stations in the United States. It broadcasts precise time signals on multiple
-            shortwave frequencies, allowing anyone with a shortwave radio to sync their clocks to national standard time
-            for free. </p>
-          <!-- Frequency Schedule Table (with UTC column) -->
+          <p class="text-gray-300">
+            Time service is one of the core infrastructures of modern society. Precise time synchronization is the
+            foundation for the normal operation of satellite navigation, 5G communication, financial transactions, deep
+            space exploration and other fields.
+          </p>
+          <p class="text-gray-300">
+            BPM Shortwave Time Station is China's national shortwave time service station, similar to the WWV/WWVH
+            stations in the United States.
+            It broadcasts precise time signals on multiple shortwave frequencies, allowing anyone with a
+            shortwave radio to sync their clocks to national standard time for free.
+          </p>
+  
+          <!-- Frequency Schedule Table -->
           <div class="overflow-x-auto">
             <table class="w-full text-sm text-left text-gray-300 border border-dark-700 rounded-lg">
               <thead class="text-xs uppercase bg-dark-700">
@@ -198,8 +221,10 @@
               </tbody>
             </table>
           </div>
-          <p class="text-yellow-400 text-sm"> Please note that this is only a simulation and demonstration tool, it
-            cannot replace the real BPM shortwave time service broadcast. All simulation results are for reference only.
+  
+          <p class="text-yellow-400 text-sm">
+            Please note that this is only a simulation and demonstration tool, it cannot replace the real BPM shortwave
+            time service broadcast. All simulation results are for reference only.
           </p>
           <!-- Settings Guide -->
           <h3 class="text-lg font-bold mt-4"><button class="w-8 h-8 bg-dark-700 rounded transition"
@@ -265,6 +290,7 @@
             announcement function in the time code, nor can it simulate the special signals when a leap second occurs.
             </p>
           </div>
+  
           <!-- Copyright & Privacy Statement -->
           <h3 class="text-lg font-bold mt-4">Copyright & Privacy Statement</h3>
           <div class="space-y-2 text-gray-400 text-sm">
@@ -273,26 +299,34 @@
             <p>Except for syncing internet time, this page will not perform any other network activities. All your
               settings are saved locally.</p>
           </div>
+  
           <!-- Reference -->
           <h3 class="text-lg font-bold mt-4">Reference</h3>
           <div class="text-gray-400 text-sm">
             <p>[1]蒙智谋.BPM短波时码授时发播技术方案[J].时间频率学报,2014,37(03):145-150.DOI:10.13875/j.issn.1674-0637.2014-03-0145-06.</p>
           </div>
         </div>
+  
         <!-- Chinese Content -->
         <div id="help_zh" class="space-y-4 hidden">
           <h2 class="text-xl font-bold">这是什么？</h2>
-          <p class="text-gray-300"> 这是一个网页版的模拟器，完美复现了中国科学院国家授时中心运营的<strong>BPM短波授时台</strong>的信号格式。 </p>
+          <p class="text-gray-300">
+            这是一个网页版的模拟器，完美复现了中国科学院国家授时中心运营的<strong>BPM短波授时台</strong>的信号格式。
+          </p>
+  
           <h3 class="text-lg font-bold mt-4">如何使用</h3>
-          <p class="text-gray-300"> 点击<button
-              class="w-6 h-6 bg-green-600 text-white font-mono rounded transition text-center"
+          <p class="text-gray-300">
+            点击<button class="w-6 h-6 bg-green-600 text-white font-mono rounded transition text-center"
               disabled="true">&minus;</button>按钮，当按钮变成<button
               class="w-6 h-6 bg-red-600 text-white font-mono rounded transition text-center"
-              disabled="true">&acd;</button>的时候，你就能听到模拟的BPM信号了。 </p>
+              disabled="true">&acd;</button>的时候，你就能听到模拟的BPM信号了。
+          </p>
+  
           <div class="bg-yellow-900/30 border border-yellow-600/50 p-2 rounded text-yellow-200 text-xs">
             <strong>注意：</strong>
             当本页面在后台运行时（例如打开了其他浏览器标签页），浏览器为了节省资源会降低定时器精度并限制音频处理，可能导致声音延迟或卡顿。<strong>请保持本页面在前台运行</strong>以获得最佳体验。
           </div>
+  
           <div class="bg-dark-700/30 p-3 rounded-lg">
             <h4 class="font-bold text-blue-400">你听到的是什么？</h4>
             <p class="text-gray-300 text-sm mt-1">BPM信号每半小时重复一次。下面的图表和表格可以帮你快速了解信号的全貌。</p>
@@ -346,9 +380,8 @@
                 <tbody>
                   <tr>
                     <td class="py-1 pr-2">00–10, 30–40</td>
-                    <td class="py-1">
-                      UTC+时码：1kHz秒脉冲（普通秒10ms，分钟起始300ms），脉冲间隙发送125Hz副载波时码（如果启用——请勾选播放按钮下方的<strong>TimeCode</strong>复选框）。
-                    </td>
+                    <td class="py-1">UTC+时码：1kHz秒脉冲（普通秒10ms，分钟起始300ms），脉冲间隙发送125Hz副载波时码。时码副载波的音量可通过播放按钮下方的小滑块（标注
+                      <strong>TimeCode<sup>[1]</sup></strong>）独立调节。</td>
                   </tr>
                   <tr>
                     <td class="py-1 pr-2">10–15, 40–45</td>
@@ -374,16 +407,17 @@
               <p>时码的具体编码规则请参见参考文献。</p>
             </div>
           </div>
-          <!-- 控制选项（包含界面指示） -->
+  
+          <!-- 控制选项 -->
           <div class="bg-dark-700/30 p-3 rounded-lg">
             <h4 class="font-bold text-blue-400">控制选项与界面指示</h4>
-            <p class="text-gray-300 text-sm mt-1"> 在播放按钮下方，有两个复选框： </p>
-            <ul class="list-disc list-inside text-gray-300 text-sm space-y-1">
-              <li><strong>TimeCode<sup>[1]</sup></strong> – 开启或关闭125Hz时码副载波。如果你觉得低频嗡嗡声有些烦躁，可以取消勾选 ——
-                此时你只会听到秒脉冲（1kHz），不再有时码副载波的声音。</li>
+            <p class="text-gray-300 text-sm mt-1">在播放按钮下方，你会看到以下控件：</p>
+            <ul class="list-disc list-inside text-gray-300 text-sm space-y-2">
+              <li><strong>TimeCode<sup>[1]</sup> 音量滑块</strong> –
+                用于调节125Hz时码副载波（秒脉冲之间低沉的“嗡嗡”声）的音量。滑到最左侧（0%）时只听到秒脉冲；调大则可以混合进时码副载波。当前音量百分比会显示在信号类型指示器旁边（例如 “UTC+80%TimeCode”）。</li>
               <li><strong>&#13235;</strong> – 在时间显示中显示或隐藏毫秒。如果毫秒数字跳得太快让你觉得眼花，可以取消勾选它，只保留秒级显示。</li>
             </ul>
-            <p class="text-gray-300 text-sm mt-2"> 此外，页面还显示： </p>
+            <p class="text-gray-300 text-sm mt-2">此外，页面还显示：</p>
             <ul class="list-disc list-inside text-gray-300 text-sm space-y-1">
               <li><span class="text-purple-400">&#128251;当前信号类型</span> – 帮助你了解当前发播时段。</li>
               <li><span class="text-green-400">&#127760;UT1时间</span> – 经DUT1值校正后的时间（天文时间）。</li>
@@ -433,8 +467,9 @@
           <h3 class="text-lg font-bold mt-4"><button class="w-8 h-8 bg-dark-700 rounded transition"
               disabled="true">&#128295;</button> 设置界面说明</h3>
           <div class="space-y-3 text-gray-300">
-            <p> 通过调整以下三个参数，你可以让模拟器的输出尽可能贴近真实的BPM信号——包括UTC、时码<strong>*</strong>、UT1和台站呼号。 </p>
-            <div class="text-gray-400 text-xs space-y-1"> <strong>*作者注：</strong>
+            <p>通过调整以下三个参数，你可以让模拟器的输出尽可能贴近真实的BPM信号——包括UTC、时码<strong>*</strong>、UT1和台站呼号。</p>
+            <div class="text-gray-400 text-xs space-y-1">
+              <strong>*作者注：</strong>
               说实话，我自己也从未真正听到过真实的BPM时码信号——或者说，它几乎总是被WWV/H的时码副载波淹没了。这个模拟器完全是照着已发表的论文（参考文献[1]）把时码的编码和发播规则“翻译”成声音的。做它的初衷也很简单——就是想<strong>亲耳听听BPM的时码到底长什么样</strong>，也就是秒脉冲之间那125Hz的低频“嗡嗡”声，顺便了解一下它的工作原理。<br><br>
               不过可以放心，只要你把下面几个参数设置正确，浏览器里播出来的声音和真实的BPM广播就是完全一样的——至少听起来是。如果你真能收听到5MHz上的时码副载波，非常期待你能帮我验证一下这个模拟器的准确性。欢迎<a
                 href="https://github.com/absummmmer/bpm-simulation/issues" target="_blank" rel="noopener noreferrer"
@@ -486,49 +521,81 @@
       <div id="time_display"
         class="text-5xl sm:text-6xl md:text-7xl font-mono font-bold text-white mb-4 whitespace-nowrap"> --:--:--<span
           id="ms_display" class="text-3xl sm:text-4xl text-gray-400">.---</span> </div>
+
       <!-- Start/Stop button -->
-      <div class="flex justify-center gap-4 mb-4"> <button id="start_btn"
+      <div class="flex justify-center gap-4 mb-4">
+        <button id="start_btn"
           class="w-28 px-0 py-4 bg-green-600 text-white font-mono rounded-lg hover:bg-green-500 transition text-7xl text-center">
-          &minus; </button> <button id="stop_btn"
+          &minus;
+        </button>
+        <button id="stop_btn"
           class="w-28 px-0 py-4 bg-red-600 text-white font-mono rounded-lg hover:bg-red-500 transition text-7xl text-center hidden">
-          &acd; </button> </div>
-      <div class="flex flex-wrap justify-center gap-4 items-center"> <label
-          class="flex items-center gap-1 cursor-pointer"> <input type="checkbox" id="play_low_freq" checked
-            class="w-4 h-4 rounded"> <span class="text-gray-400 text-sm">TimeCode<sup>[1]</sup></span> </label> <label
-          class="flex items-center gap-1 cursor-pointer"> <input type="checkbox" id="show_ms" checked
-            class="w-4 h-4 rounded"> <span class="text-gray-400 text-sm">&#13235;</span> </label> <button
-          id="toggle_settings"
+          &acd;
+        </button>
+      </div>
+
+      <!-- Controls row: TimeCode slider + ShowMs checkbox + Settings/Help buttons -->
+      <div class="flex flex-wrap justify-center gap-4 items-center">
+        <!-- TimeCode volume control (vertical grouping) -->
+        <div class="flex flex-col items-start gap-1">
+          <span class="text-gray-400 text-xs font-mono">TimeCode<sup>[1]</sup></span>
+          <input type="range" id="low_freq_volume" min="0" max="100" step="1" value="80"
+            class="w-20 h-1.5 bg-dark-700 rounded-lg appearance-none cursor-pointer accent-blue-500">
+        </div>
+        <!-- Show milliseconds checkbox -->
+        <label class="flex items-center gap-1 cursor-pointer">
+          <input type="checkbox" id="show_ms" checked class="w-4 h-4 rounded">
+          <span class="text-gray-400 text-sm">&#13235;</span>
+        </label>
+        <!-- Settings and Help buttons -->
+        <button id="toggle_settings"
           class="w-8 h-8 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-lg flex items-center justify-center">
-          &#128295; </button> <button id="open_help"
+          &#128295;
+        </button>
+        <button id="open_help"
           class="w-8 h-8 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-lg flex items-center justify-center">
-          &#10068; </button> </div>
-      <!-- Volume slider -->
-      <div class="flex justify-center items-center gap-2 mt-3"> <span
-          class="text-gray-400 text-sm text-left w-6">&#128264;</span> <input type="range" id="volume_slider" min="0"
-          max="1" step="0.01" value="0.5"
-          class="w-48 sm:w-64 h-2 bg-dark-700 rounded-lg appearance-none cursor-pointer accent-blue-500"> <span
-          id="volume_val" class="text-gray-400 text-sm w-8 text-right font-mono"> 50%</span> </div>
+          &#10068;
+        </button>
+      </div>
+
+      <!-- Volume slider (master) -->
+      <div class="flex justify-center items-center gap-2 mt-3">
+        <span class="text-gray-400 text-sm text-left w-6">&#128264;</span>
+        <input type="range" id="volume_slider" min="0" max="1" step="0.01" value="0.5"
+          class="w-48 sm:w-64 h-2 bg-dark-700 rounded-lg appearance-none cursor-pointer accent-blue-500">
+        <span id="volume_val" class="text-gray-400 text-sm w-8 text-right font-mono"> 50%</span>
+      </div>
     </div>
+
     <!-- Status display -->
     <div class="text-xs flex justify-between mb-4">
-      <div class="flex items-center gap-1 text-gray-400"> <span>&#128251;</span> <span
-          class="text-sm font-mono">BPM</span> <span id="current_period" class="text-purple-400">--</span> </div>
-      <div class="flex items-center gap-1 text-gray-400"> <span id="ut1_time"
-          class="text-green-400 font-mono">--:--:--</span> <span>&#127760;</span> </div>
+      <div class="flex items-center gap-1 text-gray-400">
+        <span>&#128251;</span>
+        <span class="text-sm font-mono">BPM</span>
+        <span id="current_period" class="text-purple-400">--</span>
+      </div>
+      <div class="flex items-center gap-1 text-gray-400">
+        <span id="ut1_time" class="text-green-400 font-mono">--:--:--</span>
+        <span>&#127760;</span>
+      </div>
     </div>
-    <!-- Collapsible settings panel -->
+
+    <!-- Settings panel -->
     <div id="settings_panel" class="hidden space-y-4 bg-dark-800 p-4 sm:p-6 rounded-xl">
       <!-- Local UTC offset -->
       <div>
-        <div class="text-lg mb-3 flex items-center gap-2 flex-wrap"> <span class="font-bold">&#9201;</span> <span
-            id="local_offset_val" class="text-blue-400 font-mono">+0.000</span> <span id="network_comp_val"
-            class="text-xs text-gray-400 font-mono">(+0ms)</span> <button data-offset="local" data-delta="reset"
+        <div class="text-lg mb-3 flex items-center gap-2 flex-wrap">
+          <span class="font-bold">&#9201;</span>
+          <span id="local_offset_val" class="text-blue-400 font-mono">+0.000</span>
+          <span id="network_comp_val" class="text-xs text-gray-400 font-mono">(+0ms)</span>
+          <button data-offset="local" data-delta="reset"
             class="text-sm px-2 py-1 bg-dark-700 rounded hover:bg-dark-600 transition text-blue-400 text-center font-mono">&#8634;</button>
           <button id="sync_btn"
-            class="text-sm px-2 py-1 bg-blue-600 text-white rounded hover:bg-blue-500 transition flex items-center gap-1">
-            SYNC </button> <span id="sync_error" class="text-xs text-gray-400 font-mono"></span>
+            class="text-sm px-2 py-1 bg-blue-600 text-white rounded hover:bg-blue-500 transition flex items-center gap-1">SYNC</button>
+          <span id="sync_error" class="text-xs text-gray-400 font-mono"></span>
         </div>
-        <div class="grid grid-cols-3 gap-2"> <button data-offset="local" data-delta="100"
+        <div class="grid grid-cols-3 gap-2">
+          <button data-offset="local" data-delta="100"
             class="text-blue-400 px-3 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono">+0.1</button>
           <button data-offset="local" data-delta="10"
             class="text-blue-400 px-3 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono">+0.01</button>
@@ -541,8 +608,8 @@
           <button data-offset="local" data-delta="-1"
             class="text-blue-400 px-3 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono">-0.001</button>
         </div>
-        <!-- Network compensation adjustment buttons -->
-        <div class="grid grid-cols-5 gap-2 mt-2"> <button data-offset="comp" data-delta="10"
+        <div class="grid grid-cols-5 gap-2 mt-2">
+          <button data-offset="comp" data-delta="10"
             class="text-gray-400 px-2 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono text-sm">+10ms</button>
           <button data-offset="comp" data-delta="1"
             class="text-gray-400 px-2 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono text-sm">+1ms</button>
@@ -557,24 +624,31 @@
       <!-- DUT1 offset -->
       <div>
         <div class="flex items-start gap-3 flex-wrap mb-3">
-          <div class="flex items-center gap-2"> <span class="text-lg font-bold">DUT1</span> <span id="dut1_val"
-              class="text-green-400 font-mono">+0.000</span> <button data-offset="dut1" data-delta="reset"
+          <div class="flex items-center gap-2">
+            <span class="text-lg font-bold">DUT1</span>
+            <span id="dut1_val" class="text-green-400 font-mono">+0.000</span>
+            <button data-offset="dut1" data-delta="reset"
               class="text-sm px-2 py-1 bg-dark-700 rounded hover:bg-dark-600 transition text-green-400 text-center font-mono">&#8634;</button>
           </div>
-          <div class="flex flex-col gap-1"> <a href="http://www.ut1.ntsc.ac.cn/" target="_blank"
+          <div class="flex flex-col gap-1">
+            <a href="http://www.ut1.ntsc.ac.cn/" target="_blank" rel="noopener noreferrer"
+              class="text-xs text-blue-400 hover:text-blue-300 flex items-center font-mono whitespace-nowrap">
+              &#128269;NTSC_EOP_<i>yyyyMMdd</i>.txt
+            </a>
+            <a href="https://datacenter.iers.org/data/latestVersion/bulletinA.txt" target="_blank"
               rel="noopener noreferrer"
               class="text-xs text-blue-400 hover:text-blue-300 flex items-center font-mono whitespace-nowrap">
-              &#128269;NTSC_EOP_<i>yyyyMMdd</i>.txt </a> <a
-              href="https://datacenter.iers.org/data/latestVersion/bulletinA.txt" target="_blank"
-              rel="noopener noreferrer"
-              class="text-xs text-blue-400 hover:text-blue-300 flex items-center font-mono whitespace-nowrap">
-              &#128190;IERS/BULLETIN-A </a> </div>
-          <div class="flex items-center gap-2 flex-wrap"> <input type="file" id="eop_file" accept=".txt"
+              &#128190;IERS/BULLETIN-A
+            </a>
+          </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <input type="file" id="eop_file" accept=".txt"
               class="text-xs text-gray-400 file:mr-2 file:py-1 file:px-2 file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-500" />
             <span id="eop_status" class="text-xs font-mono text-gray-500"></span>
           </div>
         </div>
-        <div class="grid grid-cols-3 gap-2"> <button data-offset="dut1" data-delta="100"
+        <div class="grid grid-cols-3 gap-2">
+          <button data-offset="dut1" data-delta="100"
             class="text-green-400 px-3 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono">+0.1</button>
           <button data-offset="dut1" data-delta="10"
             class="text-green-400 px-3 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono">+0.01</button>
@@ -590,6 +664,7 @@
       </div>
     </div>
   </div>
+
   <script>
     // Present polyfill for high resolution time
     function present() {
@@ -675,23 +750,23 @@
     // Global variables
     let audioContext = null;
     let updateTimer = null;
-    let voiceBuffer = null; // Voice audio buffer, loaded via Web Audio
-    let voiceSource = null; // Current voice playback source
-    let voiceGain = null; // Voice gain node, for realtime volume control
-    let volume = 0.5; // Global volume, default 50%
+    let voiceBuffer = null;
+    let voiceSource = null;
+    let voiceGain = null;
+    let volume = 0.5;
+    let lowFreqVolume = 0.8;
     let isRunning = false;
-    // Track active oscillators to ensure clean start/end
     let active1kHz = null;
     let active125Hz = null;
     let last1kHzState = false;
     let last125HzState = false;
-    // Offset configuration (internal unit: milliseconds)
-    let localOffset = 0; // Local UTC offset, ms
-    let networkCompensation = 0; // Network fixed delay compensation, ms, always >=0
-    window.bpmDUT1 = 0; // DUT1 default 0, ms precision
-    // EOP auto update related
-    window.eopData = null; // Saved EOP data map, key: year-month-day, value: ut1utc
-    window.isAutoDUT1 = false; // Whether DUT1 is in auto update mode
+    let localOffset = 0;
+    let networkCompensation = 0;
+    window.bpmDUT1 = 0;
+    window.eopData = null;
+    window.isAutoDUT1 = false;
+    window.currentDataSource = null;
+
     // Morse code sequence for BPM
     const morseSequence = [
       { type: 'dash', duration: 300 },
@@ -715,12 +790,12 @@
       { type: 'dash', duration: 300 },
     ];
     const MORSE_CYCLE = 4000;
-    const MORSE_START_DELAY = 400; // Morse starts at 29:00.400
+    const MORSE_START_DELAY = 380; // Morse starts at 29:00.380
     // Save settings to localStorage
     function saveSettings() {
       const settings = {
         show_ms: document.getElementById('show_ms').checked,
-        play_low_freq: document.getElementById('play_low_freq').checked,
+        low_freq_volume: lowFreqVolume,
         volume: volume,
         localOffset: localOffset,
         networkCompensation: networkCompensation,
@@ -738,30 +813,25 @@
         const saved = localStorage.getItem('bpm_simulator_settings');
         if (saved) {
           const settings = JSON.parse(saved);
-          // Restore show_ms
           if (typeof settings.show_ms === 'boolean') {
             document.getElementById('show_ms').checked = settings.show_ms;
           }
-          // Restore play_low_freq
-          if (typeof settings.play_low_freq === 'boolean') {
-            document.getElementById('play_low_freq').checked = settings.play_low_freq;
+          if (typeof settings.low_freq_volume === 'number') {
+            lowFreqVolume = Math.min(1, Math.max(0, settings.low_freq_volume));
+            document.getElementById('low_freq_volume').value = lowFreqVolume * 100;
           }
-          // Restore volume
           if (typeof settings.volume === 'number' && settings.volume >= 0 && settings.volume <= 1) {
             volume = settings.volume;
             document.getElementById('volume_slider').value = volume;
             document.getElementById('volume_val').innerHTML = (Math.round(volume * 100).toString().padStart(3, ' ') + '%');
           }
-          // Restore local offset
           if (typeof settings.localOffset === 'number') {
             localOffset = settings.localOffset;
           }
-          // Restore network compensation
           if (typeof settings.networkCompensation === 'number') {
             networkCompensation = settings.networkCompensation;
             networkCompensation = Math.max(0, networkCompensation);
           }
-          // Restore DUT1
           if (typeof settings.dut1 === 'number') {
             window.bpmDUT1 = settings.dut1;
             window.bpmDUT1 = Math.max(-999, Math.min(999, window.bpmDUT1));
@@ -901,9 +971,10 @@
       osc.frequency.value = 125;
       const now = audioContext.currentTime;
       const fadeTime = 0.001;
+      const amplitude = 0.5 * volume * lowFreqVolume;
       gain.gain.setValueAtTime(0, now);
-      gain.gain.linearRampToValueAtTime(0.5 * volume, now + fadeTime);
-      gain.gain.setValueAtTime(0.5 * volume, now + durationMs / 1000 - fadeTime);
+      gain.gain.linearRampToValueAtTime(amplitude, now + fadeTime);
+      gain.gain.setValueAtTime(amplitude, now + durationMs / 1000 - fadeTime);
       gain.gain.linearRampToValueAtTime(0, now + durationMs / 1000);
       osc.connect(gain);
       gain.connect(audioContext.destination);
@@ -947,6 +1018,8 @@
         voiceGain = null;
       };
     }
+
+    // Audio update loop
     function updateAudio() {
       if (!isRunning) return;
       const now = new Date();
@@ -956,8 +1029,8 @@
       const ms = utcNow.getUTCMilliseconds();
       const minute = utcNow.getUTCMinutes();
       const period = getPeriodType(minute, second, ms);
-      let target1kHz = false;
-      let target125Hz = false;
+      let target1kHz = false, target125Hz = false;
+
       if (period === 'utc') {
         const pulseSecond = second + Math.floor((ms + 20) / 1000);
         const pulseSecondMod = pulseSecond % 60;
@@ -991,7 +1064,7 @@
         }
         const pulseSecond = adjustedSecond + Math.floor((adjustedMs + 20) / 1000);
         const pulseSecondMod = pulseSecond % 60;
-        const pulseDuration = pulseSecondMod == 0 ? 300 : 100;
+        const pulseDuration = pulseSecondMod === 0 ? 300 : 100;
         const isPulse = (adjustedMs + 20) % 1000 < pulseDuration;
         if (isPulse && !last1kHzState) {
           play1kHz(pulseDuration);
@@ -1003,9 +1076,7 @@
           const morseMs = totalMs - MORSE_START_DELAY;
           if (morseMs >= 0) {
             const cycleMs = morseMs % MORSE_CYCLE;
-            let currentPos = 0;
-            let isOn = false;
-            let itemDuration = 0;
+            let currentPos = 0, isOn = false, itemDuration = 0;
             for (const item of morseSequence) {
               currentPos += item.duration;
               if (cycleMs < currentPos) {
@@ -1016,9 +1087,7 @@
                 break;
               }
             }
-            if (isOn && !last1kHzState) {
-              play1kHz(itemDuration);
-            }
+            if (isOn && !last1kHzState) play1kHz(itemDuration);
             target1kHz = isOn;
           }
         } else {
@@ -1026,27 +1095,17 @@
         }
       }
       if (isInTimeCodePeriod(minute) && period !== 'silent' && period !== 'call' && period !== 'carrier') {
-        if (second == 0) {
+        if (second === 0) {
           target125Hz = false;
         } else {
           const bits = generateTimeCode(utcNow);
           const bit = bits[second];
-          let bitDuration = 0;
-          let isCode = false;
-          if (bit == 0) {
-            bitDuration = 200;
-            isCode = ms < bitDuration;
-          } else if (bit == 1) {
-            bitDuration = 480;
-            isCode = ms < bitDuration;
-          } else if (bit == 2) {
-            bitDuration = 800;
-            isCode = ms < bitDuration;
-          }
-          if (isCode && !last125HzState) {
-            if (document.getElementById('play_low_freq').checked) {
-              play125Hz(bitDuration);
-            }
+          let bitDuration = 0, isCode = false;
+          if (bit === 0) { bitDuration = 200; isCode = ms < bitDuration; }
+          else if (bit === 1) { bitDuration = 480; isCode = ms < bitDuration; }
+          else if (bit === 2) { bitDuration = 800; isCode = ms < bitDuration; }
+          if (isCode && !last125HzState && lowFreqVolume > 0) {
+            play125Hz(bitDuration);
           }
           target125Hz = isCode;
         }
@@ -1054,6 +1113,8 @@
       last1kHzState = target1kHz;
       last125HzState = target125Hz;
     }
+
+    // Update time display and signal type text
     function updateTimeDisplay() {
       const now = new Date();
       const totalOffset = localOffset + networkCompensation;
@@ -1063,47 +1124,42 @@
       const secs = String(utcNow.getUTCSeconds()).padStart(2, '0');
       const msStr = String(utcNow.getUTCMilliseconds()).padStart(3, '0');
       const showMs = document.getElementById('show_ms').checked;
-      const playLowFreq = document.getElementById('play_low_freq').checked;
-      document.getElementById('time_display').innerHTML =
-        `${hours}:${mins}:${secs}` +
-        (showMs ? `<span id="ms_display" class="text-3xl sm:text-4xl text-gray-400">.${msStr}</span>` : '');
+      document.getElementById('time_display').innerHTML = `${hours}:${mins}:${secs}` + (showMs ? `<span id="ms_display" class="text-3xl sm:text-4xl text-gray-400">.${msStr}</span>` : '');
       const ut1Now = new Date(utcNow.getTime() + window.bpmDUT1);
-      if (showMs) {
-        document.getElementById('ut1_time').textContent = ut1Now.toISOString().substr(11, 12);
-      } else {
-        document.getElementById('ut1_time').textContent = ut1Now.toISOString().substr(11, 8);
-      }
+      if (showMs) document.getElementById('ut1_time').textContent = ut1Now.toISOString().substr(11, 12);
+      else document.getElementById('ut1_time').textContent = ut1Now.toISOString().substr(11, 8);
+
       const second = utcNow.getUTCSeconds();
       const ms = utcNow.getUTCMilliseconds();
       const minute = utcNow.getUTCMinutes();
-      let periodName = '';
       const period = getPeriodType(minute, second, ms);
-      if (period === 'utc') periodName = playLowFreq ? 'UTC+TimeCode' : 'UTC';
-      else if (period === 'carrier') periodName = 'Carrier';
+      let periodName = '';
+      if (period === 'utc') {
+        const volPercent = Math.round(lowFreqVolume * 100);
+        if (volPercent === 0) periodName = 'UTC';
+        else if (volPercent === 100) periodName = 'UTC+TimeCode';
+        else periodName = `UTC+${volPercent}%TimeCode`;
+      } else if (period === 'carrier') periodName = 'Carrier';
       else if (period === 'ut1') periodName = 'UT1';
       else if (period === 'silent') periodName = 'UT1';
-      else if (period === 'call') {
-        if (second < 40) periodName = 'MorseCodeStationID';
-        else periodName = '标准时间标准频率发播台';
-      }
+      else if (period === 'call') periodName = (second < 40) ? 'MorseCodeStationID' : '标准时间标准频率发播台';
       document.getElementById('current_period').textContent = periodName;
+
       if (window.isAutoDUT1 && window.eopData) {
-        const currentKey = `${String(utcNow.getUTCFullYear()).padStart(4, '0')}${String(utcNow.getUTCMonth() + 1).padStart(2, '0')}${String(utcNow.getUTCDate()).padStart(2, '0')}`;
+        const currentKey = `${utcNow.getUTCFullYear().toString().padStart(4, '0')}${(utcNow.getUTCMonth() + 1).toString().padStart(2, '0')}${utcNow.getUTCDate().toString().padStart(2, '0')}`;
         if (window.eopData.has(currentKey)) {
           const expectedDut1 = window.eopData.get(currentKey);
-          const expectedStatusText = `${window.currentDataSource ?? ''} @ ${currentKey}`;
-          if (window.bpmDUT1 !== expectedDut1 || document.getElementById('eop_status').textContent !== expectedStatusText) {
+          if (window.bpmDUT1 !== expectedDut1) {
             window.bpmDUT1 = expectedDut1;
             updateOffsetDisplay();
-            const eopStatus = document.getElementById('eop_status');
-            eopStatus.textContent = expectedStatusText;
-            eopStatus.classList.remove('text-red-400');
-            eopStatus.classList.remove('text-yellow-400');
-            eopStatus.classList.add('text-green-400');
+            document.getElementById('eop_status').textContent = `${window.currentDataSource ?? 'Auto'} @ ${currentKey}`;
+            document.getElementById('eop_status').classList.remove('text-red-400', 'text-yellow-400');
+            document.getElementById('eop_status').classList.add('text-green-400');
           }
         }
       }
     }
+
     function updateOffsetDisplay() {
       const localSec = localOffset / 1000;
       const dut1Sec = window.bpmDUT1 / 1000;
@@ -1112,6 +1168,8 @@
       document.getElementById('dut1_val').textContent = (dut1Sec > 0 ? '+' : '') + dut1Sec.toFixed(3);
       saveSettings();
     }
+
+    // NTSC and IERS parsers (unchanged)
     function parseNtscEop(content) {
       const lines = content.split('\n');
       const eopMap = new Map();
@@ -1119,10 +1177,8 @@
         const trimmed = line.trim();
         if (!trimmed || trimmed.startsWith('#')) continue;
         const parts = trimmed.split(/\s+/);
-        if (parts.length != 16) continue;
-        const year = parseInt(parts[0]);
-        const month = parseInt(parts[1]);
-        const day = parseInt(parts[2]);
+        if (parts.length !== 16) continue;
+        const year = parseInt(parts[0]), month = parseInt(parts[1]), day = parseInt(parts[2]);
         const ut1utc = parseFloat(parts[6]);
         if (!isNaN(year) && !isNaN(month) && !isNaN(day) && !isNaN(ut1utc)) {
           const key = `${year.toString().padStart(4, '0')}${month.toString().padStart(2, '0')}${day.toString().padStart(2, '0')}`;
@@ -1131,13 +1187,11 @@
       }
       return eopMap;
     }
-    // Parse IERS Bulletin A format (skip header, locate data lines)
     function parseIersBulletinA(content) {
       const lines = content.split('\n');
       const eopMap = new Map();
       let inData = false, inDataPredict = false;
       for (const line of lines) {
-        // Look for header line that indicates start of data
         if (line.includes('MJD') && line.includes('UT1-UTC')) {
           inData = true;
           inDataPredict = !line.includes('error') && line.includes('UT1-UTC(sec)');
@@ -1146,20 +1200,19 @@
         if (!inData || !inDataPredict) continue;
         const trimmed = line.trim();
         if (trimmed.length === 0) continue;
-        // Data lines are space-separated: year month day MJD x y UT1-UTC
         const parts = trimmed.split(/\s+/);
-        if (parts.length != (inDataPredict ? 7 : 10)) continue;
-        const year = parseInt(parts[0]);
-        const month = parseInt(parts[1]);
-        const day = parseInt(parts[2]);
+        if (parts.length !== (inDataPredict ? 7 : 10)) continue;
+        const year = parseInt(parts[0]), month = parseInt(parts[1]), day = parseInt(parts[2]);
         const ut1utc = parseFloat(parts[6]);
         if (!isNaN(year) && !isNaN(month) && !isNaN(day) && !isNaN(ut1utc)) {
           const key = `${year.toString().padStart(4, '0')}${month.toString().padStart(2, '0')}${day.toString().padStart(2, '0')}`;
-          eopMap.set(key, ut1utc); // store in seconds (will be multiplied by 1000 later)
+          eopMap.set(key, ut1utc);
         }
       }
       return eopMap;
     }
+
+    // Auto sync (unchanged)
     async function autoSyncTime() {
       const syncBtn = document.getElementById('sync_btn');
       const syncError = document.getElementById('sync_error');
@@ -1167,27 +1220,23 @@
       syncBtn.disabled = true;
       syncBtn.textContent = 'SYNCING...';
       try {
-        const requestTime1 = Date.now();
-        const res1 = await fetch('https://gettimeapi.dev/v1/time?timezone=UTC');
-        const responseTime1 = Date.now();
-        await new Promise((resolve) => setTimeout(() => resolve(), Math.random() * 1000));
-        const requestTime2 = Date.now();
-        const res2 = await fetch('https://gettimeapi.dev/v1/time?timezone=UTC');
-        const responseTime2 = Date.now();
-        if (!res1.ok || !res2.ok) throw new Error('API request failed');
-        const data1 = await res1.json();
-        const data2 = await res2.json();
-        const serverTime1 = new Date(`${data1.date}T${data1.time}Z`).getTime();
-        const serverTime2 = new Date(`${data2.date}T${data2.time}Z`).getTime();
-        const latency1 = responseTime1 - requestTime1;
-        const latency2 = responseTime2 - requestTime2;
-        const timeDiff1 = requestTime1 - serverTime1 + Math.round(latency1 / 2);
-        const timeDiff2 = requestTime2 - serverTime2 + Math.round(latency2 / 2);
-        localOffset = -(latency1 < latency2 ? timeDiff1 : timeDiff2);
+        const t1 = Date.now();
+        const r1 = await fetch('https://gettimeapi.dev/v1/time?timezone=UTC');
+        const rt1 = Date.now();
+        await new Promise(r => setTimeout(r, Math.random() * 1000));
+        const t2 = Date.now();
+        const r2 = await fetch('https://gettimeapi.dev/v1/time?timezone=UTC');
+        const rt2 = Date.now();
+        if (!r1.ok || !r2.ok) throw new Error('API failed');
+        const d1 = await r1.json(), d2 = await r2.json();
+        const s1 = new Date(`${d1.date}T${d1.time}Z`).getTime(), s2 = new Date(`${d2.date}T${d2.time}Z`).getTime();
+        const lat1 = rt1 - t1, lat2 = rt2 - t2;
+        const diff1 = t1 - s1 + Math.round(lat1 / 2), diff2 = t2 - s2 + Math.round(lat2 / 2);
+        localOffset = -(lat1 < lat2 ? diff1 : diff2);
         updateOffsetDisplay();
-        const errorMs = (latency1 < latency2 ? latency1 : latency2) / 2;
-        const syncTime = new Date(latency1 < latency2 ? serverTime1 : serverTime2);
-        syncError.innerHTML = `±${(errorMs / 1000).toFixed(3)}s via <a href="https://gettimeapi.dev" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300">gettimeapi.dev</a> @ ${String(syncTime.getUTCFullYear()).padStart(4, '0')}${String(syncTime.getUTCMonth() + 1).padStart(2, '0')}${String(syncTime.getUTCDate()).padStart(2, '0')}T${String(syncTime.getUTCHours()).padStart(2, '0')}${String(syncTime.getUTCMinutes()).padStart(2, '0')}${String(syncTime.getUTCSeconds()).padStart(2, '0')}Z`;
+        const errorMs = (lat1 < lat2 ? lat1 : lat2) / 2;
+        const syncTime = new Date(lat1 < lat2 ? s1 : s2);
+        syncError.innerHTML = `±${(errorMs / 1000).toFixed(3)}s via <a href="https://gettimeapi.dev" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300">gettimeapi.dev</a> @ ${syncTime.toISOString().replace(/[-:]/g, '').slice(0, 15)}Z`;
         syncBtn.textContent = 'DONE!';
         setTimeout(() => {
           syncBtn.textContent = 'SYNC';
@@ -1200,6 +1249,8 @@
         syncBtn.disabled = false;
       }
     }
+
+    // Start/Stop
     function start() {
       try {
         audioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -1214,9 +1265,7 @@
         updateTimer = setDriftlessInterval(updateAudio, 1);
         document.getElementById('start_btn').classList.add('hidden');
         document.getElementById('stop_btn').classList.remove('hidden');
-        console.log('Simulator started successfully');
       } catch (e) {
-        console.error('Start failed:', e);
         alert('Start failed: ' + e.message);
         document.getElementById('start_btn').classList.remove('hidden');
         document.getElementById('stop_btn').classList.add('hidden');
@@ -1235,6 +1284,8 @@
       document.getElementById('start_btn').classList.remove('hidden');
       document.getElementById('stop_btn').classList.add('hidden');
     }
+
+    // DOMContentLoaded
     document.addEventListener('DOMContentLoaded', function () {
       loadSettings();
       if (navigator.mediaSession) {
@@ -1249,6 +1300,8 @@
         } catch (e) { }
       }
       setDriftlessInterval(updateTimeDisplay, 10);
+
+      // Event listeners
       document.getElementById('open_help').addEventListener('click', function () {
         document.getElementById('help_modal').classList.remove('hidden');
       });
@@ -1280,8 +1333,13 @@
         updateTimeDisplay();
         saveSettings();
       });
-      document.getElementById('play_low_freq').addEventListener('change', function () {
+      // update lowFreqVolume slider UI
+      const lowFreqSlider = document.getElementById('low_freq_volume');
+      lowFreqSlider.value = lowFreqVolume * 100;
+      lowFreqSlider.addEventListener('input', function () {
+        lowFreqVolume = this.value / 100;
         saveSettings();
+        updateTimeDisplay(); // refresh period name
       });
       document.getElementById('volume_slider').addEventListener('input', function () {
         volume = parseFloat(this.value);
@@ -1289,20 +1347,13 @@
         if (voiceGain) voiceGain.gain.value = volume;
         saveSettings();
       });
-      document.getElementById('toggle_settings').addEventListener('click', function () {
-        const panel = document.getElementById('settings_panel');
-        if (panel.classList.contains('hidden')) {
-          panel.classList.remove('hidden');
-        } else {
-          panel.classList.add('hidden');
-        }
-        saveSettings();
-      });
-      document.getElementById('sync_btn').addEventListener('click', autoSyncTime);
+      document.getElementById('toggle_settings').onclick = () => { document.getElementById('settings_panel').classList.toggle('hidden'); saveSettings(); };
+      document.getElementById('sync_btn').onclick = autoSyncTime;
+
+      // offset buttons
       document.querySelectorAll('[data-offset]').forEach(btn => {
         btn.addEventListener('click', function () {
-          const type = this.dataset.offset;
-          const deltaStr = this.dataset.delta;
+          const type = this.dataset.offset, deltaStr = this.dataset.delta;
           if (deltaStr === 'reset') {
             if (type === 'local') {
               localOffset = 0;
@@ -1313,7 +1364,7 @@
               window.bpmDUT1 = 0;
               const eopStatus = document.getElementById('eop_status');
               eopStatus.textContent = '';
-              eopStatus.classList.remove('text-green-400', 'text-red-400');
+              eopStatus.classList.remove('text-green-400', 'text-red-400', 'text-yellow-400');
               eopStatus.classList.add('text-gray-500');
               document.getElementById('eop_file').value = '';
               window.isAutoDUT1 = false;
@@ -1342,6 +1393,8 @@
           updateOffsetDisplay();
         });
       });
+
+      // EOP file upload (supports both NTSC and IERS)
       document.getElementById('eop_file').addEventListener('change', function (e) {
         const file = e.target.files[0];
         if (!file) return;
@@ -1366,8 +1419,8 @@
             }
             if (!eopMap || eopMap.size === 0) {
               document.getElementById('eop_status').textContent = 'Err: Unrecognized format';
-              document.getElementById('eop_status').classList.remove('text-green-400');
-              document.getElementById('eop_status').classList.remove('text-yellow-400');
+              document.getElementById('eop_status').classList.remove('text-green-400', 'text-yellow-400');
+              document.getElementById('eop_status').classList.remove();
               document.getElementById('eop_status').classList.add('text-red-400');
               return;
             }
@@ -1387,20 +1440,17 @@
               window.bpmDUT1 = eopDataMs.get(currentKey);
               updateOffsetDisplay();
               document.getElementById('eop_status').textContent = `${sourceType} @ ${currentKey}`;
-              document.getElementById('eop_status').classList.remove('text-red-400');
-              document.getElementById('eop_status').classList.remove('text-yellow-400');
+              document.getElementById('eop_status').classList.remove('text-red-400', 'text-yellow-400');
               document.getElementById('eop_status').classList.add('text-green-400');
             } else {
               document.getElementById('eop_status').textContent = `${sourceType}: no data for today`;
-              document.getElementById('eop_status').classList.remove('text-red-400');
-              document.getElementById('eop_status').classList.remove('text-green-400');
+              document.getElementById('eop_status').classList.remove('text-green-400', 'text-red-400');
               document.getElementById('eop_status').classList.add('text-yellow-400');
             }
           } catch (err) {
             console.error('Parse error:', err);
             document.getElementById('eop_status').textContent = 'Err';
-            document.getElementById('eop_status').classList.remove('text-green-400');
-            document.getElementById('eop_status').classList.remove('text-yellow-400');
+            document.getElementById('eop_status').classList.remove('text-green-400', 'text-yellow-400');
             document.getElementById('eop_status').classList.add('text-red-400');
           }
         };

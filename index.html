@@ -947,8 +947,8 @@
       const now = audioContext.currentTime;
       const fadeTime = 0.001;
       gain.gain.setValueAtTime(0, now);
-      gain.gain.linearRampToValueAtTime(0.7 * volume, now + fadeTime);
-      gain.gain.setValueAtTime(0.7 * volume, now + durationMs / 1000 - fadeTime);
+      gain.gain.linearRampToValueAtTime(0.56 * volume, now + fadeTime);
+      gain.gain.setValueAtTime(0.56 * volume, now + durationMs / 1000 - fadeTime);
       gain.gain.linearRampToValueAtTime(0, now + durationMs / 1000);
       osc.connect(gain);
       gain.connect(audioContext.destination);
@@ -971,7 +971,7 @@
       osc.frequency.value = 125;
       const now = audioContext.currentTime;
       const fadeTime = 0.001;
-      const amplitude = 0.5 * volume * lowFreqVolume;
+      const amplitude = 0.35 * volume * lowFreqVolume;
       gain.gain.setValueAtTime(0, now);
       gain.gain.linearRampToValueAtTime(amplitude, now + fadeTime);
       gain.gain.setValueAtTime(amplitude, now + durationMs / 1000 - fadeTime);

@@ -21,7 +21,7 @@
   </script>
 </head>
 
-<body class="bg-dark-900 text-white min-h-screen p-4 sm:p-8 flex flex-col justify-center">
+<body class="bg-dark-900 text-white min-h-screen min-w-[320px] p-4 sm:p-8 flex flex-col justify-center">
   <!-- Help Modal -->
   <div id="help_modal" class="fixed inset-0 bg-black/70 z-50 hidden flex items-center justify-center p-4">
     <div class="bg-dark-800 rounded-xl max-w-2xl w-full max-h-[80vh] overflow-hidden flex flex-col">
@@ -45,27 +45,27 @@
             This is a web-based simulator that perfectly replicates the audio signal format of the <strong>BPM Shortwave
               Time Station</strong> operated by the National Time Service Center of China.
           </p>
-  
+
           <h3 class="text-lg font-bold mt-4">How to use</h3>
           <p class="text-gray-300">
-            Click the <button class="w-6 h-6 bg-green-600 text-white font-mono rounded transition text-center"
+            Click the <button class="w-6 h-6 bg-gray-700 text-white font-mono rounded transition text-center"
               disabled="true">&minus;</button> button. When the button changes to <button
               class="w-6 h-6 bg-red-600 text-white font-mono rounded transition text-center"
               disabled="true">&acd;</button>, you will hear the simulated BPM signal.
           </p>
-  
+
           <div class="bg-yellow-900/30 border border-yellow-600/50 p-2 rounded text-yellow-200 text-xs">
             <strong>Note:</strong> When this page runs in the background (e.g., another browser tab is active), browsers
             may reduce timer precision and throttle audio processing to save resources. This can cause audible delay or
             glitches. <strong>Please keep this page in the foreground</strong> for the best experience.
           </div>
-  
+
           <div class="bg-dark-700/30 p-3 rounded-lg">
             <h4 class="font-bold text-blue-400">What you hear</h4>
             <p class="text-gray-300 text-sm mt-1">The BPM signal repeats every half hour. The chart and table below give
               you a quick overview.</p>
             <!-- SVG pie chart -->
-            <div class="flex justify-center my-2">
+            <div class="flex justify-center my-2 font-mono">
               <svg width="280" height="280" viewBox="0 0 280 280">
                 <path d="M 140 10 A 130 130 0 0 1 252.58 75 L 140 140 Z" fill="#4a6fe3" />
                 <path d="M 270 140 A 130 130 0 0 1 205 252.58 L 140 140 Z" fill="#4a6fe3" />
@@ -77,18 +77,76 @@
                 <path d="M 75 27.42 A 130 130 0 0 1 126.415 10.715 L 140 140 Z" fill="#f57c00" />
                 <path d="M 153.585 269.285 A 130 130 0 0 1 140 270 L 140 140 Z" fill="#4caf50" />
                 <path d="M 126.415 10.715 A 130 130 0 0 1 140 10 L 140 140 Z" fill="#4caf50" />
-                <circle cx="140" cy="140" r="70" fill="white" />
+                <circle cx="140" cy="140" r="70" fill="white" stroke="#d32f2f" stroke-width="1" />
                 <text x="140" y="145" text-anchor="middle" font-size="18" font-weight="bold" fill="#d32f2f">BPM</text>
-                <text x="140" y="25" text-anchor="middle" font-size="10" fill="white">00</text>
-                <text x="241" y="85" text-anchor="middle" font-size="10" fill="white">10</text>
-                <text x="258" y="143" text-anchor="middle" font-size="10" fill="white">15</text>
-                <text x="198" y="243" text-anchor="middle" font-size="10" fill="white">25</text>
-                <text x="152" y="253" text-anchor="middle" font-size="10" fill="white">29</text>
-                <text x="140" y="262" text-anchor="middle" font-size="10" fill="white">30</text>
-                <text x="39" y="201" text-anchor="middle" font-size="10" fill="white">40</text>
-                <text x="22" y="143" text-anchor="middle" font-size="10" fill="white">45</text>
-                <text x="82" y="42" text-anchor="middle" font-size="10" fill="white">55</text>
-                <text x="128" y="34" text-anchor="middle" font-size="10" fill="white">59</text>
+                <g stroke="#d32f2f" stroke-width="1">
+                  <line x1="140" y1="70" x2="140" y2="78" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(6, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(12, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(18, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(24, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="78" transform="rotate(30, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(36, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(42, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(48, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(54, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="78" transform="rotate(60, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(66, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(72, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(78, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(84, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="78" transform="rotate(90, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(96, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(102, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(108, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(114, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="78" transform="rotate(120, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(126, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(132, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(138, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(144, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="78" transform="rotate(150, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(156, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(162, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(168, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(174, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="78" transform="rotate(180, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(186, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(192, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(198, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(204, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="78" transform="rotate(210, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(216, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(222, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(228, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(234, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="78" transform="rotate(240, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(246, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(252, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(258, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(264, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="78" transform="rotate(270, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(276, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(282, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(288, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(294, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="78" transform="rotate(300, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(306, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(312, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(318, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(324, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="78" transform="rotate(330, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(336, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(342, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(348, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(354, 140, 140)" />
+                </g>
+                <text x="140" y="92" text-anchor="middle" font-size="14" fill="#d32f2f">00</text>
+                <text x="181" y="117" text-anchor="middle" font-size="14" fill="#d32f2f">10</text>
+                <text x="181" y="171" text-anchor="middle" font-size="14" fill="#d32f2f">20</text>
+                <text x="140" y="196" text-anchor="middle" font-size="14" fill="#d32f2f">30</text>
+                <text x="99" y="171" text-anchor="middle" font-size="14" fill="#d32f2f">40</text>
+                <text x="99" y="117" text-anchor="middle" font-size="14" fill="#d32f2f">50</text>
               </svg>
             </div>
             <!-- Legend -->
@@ -147,7 +205,7 @@
               <p>For the exact time code encoding, please refer to the reference below.</p>
             </div>
           </div>
-  
+
           <!-- Control options (with UI indicators) -->
           <div class="bg-dark-700/30 p-3 rounded-lg">
             <h4 class="font-bold text-blue-400">Control options &amp; UI indicators</h4>
@@ -158,7 +216,7 @@
               <li><strong>TimeCode<sup>[1]</sup> volume slider</strong> – Adjusts the loudness of the 125 Hz time code
                 subcarrier (the low humming sound between second ticks). Slide it to zero to hear only the 1 kHz second
                 pulses; raise it to mix in the subcarrier at the desired level. The current volume percentage appears
-                next to the signal type indicator (e.g., “UTC+80%TimeCode”).</li>
+                next to <span class="font-bold">Current signal type</span> indicator (e.g., “UTC+TimeCode(80%)”).</li>
               <li><strong>&#13235;</strong> – Show or hide milliseconds on the time display. If the rapidly changing
                 digits feel distracting, just uncheck this to keep the display clean at second resolution.</li>
             </ul>
@@ -186,7 +244,7 @@
             It broadcasts precise time signals on multiple shortwave frequencies, allowing anyone with a
             shortwave radio to sync their clocks to national standard time for free.
           </p>
-  
+
           <!-- Frequency Schedule Table -->
           <div class="overflow-x-auto">
             <table class="w-full text-sm text-left text-gray-300 border border-dark-700 rounded-lg">
@@ -221,7 +279,7 @@
               </tbody>
             </table>
           </div>
-  
+
           <p class="text-yellow-400 text-sm">
             Please note that this is only a simulation and demonstration tool, it cannot replace the real BPM shortwave
             time service broadcast. All simulation results are for reference only.
@@ -274,7 +332,7 @@
               Service (IERS) adjusts UTC by inserting leap seconds, keeping the difference within 0.9 seconds. The EOP
               (Earth Orientation Parameters) file records the latest observed value of this difference. With it, we can
               generate accurate UT1 time service signals, and also embed the correct UT1 correction value in the time
-              code.<br> You can obtain the latest DUT1 value in two ways:
+              code.<br> You can obtain the latest DUT1 (UTC-UT1) value in two ways:
             <ul class="list-disc list-inside ml-4 text-sm space-y-1 mt-1">
               <li><strong>From NTSC:</strong> Click the <strong>NTSC_EOP_<i>yyyyMMdd</i>.txt</strong> link on the
                 adjustment panel – this will take you to the UT1 Measurement and Service Center of NTSC. Look for the
@@ -290,7 +348,7 @@
             announcement function in the time code, nor can it simulate the special signals when a leap second occurs.
             </p>
           </div>
-  
+
           <!-- Copyright & Privacy Statement -->
           <h3 class="text-lg font-bold mt-4">Copyright & Privacy Statement</h3>
           <div class="space-y-2 text-gray-400 text-sm">
@@ -299,39 +357,40 @@
             <p>Except for syncing internet time, this page will not perform any other network activities. All your
               settings are saved locally.</p>
           </div>
-  
+
           <!-- Reference -->
           <h3 class="text-lg font-bold mt-4">Reference</h3>
           <div class="text-gray-400 text-sm">
             <p>[1]蒙智谋.BPM短波时码授时发播技术方案[J].时间频率学报,2014,37(03):145-150.DOI:10.13875/j.issn.1674-0637.2014-03-0145-06.</p>
           </div>
         </div>
-  
+
         <!-- Chinese Content -->
         <div id="help_zh" class="space-y-4 hidden">
           <h2 class="text-xl font-bold">这是什么？</h2>
           <p class="text-gray-300">
             这是一个网页版的模拟器，完美复现了中国科学院国家授时中心运营的<strong>BPM短波授时台</strong>的信号格式。
           </p>
-  
+
           <h3 class="text-lg font-bold mt-4">如何使用</h3>
           <p class="text-gray-300">
-            点击<button class="w-6 h-6 bg-green-600 text-white font-mono rounded transition text-center"
+            点击<button class="w-6 h-6 bg-gray-700 text-white font-mono rounded transition text-center"
               disabled="true">&minus;</button>按钮，当按钮变成<button
               class="w-6 h-6 bg-red-600 text-white font-mono rounded transition text-center"
               disabled="true">&acd;</button>的时候，你就能听到模拟的BPM信号了。
           </p>
-  
+
           <div class="bg-yellow-900/30 border border-yellow-600/50 p-2 rounded text-yellow-200 text-xs">
             <strong>注意：</strong>
             当本页面在后台运行时（例如打开了其他浏览器标签页），浏览器为了节省资源会降低定时器精度并限制音频处理，可能导致声音延迟或卡顿。<strong>请保持本页面在前台运行</strong>以获得最佳体验。
           </div>
-  
+
           <div class="bg-dark-700/30 p-3 rounded-lg">
             <h4 class="font-bold text-blue-400">你听到的是什么？</h4>
             <p class="text-gray-300 text-sm mt-1">BPM信号每半小时重复一次。下面的图表和表格可以帮你快速了解信号的全貌。</p>
             <!-- SVG饼图 -->
-            <div class="flex justify-center my-2"> <svg width="280" height="280" viewBox="0 0 280 280">
+            <div class="flex justify-center my-2 font-mono">
+              <svg width="280" height="280" viewBox="0 0 280 280">
                 <path d="M 140 10 A 130 130 0 0 1 252.58 75 L 140 140 Z" fill="#4a6fe3" />
                 <path d="M 270 140 A 130 130 0 0 1 205 252.58 L 140 140 Z" fill="#4a6fe3" />
                 <path d="M 140 270 A 130 130 0 0 1 27.42 205 L 140 140 Z" fill="#4a6fe3" />
@@ -342,18 +401,78 @@
                 <path d="M 75 27.42 A 130 130 0 0 1 126.415 10.715 L 140 140 Z" fill="#f57c00" />
                 <path d="M 153.585 269.285 A 130 130 0 0 1 140 270 L 140 140 Z" fill="#4caf50" />
                 <path d="M 126.415 10.715 A 130 130 0 0 1 140 10 L 140 140 Z" fill="#4caf50" />
-                <circle cx="140" cy="140" r="70" fill="white" /> <text x="140" y="145" text-anchor="middle"
-                  font-size="18" font-weight="bold" fill="#d32f2f">BPM</text> <text x="140" y="25" text-anchor="middle"
-                  font-size="10" fill="white">00</text> <text x="241" y="85" text-anchor="middle" font-size="10"
-                  fill="white">10</text> <text x="258" y="143" text-anchor="middle" font-size="10"
-                  fill="white">15</text> <text x="198" y="243" text-anchor="middle" font-size="10"
-                  fill="white">25</text> <text x="152" y="253" text-anchor="middle" font-size="10"
-                  fill="white">29</text> <text x="140" y="262" text-anchor="middle" font-size="10"
-                  fill="white">30</text> <text x="39" y="201" text-anchor="middle" font-size="10" fill="white">40</text>
-                <text x="22" y="143" text-anchor="middle" font-size="10" fill="white">45</text> <text x="82" y="42"
-                  text-anchor="middle" font-size="10" fill="white">55</text> <text x="128" y="34" text-anchor="middle"
-                  font-size="10" fill="white">59</text>
-              </svg> </div>
+                <circle cx="140" cy="140" r="70" fill="white" stroke="#d32f2f" stroke-width="1" />
+                <text x="140" y="145" text-anchor="middle" font-size="18" font-weight="bold" fill="#d32f2f">BPM</text>
+                <g stroke="#d32f2f" stroke-width="1">
+                  <line x1="140" y1="70" x2="140" y2="78" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(6, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(12, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(18, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(24, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="78" transform="rotate(30, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(36, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(42, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(48, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(54, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="78" transform="rotate(60, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(66, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(72, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(78, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(84, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="78" transform="rotate(90, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(96, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(102, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(108, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(114, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="78" transform="rotate(120, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(126, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(132, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(138, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(144, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="78" transform="rotate(150, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(156, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(162, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(168, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(174, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="78" transform="rotate(180, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(186, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(192, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(198, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(204, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="78" transform="rotate(210, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(216, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(222, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(228, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(234, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="78" transform="rotate(240, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(246, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(252, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(258, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(264, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="78" transform="rotate(270, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(276, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(282, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(288, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(294, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="78" transform="rotate(300, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(306, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(312, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(318, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(324, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="78" transform="rotate(330, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(336, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(342, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(348, 140, 140)" />
+                  <line x1="140" y1="70" x2="140" y2="74" transform="rotate(354, 140, 140)" />
+                </g>
+                <text x="140" y="92" text-anchor="middle" font-size="14" fill="#d32f2f">00</text>
+                <text x="181" y="117" text-anchor="middle" font-size="14" fill="#d32f2f">10</text>
+                <text x="181" y="171" text-anchor="middle" font-size="14" fill="#d32f2f">20</text>
+                <text x="140" y="196" text-anchor="middle" font-size="14" fill="#d32f2f">30</text>
+                <text x="99" y="171" text-anchor="middle" font-size="14" fill="#d32f2f">40</text>
+                <text x="99" y="117" text-anchor="middle" font-size="14" fill="#d32f2f">50</text>
+              </svg>
+            </div>
             <!-- 图例 -->
             <div class="flex flex-wrap justify-center gap-4 text-sm text-gray-300 mb-3">
               <div class="flex items-center gap-2">
@@ -381,7 +500,8 @@
                   <tr>
                     <td class="py-1 pr-2">00–10, 30–40</td>
                     <td class="py-1">UTC+时码：1kHz秒脉冲（普通秒10ms，分钟起始300ms），脉冲间隙发送125Hz副载波时码。时码副载波的音量可通过播放按钮下方的小滑块（标注
-                      <strong>TimeCode<sup>[1]</sup></strong>）独立调节。</td>
+                      <strong>TimeCode<sup>[1]</sup></strong>）独立调节。
+                    </td>
                   </tr>
                   <tr>
                     <td class="py-1 pr-2">10–15, 40–45</td>
@@ -407,14 +527,15 @@
               <p>时码的具体编码规则请参见参考文献。</p>
             </div>
           </div>
-  
+
           <!-- 控制选项 -->
           <div class="bg-dark-700/30 p-3 rounded-lg">
             <h4 class="font-bold text-blue-400">控制选项与界面指示</h4>
             <p class="text-gray-300 text-sm mt-1">在播放按钮下方，你会看到以下控件：</p>
             <ul class="list-disc list-inside text-gray-300 text-sm space-y-2">
               <li><strong>TimeCode<sup>[1]</sup> 音量滑块</strong> –
-                用于调节125Hz时码副载波（秒脉冲之间低沉的“嗡嗡”声）的音量。滑到最左侧（0%）时只听到秒脉冲；调大则可以混合进时码副载波。当前音量百分比会显示在信号类型指示器旁边（例如 “UTC+80%TimeCode”）。</li>
+                用于调节125Hz时码副载波（秒脉冲之间低沉的“嗡嗡”声）的音量。滑到最左侧（0%）时只听到秒脉冲；调大则可以混合进时码副载波。当前音量百分比会显示在<span
+                  class="font-bold">当前信号类型</span>指示器旁边（例如 “UTC+TimeCode(80%)”）。</li>
               <li><strong>&#13235;</strong> – 在时间显示中显示或隐藏毫秒。如果毫秒数字跳得太快让你觉得眼花，可以取消勾选它，只保留秒级显示。</li>
             </ul>
             <p class="text-gray-300 text-sm mt-2">此外，页面还显示：</p>
@@ -473,7 +594,8 @@
               说实话，我自己也从未真正听到过真实的BPM时码信号——或者说，它几乎总是被WWV/H的时码副载波淹没了。这个模拟器完全是照着已发表的论文（参考文献[1]）把时码的编码和发播规则“翻译”成声音的。做它的初衷也很简单——就是想<strong>亲耳听听BPM的时码到底长什么样</strong>，也就是秒脉冲之间那125Hz的低频“嗡嗡”声，顺便了解一下它的工作原理。<br><br>
               不过可以放心，只要你把下面几个参数设置正确，浏览器里播出来的声音和真实的BPM广播就是完全一样的——至少听起来是。如果你真能收听到5MHz上的时码副载波，非常期待你能帮我验证一下这个模拟器的准确性。欢迎<a
                 href="https://github.com/absummmmer/bpm-simulation/issues" target="_blank" rel="noopener noreferrer"
-                class="text-blue-400 hover:text-blue-300">来这里</a>随时交流！ </div>
+                class="text-blue-400 hover:text-blue-300">来这里</a>随时交流！
+            </div>
             <p> <strong class="text-blue-400">本地时钟偏移<span
                   class="text-white">&#9201;</span>：</strong>UTC信号的准确性取决于你的设备时钟。一般而言，你使用设备的时钟频率与现实世界的频率并不完全一致，这会导致设备时钟长时间运行后与真实时间产生偏移。联网设备一般会使用NTP协议与互联网进行时间同步消除这个偏移，但这个同步动作并不是实时的，这仍然会导致你设备的时钟和真实时间存在随机偏移。你可以通过调整该偏移，或者点击<button
                 class="text-sm px-1 bg-blue-600 text-white rounded transition"
@@ -483,13 +605,11 @@
             <p> <strong
                 class="text-gray-400">延迟补偿(ms)：</strong>该参数用于抵消音频链路的固定延迟。在你完成本地时钟与互联网时间的稳定同步后，模拟器的声音输出仍可能存在一个稳定的滞后，这一般由浏览器音频处理、系统渲染链路等因素共同引入。<span
                 class="text-pink-400">（第二步：调整此值，直到声音与真实BPM信号对齐。）</span><br>
-            <div class="text-gray-400 text-xs space-y-1">
               只要浏览器和操作系统的音频输出设置不变，该值通常不需要频繁调整。如果音频输出设备或其配置发生变化（例如改用蓝牙耳机、更改采样率或缓冲区大小等），延迟可能会改变，需要重新校准。三个参数都调整到位后，如果日后发现信号再次偏移，通常只需重新同步本地时钟即可恢复对齐，无需改动延迟补偿。
-            </div>
             </p>
             <p> <strong
                 class="text-green-400">DUT1：</strong>UT1改正值。我们日常使用的UTC时间是原子钟生成的均匀时间，而UT1是基于地球自转的天文时间，由于地球自转速度并不均匀，两者之间会存在微小的差异。为了避免这个差异持续扩大，国际地球自转服务（IERS）会通过插入闰秒的方式调整UTC，将两者的差值控制在0.9秒以内。EOP（地球定向参数）文件就记录了这个差异的最新观测值，通过它我们可以生成准确的UT1授时信号，同时也能在时码中嵌入正确的UT1改正值。<br>
-              你可以通过以下两种方式获取最新的DUT1值：
+              你可以通过以下两种方式获取最新的DUT1（UTC-UT1）值：
             <ul class="list-disc list-inside ml-4 text-sm space-y-1 mt-1">
               <li><strong>来自国家授时中心（NTSC）：</strong> 点击调整面板上的 <strong>NTSC_EOP_<i>yyyyMMdd</i>.txt</strong>
                 链接，会跳转到NTSC的UT1测量与服务中心。在页面上找到符合页面显示格式的最新发布文件，下载后使用文件选择器上传，页面会自动填充DUT1值。</li>
@@ -525,7 +645,7 @@
       <!-- Start/Stop button -->
       <div class="flex justify-center gap-4 mb-4">
         <button id="start_btn"
-          class="w-28 px-0 py-4 bg-green-600 text-white font-mono rounded-lg hover:bg-green-500 transition text-7xl text-center">
+          class="w-28 px-0 py-4 bg-gray-700 text-white font-mono rounded-lg hover:bg-gray-600 transition text-7xl text-center">
           &minus;
         </button>
         <button id="stop_btn"
@@ -549,11 +669,11 @@
         </label>
         <!-- Settings and Help buttons -->
         <button id="toggle_settings"
-          class="w-8 h-8 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-lg flex items-center justify-center">
+          class="px-2 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-lg flex items-center justify-center">
           &#128295;
         </button>
         <button id="open_help"
-          class="w-8 h-8 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-lg flex items-center justify-center">
+          class="px-2 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-lg flex items-center justify-center">
           &#10068;
         </button>
       </div>
@@ -563,7 +683,7 @@
         <span class="text-gray-400 text-sm text-left w-6">&#128264;</span>
         <input type="range" id="volume_slider" min="0" max="1" step="0.01" value="0.5"
           class="w-48 sm:w-64 h-2 bg-dark-700 rounded-lg appearance-none cursor-pointer accent-blue-500">
-        <span id="volume_val" class="text-gray-400 text-sm w-8 text-right font-mono"> 50%</span>
+        <span id="volume_val" class="text-gray-400 text-sm w-9 text-right font-mono"> 50%</span>
       </div>
     </div>
 
@@ -596,36 +716,36 @@
         </div>
         <div class="grid grid-cols-3 gap-2">
           <button data-offset="local" data-delta="100"
-            class="text-blue-400 px-3 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono">+0.1</button>
+            class="text-blue-400 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono">+0.1</button>
           <button data-offset="local" data-delta="10"
-            class="text-blue-400 px-3 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono">+0.01</button>
+            class="text-blue-400 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono">+0.01</button>
           <button data-offset="local" data-delta="1"
-            class="text-blue-400 px-3 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono">+0.001</button>
+            class="text-blue-400 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono">+0.001</button>
           <button data-offset="local" data-delta="-100"
-            class="text-blue-400 px-3 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono">-0.1</button>
+            class="text-blue-400 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono">-0.1</button>
           <button data-offset="local" data-delta="-10"
-            class="text-blue-400 px-3 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono">-0.01</button>
+            class="text-blue-400 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono">-0.01</button>
           <button data-offset="local" data-delta="-1"
-            class="text-blue-400 px-3 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono">-0.001</button>
+            class="text-blue-400 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono">-0.001</button>
         </div>
         <div class="grid grid-cols-5 gap-2 mt-2">
           <button data-offset="comp" data-delta="10"
-            class="text-gray-400 px-2 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono text-sm">+10ms</button>
+            class="text-gray-400 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono text-sm">+10ms</button>
           <button data-offset="comp" data-delta="1"
-            class="text-gray-400 px-2 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono text-sm">+1ms</button>
+            class="text-gray-400 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono text-sm">+1ms</button>
           <button data-offset="comp" data-delta="reset"
-            class="text-gray-400 px-2 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono text-sm">&#8634;</button>
+            class="text-gray-400 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono text-sm">&#8634;</button>
           <button data-offset="comp" data-delta="-1"
-            class="text-gray-400 px-2 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono text-sm">-1ms</button>
+            class="text-gray-400 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono text-sm">-1ms</button>
           <button data-offset="comp" data-delta="-10"
-            class="text-gray-400 px-2 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono text-sm">-10ms</button>
+            class="text-gray-400 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono text-sm">-10ms</button>
         </div>
       </div>
       <!-- DUT1 offset -->
       <div>
         <div class="flex items-start gap-3 flex-wrap mb-3">
-          <div class="flex items-center gap-2">
-            <span class="text-lg font-bold">DUT1</span>
+          <div class="flex items-center text-lg gap-2">
+            <span class="font-bold">DUT1</span>
             <span id="dut1_val" class="text-green-400 font-mono">+0.000</span>
             <button data-offset="dut1" data-delta="reset"
               class="text-sm px-2 py-1 bg-dark-700 rounded hover:bg-dark-600 transition text-green-400 text-center font-mono">&#8634;</button>
@@ -649,17 +769,17 @@
         </div>
         <div class="grid grid-cols-3 gap-2">
           <button data-offset="dut1" data-delta="100"
-            class="text-green-400 px-3 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono">+0.1</button>
+            class="text-green-400 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono">+0.1</button>
           <button data-offset="dut1" data-delta="10"
-            class="text-green-400 px-3 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono">+0.01</button>
+            class="text-green-400 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono">+0.01</button>
           <button data-offset="dut1" data-delta="1"
-            class="text-green-400 px-3 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono">+0.001</button>
+            class="text-green-400 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono">+0.001</button>
           <button data-offset="dut1" data-delta="-100"
-            class="text-green-400 px-3 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono">-0.1</button>
+            class="text-green-400 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono">-0.1</button>
           <button data-offset="dut1" data-delta="-10"
-            class="text-green-400 px-3 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono">-0.01</button>
+            class="text-green-400 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono">-0.01</button>
           <button data-offset="dut1" data-delta="-1"
-            class="text-green-400 px-3 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono">-0.001</button>
+            class="text-green-400 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono">-0.001</button>
         </div>
       </div>
     </div>
@@ -1138,10 +1258,10 @@
         const volPercent = Math.round(lowFreqVolume * 100);
         if (volPercent === 0) periodName = 'UTC';
         else if (volPercent === 100) periodName = 'UTC+TimeCode';
-        else periodName = `UTC+${volPercent}%TimeCode`;
+        else periodName = `UTC+TimeCode(${volPercent}%)`;
       } else if (period === 'carrier') periodName = 'Carrier';
       else if (period === 'ut1') periodName = 'UT1';
-      else if (period === 'silent') periodName = 'UT1';
+      else if (period === 'silent') periodName = 'MorseCodeStationID';
       else if (period === 'call') periodName = (second < 40) ? 'MorseCodeStationID' : '标准时间标准频率发播台';
       document.getElementById('current_period').textContent = periodName;
 

@@ -226,7 +226,7 @@
             <ul class="list-disc list-inside text-gray-300 text-sm space-y-1">
               <li><span class="text-purple-400">&#128251;Current signal type</span> – helps you identify the ongoing
                 broadcast period.</li>
-              <li><span class="text-green-400">&#127760;UT1 time</span> – the time corrected by the DUT1 value
+              <li><span class="text-green-400">&#128301;UT1 time</span> – the time corrected by the DUT1 value
                 (astronomical time).</li>
             </ul>
             <p class="text-gray-400 text-xs mt-2">All settings are saved automatically and restored when you revisit the
@@ -288,8 +288,8 @@
           <h3 class="text-lg font-bold mt-4"><button class="w-8 h-8 bg-dark-700 rounded transition"
               disabled="true">&#128295;</button> Settings Guide</h3>
           <div class="space-y-3 text-gray-300">
-            <p> By adjusting the three parameters below, you can make the simulator's output match the real BPM signal
-              as closely as possible – including UTC, time code<strong>*</strong>, UT1, and station ID. </p>
+            <p> By adjusting the settings below, you can make the simulator's output match the real BPM signal as
+              closely as possible – including UTC, time code<strong>*</strong>, UT1, and station ID. </p>
             <div class="bg-dark-800/50 p-2 rounded text-xs text-gray-400 border-blue-500"> <strong>* Author's
                 note:</strong> To be honest, I've never actually heard the real BPM time code signal myself – or rather,
               it was almost always drowned out by the time code subcarrier of WWV/H. This simulator is built strictly
@@ -306,8 +306,8 @@
               aligned with the real world, causing drift over time. Networked devices usually use NTP to sync time, but
               this sync is not real-time, leaving a random offset. You can adjust this offset manually, or click the
               <button class="text-sm px-1 bg-blue-600 text-white rounded transition" disabled="true">SYNC</button>
-              button to sync with internet time automatically. <span class="text-pink-400">(Step 1: SYNC your local
-                clock.)</span><br> This offset only affects this webpage, not your system clock. Affected by network
+              button to sync with internet time automatically. <br>
+              This offset only affects this webpage, not your system clock. Affected by network
               randomness, a single sync cannot always get a sufficiently accurate offset, and the network error will be
               displayed on the page. You can try syncing multiple times until the offset remains stable (only
               single-digit millisecond changes) in a short period with small enough network error, then the offset is
@@ -316,14 +316,20 @@
             <p> <strong class="text-gray-400">Latency Compensation (ms):</strong> This parameter is used to offset the
               fixed delay of the audio processing. After you have stably synchronized your local clock with internet
               time, the simulator's sound output may still have a stable lag, which is usually introduced by factors
-              such as browser audio processing and system rendering pipeline. <span class="text-pink-400">(Step 2:
-                adjust this value until the sound aligns with the real BPM signal.)</span><br>
-              This value remains stable as long as your browser and OS audio
-              output settings do not change. If the audio output device or its configuration changes (e.g., switching to
-              Bluetooth headphones, altering sample rate or buffer size), the delay may shift and you will need to
-              recalibrate this compensation. After all three parameters are properly aligned, if you notice a drift
-              later, simply re‑sync your local clock — it usually restores the alignment without touching latency
-              compensation.
+              such as browser audio processing and system rendering pipeline. <br>
+              This value remains stable as long as your browser and OS audio output settings do not change. If the
+              audio output device or its configuration changes (e.g., switching to Bluetooth headphones, altering
+              sample rate or buffer size), the delay may shift and you will need to recalibrate this compensation.
+              After all three parameters are properly aligned, if you notice a drift later, simply re‑sync your local
+              clock — it usually restores the alignment without touching latency compensation.
+            </p>
+            <p> <strong class="text-yellow-300">UTC Lock <span class="text-white">&#128274;</span>:</strong> When <strong>checked</strong>, the
+              simulator <strong>only outputs UTC + Time Code signals</strong>, ignoring Carrier, UT1, and Station ID
+              periods. The DUT1 adjustment section is hidden and the UT1 time indicator changes to a lock icon <span
+                class="text-yellow-400 font-mono">UTC&#128274;</span>.<br>
+              <span class="text-yellow-400">Note:</span> This mode <strong>overrides the standard BPM broadcast
+                format</strong> – it is provided only for studying the 125 Hz time code subcarrier without
+              interruptions, not for simulating the real‑world signal sequence.
             </p>
             <p> <strong class="text-green-400">DUT1:</strong> UT1 correction value. The UTC time we use daily is a
               uniform time generated by atomic clocks, while UT1 is the astronomical time based on the Earth's rotation.
@@ -342,8 +348,6 @@
                 content as a text file, then upload it using the same file picker. The simulator recognizes both NTSC
                 and IERS formats and will update DUT1 automatically.</li>
             </ul>
-            <span class="text-pink-400">(Step 3: for UT1 alignment, download either file and upload
-              it.)</span><br>
             To prevent this difference from growing too large, the International Earth Rotation and Reference Systems
             Service (IERS) adjusts UTC by inserting leap seconds, keeping the difference within 0.9 seconds.To
             prevent this difference from growing too large, the International Earth Rotation and Reference Systems
@@ -545,7 +549,7 @@
             <p class="text-gray-300 text-sm mt-2">此外，页面还显示：</p>
             <ul class="list-disc list-inside text-gray-300 text-sm space-y-1">
               <li><span class="text-purple-400">&#128251;当前信号类型</span> – 帮助你了解当前发播时段。</li>
-              <li><span class="text-green-400">&#127760;UT1时间</span> – 经DUT1值校正后的时间（天文时间）。</li>
+              <li><span class="text-green-400">&#128301;UT1时间</span> – 经DUT1值校正后的时间（天文时间）。</li>
             </ul>
             <p class="text-gray-400 text-xs mt-2">所有设置都会自动保存，再次访问页面时恢复。</p>
           </div>
@@ -592,7 +596,7 @@
           <h3 class="text-lg font-bold mt-4"><button class="w-8 h-8 bg-dark-700 rounded transition"
               disabled="true">&#128295;</button> 设置界面说明</h3>
           <div class="space-y-3 text-gray-300">
-            <p>通过调整以下三个参数，你可以让模拟器的输出尽可能贴近真实的BPM信号——包括UTC、时码<strong>*</strong>、UT1和台站呼号。</p>
+            <p>通过调整以下设置，你可以让模拟器的输出尽可能贴近真实的BPM信号——包括UTC、时码<strong>*</strong>、UT1和台站呼号。</p>
             <div class="text-gray-400 text-xs space-y-1">
               <strong>*作者注：</strong>
               说实话，我自己也从未真正听到过真实的BPM时码信号——或者说，它几乎总是被WWV/H的时码副载波淹没。这个模拟器完全是照着已发表的论文（参考文献[1]）把时码的编码和发播规则“翻译”成声音的。做它的初衷也很简单——就是想<strong>亲耳听听BPM的时码到底长什么样</strong>，也就是秒脉冲之间那125Hz的低频“嗡嗡”声，顺便了解一下它的工作原理。<br><br>
@@ -603,13 +607,18 @@
             <p> <strong class="text-blue-400">本地时钟偏移<span
                   class="text-white">&#9201;</span>：</strong>UTC信号的准确性取决于你的设备时钟。一般而言，你使用设备的时钟频率与现实世界的频率并不完全一致，这会导致设备时钟长时间运行后与真实时间产生偏移。联网设备一般会使用NTP协议与互联网进行时间同步消除这个偏移，但这个同步动作并不是实时的，这仍然会导致你设备的时钟和真实时间存在随机偏移。你可以通过调整该偏移，或者点击<button
                 class="text-sm px-1 bg-blue-600 text-white rounded transition"
-                disabled="true">SYNC</button>按钮实时地与互联网时间进行同步。<span class="text-pink-400">（第一步：同步本地时钟。）</span><br>
+                disabled="true">SYNC</button>按钮实时地与互联网时间进行同步。<br>
               该偏移同步只影响网页展示与你收听到的脉冲信号，不会更改你设备上的时钟。受网络连接的随机性影响，单次同步并不总能获取足够精确的偏移量，同步结果会附带显示网络误差。你可以多次尝试同步，直到短时间内多次同步的偏移量保持稳定（仅个位数毫秒的变动），且网络误差足够小，此时的偏移量才足够准确。
             </p>
             <p> <strong
-                class="text-gray-400">延迟补偿(ms)：</strong>该参数用于抵消音频链路的固定延迟。在你完成本地时钟与互联网时间的稳定同步后，模拟器的声音输出仍可能存在一个稳定的滞后，这一般由浏览器音频处理、系统渲染链路等因素共同引入。<span
-                class="text-pink-400">（第二步：调整此值，直到声音与真实BPM信号对齐。）</span><br>
+                class="text-gray-400">延迟补偿(ms)：</strong>该参数用于抵消音频链路的固定延迟。在你完成本地时钟与互联网时间的稳定同步后，模拟器的声音输出仍可能存在一个稳定的滞后，这一般由浏览器音频处理、系统渲染链路等因素共同引入。<br>
               只要浏览器和操作系统的音频输出设置不变，该值通常不需要频繁调整。如果音频输出设备或其配置发生变化（例如改用蓝牙耳机、更改采样率或缓冲区大小等），延迟可能会改变，需要重新校准。三个参数都调整到位后，如果日后发现信号再次偏移，通常只需重新同步本地时钟即可恢复对齐，无需改动延迟补偿。
+            </p>
+            <p><strong class="text-yellow-300">UTC锁定<span class="text-white">&#128274;</span>：</strong><strong>勾选</strong>后，模拟器<strong>只播放
+                UTC+时码信号</strong>，忽略无调制载波、UT1和台站呼号。此时 下方的 DUT1 设置区域自动隐藏，UT1时间指示变为锁形图标 <span
+                class="text-yellow-400 font-mono">UTC&#128274;</span>。<br>
+              <span class="text-yellow-400">注意：</span>此模式<strong>不遵循 BPM
+                真实发播格式</strong>，仅用于专注收听时码副载波，不可用于验证真实信号流程。
             </p>
             <p> <strong
                 class="text-green-400">DUT1：</strong>UT1改正值。我们日常使用的UTC时间是原子钟生成的均匀时间，而UT1是基于地球自转的天文时间，由于地球自转速度并不均匀，两者之间会存在微小的差异。EOP（地球定向参数）文件就记录了这个差异的最新观测值，通过它我们可以生成准确的UT1授时信号，同时也能在时码中嵌入正确的UT1改正值。<br>
@@ -621,7 +630,6 @@
                 发布的快速服务/预测公报，包含地球定向参数（包括
                 UT1-UTC）的测量值和未来预测。你可以直接保存该文件（右键另存为），或者打开后保存内容为文本文件，然后用同一个文件选择器上传。模拟器能自动识别两种格式，并更新DUT1。</li>
             </ul>
-            <span class="text-pink-400">（第三步：如需对齐UT1信号，下载任一文件并上传。）</span><br>
             为了避免这个差异持续扩大，国际地球自转服务（IERS）会通过插入闰秒的方式调整UTC，将两者的差值控制在0.9秒以内。需要说明的是，当前模拟器无法实现时码中的闰秒预告功能，也无法模拟闰秒发生时的特殊信号。 </p>
           </div>
           <!-- 版权与隐私声明 -->
@@ -701,7 +709,7 @@
       </div>
       <div class="flex items-center gap-1 text-gray-400">
         <span id="ut1_time" class="text-green-400 font-mono">--:--:--</span>
-        <span>&#127760;</span>
+        <span id="ut1_indicator">&#128301;</span>
       </div>
     </div>
 
@@ -746,8 +754,15 @@
             class="text-gray-400 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono text-sm">-10ms</button>
         </div>
       </div>
+      <!-- Force UTC+TC -->
+      <div class="border-t border-dark-700 pt-4 mb-2">
+        <label class="flex items-center gap-2 cursor-pointer">
+          <input type="checkbox" id="force_utc_mode" class="w-5 h-5 rounded">
+          <span class="text-sm text-yellow-300">&#128274;UTC</span>
+        </label>
+      </div>
       <!-- DUT1 offset -->
-      <div>
+      <div id="dut1_section">
         <div class="flex items-start gap-3 flex-wrap mb-3">
           <div class="flex items-center text-lg gap-2">
             <span class="font-bold">DUT1</span>
@@ -885,6 +900,7 @@
     let active125Hz = null;
     let last1kHzState = false;
     let last125HzState = false;
+    let forceUtcOnly = false;
     let localOffset = 0;
     let networkCompensation = 0;
     window.bpmDUT1 = 0;
@@ -925,6 +941,7 @@
         localOffset: localOffset,
         networkCompensation: networkCompensation,
         dut1: window.bpmDUT1,
+        forceUtcOnly: forceUtcOnly,
       };
       try {
         localStorage.setItem('bpm_simulator_settings', JSON.stringify(settings));
@@ -960,6 +977,10 @@
           if (typeof settings.dut1 === 'number') {
             window.bpmDUT1 = settings.dut1;
             window.bpmDUT1 = Math.max(-999, Math.min(999, window.bpmDUT1));
+          }
+          if (typeof settings.forceUtcOnly === 'boolean') {
+            forceUtcOnly = settings.forceUtcOnly;
+            document.getElementById('force_utc_mode').checked = forceUtcOnly;
           }
         }
       } catch (e) {
@@ -1035,7 +1056,7 @@
       return bits;
     }
     function isInTimeCodePeriod(minute) {
-      return (minute >= 0 && minute < 10) ||
+      return forceUtcOnly ? true : (minute >= 0 && minute < 10) ||
         (minute >= 15 && minute < 25) ||
         (minute >= 30 && minute < 40) ||
         (minute >= 45 && minute < 55);
@@ -1153,7 +1174,7 @@
       const second = utcNow.getUTCSeconds();
       const ms = utcNow.getUTCMilliseconds();
       const minute = utcNow.getUTCMinutes();
-      const period = getPeriodType(minute, second, ms);
+      const period = forceUtcOnly ? 'utc' : getPeriodType(minute, second, ms);
       let target1kHz = false, target125Hz = false;
 
       if (period === 'utc') {
@@ -1161,7 +1182,7 @@
         const pulseSecondMod = pulseSecond % 60;
         let pulseDuration;
         if (pulseSecondMod == 0) {
-          if ((minute == 9 && second == 59) || (minute == 39 && second == 59)) {
+          if (!forceUtcOnly && ((minute == 9 && second == 59) || (minute == 39 && second == 59))) {
             target1kHz = false;
             last1kHzState = false;
             last125HzState = false;
@@ -1250,14 +1271,24 @@
       const msStr = String(utcNow.getUTCMilliseconds()).padStart(3, '0');
       const showMs = document.getElementById('show_ms').checked;
       document.getElementById('time_display').innerHTML = `${hours}:${mins}:${secs}` + (showMs ? `<span id="ms_display" class="text-3xl sm:text-4xl text-gray-400">.${msStr}</span>` : '');
-      const ut1Now = new Date(utcNow.getTime() + window.bpmDUT1);
-      if (showMs) document.getElementById('ut1_time').textContent = ut1Now.toISOString().substr(11, 12);
-      else document.getElementById('ut1_time').textContent = ut1Now.toISOString().substr(11, 8);
+      if (forceUtcOnly) {
+        document.getElementById('ut1_indicator').innerHTML = '&#128274;';
+        document.getElementById('ut1_time').innerHTML = 'UTC';
+        document.getElementById('ut1_time').classList.add('text-yellow-400');
+        document.getElementById('ut1_time').classList.remove('text-green-400');
+      } else {
+        document.getElementById('ut1_indicator').innerHTML = '&#128301;';
+        document.getElementById('ut1_time').classList.remove('text-yellow-400');
+        document.getElementById('ut1_time').classList.add('text-green-400');
+        const ut1Now = new Date(utcNow.getTime() + window.bpmDUT1);
+        if (showMs) document.getElementById('ut1_time').textContent = ut1Now.toISOString().substr(11, 12);
+        else document.getElementById('ut1_time').textContent = ut1Now.toISOString().substr(11, 8);
+      }
 
       const second = utcNow.getUTCSeconds();
       const ms = utcNow.getUTCMilliseconds();
       const minute = utcNow.getUTCMinutes();
-      const period = getPeriodType(minute, second, ms);
+      const period = forceUtcOnly ? 'utc' : getPeriodType(minute, second, ms);
       let periodName = '';
       if (period === 'utc') {
         const volPercent = Math.round(lowFreqVolume * 100);
@@ -1292,6 +1323,26 @@
       document.getElementById('network_comp_val').textContent = `(+${networkCompensation}ms)`;
       document.getElementById('dut1_val').textContent = (dut1Sec > 0 ? '+' : '') + dut1Sec.toFixed(3);
       saveSettings();
+    }
+
+    function syncForceUtcUI() {
+      const dut1Section = document.getElementById('dut1_section');
+      if (dut1Section) {
+        dut1Section.style.display = forceUtcOnly ? 'none' : 'block';
+      }
+      const ut1indicator = document.getElementById('ut1_indicator');
+      const ut1Span = document.getElementById('ut1_time');
+      if (forceUtcOnly) {
+        ut1indicator.innerHTML = '&#128274;';
+        ut1Span.innerHTML = 'UTC';
+        ut1Span.classList.add('text-yellow-400');
+        ut1Span.classList.remove('text-green-400');
+      } else {
+        ut1indicator.innerHTML = '&#128301;';
+        ut1Span.innerHTML = '--:--:--';
+        ut1Span.classList.remove('text-yellow-400');
+        ut1Span.classList.add('text-green-400');
+      }
     }
 
     // NTSC and IERS parsers (unchanged)
@@ -1518,6 +1569,17 @@
           updateOffsetDisplay();
         });
       });
+
+      const forceCheckbox = document.getElementById('force_utc_mode');
+      if (forceCheckbox) {
+        forceCheckbox.addEventListener('change', function (e) {
+          forceUtcOnly = e.target.checked;
+          saveSettings();
+          syncForceUtcUI();
+          updateTimeDisplay();
+        });
+      }
+      syncForceUtcUI();
 
       // EOP file upload (supports both NTSC and IERS)
       document.getElementById('eop_file').addEventListener('change', function (e) {

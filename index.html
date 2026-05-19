@@ -55,9 +55,9 @@
           </p>
 
           <div class="bg-yellow-900/30 border border-yellow-600/50 p-2 rounded text-yellow-200 text-xs">
-            <strong>Note:</strong> When this page runs in the background (e.g., another browser tab is active), browsers
-            may reduce timer precision and throttle audio processing to save resources. This can cause audible delay or
-            glitches. <strong>Please keep this page in the foreground</strong> for the best experience.
+            <strong>Note:</strong> When this page runs in the background, browsers may still reduce timer precision
+            and throttle audio processing. This simulator uses a silent audio stream to mitigate the effect,
+            but for best accuracy please keep the page in the foreground.
           </div>
 
           <div class="bg-dark-700/30 p-3 rounded-lg">
@@ -364,6 +364,12 @@
             be noted that the current simulator cannot implement the leap second announcement function in the time code,
             nor can it simulate the special signals when a leap second occurs.
             </p>
+            <p><strong class="text-gray-400">Shortwave Background Noise <span
+                  class="text-white">&#9889;</span>:</strong> The slider at the bottom of the settings panel adds a
+              soft, band‑limited hiss (filtered below 4 kHz). It uses a <strong>separate volume control</strong>
+              (independent of the main volume slider <strong>below the play button</strong>) and helps keep your
+              Bluetooth audio path active, preventing the very short (10 ms) second ticks from being swallowed. Adjust
+              the level from silent (far left) to your comfortable loudness (drag right).</p>
           </div>
 
           <!-- Copyright & Privacy Statement -->
@@ -399,7 +405,8 @@
 
           <div class="bg-yellow-900/30 border border-yellow-600/50 p-2 rounded text-yellow-200 text-xs">
             <strong>注意：</strong>
-            当本页面在后台运行时（例如打开了其他浏览器标签页），浏览器为了节省资源会降低定时器精度并限制音频处理，可能导致声音延迟或卡顿。<strong>请保持本页面在前台运行</strong>以获得最佳体验。
+            当本页面在后台运行时，浏览器仍可能降低定时器精度并限制音频处理。
+            本页面使用静音音频流缓解此问题，但为获得最佳精度，仍建议保持页面在前台。
           </div>
 
           <div class="bg-dark-700/30 p-3 rounded-lg">
@@ -643,6 +650,10 @@
                 UT1-UTC）的测量值和未来预测。你可以直接保存该文件（右键另存为），或者打开后保存内容为文本文件，然后用同一个文件选择器上传。模拟器能自动识别两种格式，并更新DUT1。</li>
             </ul>
             为了避免这个差异持续扩大，国际地球自转服务（IERS）会通过插入闰秒的方式调整UTC，将两者的差值控制在0.9秒以内。需要说明的是，当前模拟器无法实现时码中的闰秒预告功能，也无法模拟闰秒发生时的特殊信号。 </p>
+            <p><strong class="text-gray-400">短波背景噪声<span
+                  class="text-white">&#9889;</span>：</strong>设置面板底部的滑块可添加一段柔和的、4 kHz
+              以下频宽的嘶声，其<strong>音量独立控制</strong>（不受播放按钮<strong>下方</strong>主音量滑块影响）。它能保持蓝牙音频通道持续激活，避免极短的 10 ms
+              秒脉冲被吞掉。请从最左（静音）向右调节至你感觉舒适的音量。</p>
           </div>
           <!-- 版权与隐私声明 -->
           <h3 class="text-lg font-bold mt-4">版权与隐私声明</h3>
@@ -708,7 +719,7 @@
         <span class="text-gray-400 text-sm text-left w-6">&#128264;</span>
         <input type="range" id="volume_slider" min="0" max="1" step="0.01" value="0.5"
           class="w-48 sm:w-64 h-2 bg-dark-700 rounded-lg appearance-none cursor-pointer accent-blue-500">
-        <span id="volume_val" class="text-gray-400 text-sm w-9 text-right font-mono"> 50%</span>
+        <pre id="volume_val" class="text-gray-400 text-sm text-right font-mono"> 50%</pre>
       </div>
     </div>
 
@@ -815,6 +826,13 @@
             class="text-green-400 py-2 bg-dark-700 rounded-lg hover:bg-dark-600 transition text-center font-mono">-0.001</button>
         </div>
       </div>
+      <!-- Shortwave Background Noise -->
+      <div class="flex items-center gap-3 py-2 border-t border-dark-700 pt-4">
+        <span class="text-gray-400 text-sm w-6">&#9889;</span>
+        <input type="range" id="noise_volume" min="0" max="1" step="0.01" value="0.15"
+          class="flex-1 h-2 bg-dark-700 rounded-lg appearance-none cursor-pointer accent-blue-500">
+        <pre id="noise_volume_percent" class="text-gray-400 text-xs font-mono w-6 text-right">  0</pre>
+      </div>
     </div>
   </div>
 
@@ -909,8 +927,12 @@
     let voiceBuffer = null;
     let voiceSource = null;
     let voiceGain = null;
+    let noiseSource = null;
+    let noiseFilter = null;
+    let noiseGainNode = null;
     let volume = 0.5;
     let lowFreqVolume = 0.8;
+    let noiseVolume = 0.0;
     let isRunning = false;
     let active1kHz = null;
     let active125Hz = null;
@@ -954,6 +976,7 @@
         show_ms: document.getElementById('show_ms').checked,
         low_freq_volume: lowFreqVolume,
         volume: volume,
+        noiseVolume: noiseVolume,
         localOffset: localOffset,
         networkCompensation: networkCompensation,
         dut1: window.bpmDUT1,
@@ -982,6 +1005,12 @@
             volume = settings.volume;
             document.getElementById('volume_slider').value = volume;
             document.getElementById('volume_val').innerHTML = (Math.round(volume * 100).toString().padStart(3, ' ') + '%');
+          }
+          if (typeof settings.noiseVolume === 'number') {
+            noiseVolume = Math.min(1, Math.max(0, settings.noiseVolume));
+            const noiseSlider = document.getElementById('noise_volume');
+            if (noiseSlider) noiseSlider.value = noiseVolume;
+            updateNoisePercentDisplay(noiseVolume);
           }
           if (typeof settings.localOffset === 'number') {
             localOffset = settings.localOffset;
@@ -1107,7 +1136,7 @@
       osc.type = 'sine';
       osc.frequency.value = 1000;
       const now = audioContext.currentTime;
-      const fadeTime = 0.001;
+      const fadeTime = 0.0005;
       gain.gain.setValueAtTime(0, now);
       gain.gain.linearRampToValueAtTime(0.56 * volume, now + fadeTime);
       gain.gain.setValueAtTime(0.56 * volume, now + durationMs / 1000 - fadeTime);
@@ -1132,7 +1161,7 @@
       osc.type = 'sine';
       osc.frequency.value = 125;
       const now = audioContext.currentTime;
-      const fadeTime = 0.001;
+      const fadeTime = 0.0005;
       const amplitude = 0.35 * volume * lowFreqVolume;
       gain.gain.setValueAtTime(0, now);
       gain.gain.linearRampToValueAtTime(amplitude, now + fadeTime);
@@ -1179,6 +1208,44 @@
         voiceSource = null;
         voiceGain = null;
       };
+    }
+    function initNoise() {
+      if (!audioContext) return;
+      if (noiseSource) return;
+
+      const bufferSize = audioContext.sampleRate * 2;
+      const buffer = audioContext.createBuffer(1, bufferSize, audioContext.sampleRate);
+      const data = buffer.getChannelData(0);
+      for (let i = 0; i < bufferSize; i++) {
+        data[i] = Math.random() * 2 - 1;
+      }
+      const whiteNoiseSource = audioContext.createBufferSource();
+      whiteNoiseSource.buffer = buffer;
+      whiteNoiseSource.loop = true;
+
+      const filter1 = audioContext.createBiquadFilter();
+      filter1.type = 'lowpass';
+      filter1.frequency.value = 1500;
+      filter1.Q.value = 0.7;
+
+      const filter2 = audioContext.createBiquadFilter();
+      filter2.type = 'lowpass';
+      filter2.frequency.value = 1500;
+      filter2.Q.value = 0.7;
+
+      const gainNode = audioContext.createGain();
+      gainNode.gain.value = Math.pow(noiseVolume, 3);
+
+      whiteNoiseSource.connect(filter1);
+      filter1.connect(filter2);
+      filter2.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+
+      whiteNoiseSource.start();
+
+      noiseSource = whiteNoiseSource;
+      noiseFilter = filter1;
+      noiseGainNode = gainNode;
     }
 
     // Audio update loop
@@ -1289,7 +1356,7 @@
       document.getElementById('time_display').innerHTML = `${hours}:${mins}:${secs}` + (showMs ? `<span id="ms_display" class="text-3xl sm:text-4xl text-gray-400">.${msStr}</span>` : '');
       if (forceUtcOnly) {
         document.getElementById('ut1_indicator').innerHTML = '&#128274;';
-        document.getElementById('ut1_time').innerHTML = 'UTC';
+        document.getElementById('ut1_time').innerHTML = '';
         document.getElementById('ut1_time').classList.add('text-yellow-400');
         document.getElementById('ut1_time').classList.remove('text-green-400');
       } else {
@@ -1329,6 +1396,22 @@
             document.getElementById('eop_status').classList.add('text-green-400');
           }
         }
+      }
+    }
+
+    function updateNoiseVolume(value) {
+      if (noiseGainNode) {
+        noiseGainNode.gain.value = Math.pow(value, 3);
+      }
+      noiseVolume = value;
+      updateNoisePercentDisplay(value);
+      saveSettings();
+    }
+    function updateNoisePercentDisplay(value) {
+      const percentSpan = document.getElementById('noise_volume_percent');
+      if (percentSpan) {
+        const percent = Math.round(value * 100);
+        percentSpan.textContent = percent.toString().padStart(3, '');
       }
     }
 
@@ -1375,7 +1458,7 @@
       const ut1Span = document.getElementById('ut1_time');
       if (forceUtcOnly) {
         ut1indicator.innerHTML = '&#128274;';
-        ut1Span.innerHTML = 'UTC';
+        ut1Span.innerHTML = '';
         ut1Span.classList.add('text-yellow-400');
         ut1Span.classList.remove('text-green-400');
       } else {
@@ -1538,7 +1621,7 @@
     // Start/Stop
     function start() {
       try {
-        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        audioContext = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: 8000 });
         requestWakeLock();
         isRunning = true;
         active1kHz = null;
@@ -1548,6 +1631,10 @@
         voiceSource = null;
         voiceGain = null;
         preloadVoiceAudio();
+        initNoise();
+        if (document.hidden) {
+          startBackgroundKeepAlive();
+        }
         updateTimer = setDriftlessInterval(updateAudio, 1);
         document.getElementById('start_btn').classList.add('hidden');
         document.getElementById('stop_btn').classList.remove('hidden');
@@ -1566,7 +1653,14 @@
       if (active1kHz) { try { active1kHz.stop(); } catch (e) { } active1kHz = null; }
       if (active125Hz) { try { active125Hz.stop(); } catch (e) { } active125Hz = null; }
       if (voiceSource) { try { voiceSource.stop(); } catch (e) { } voiceSource = null; voiceGain = null; }
+      if (noiseSource) {
+        try { noiseSource.stop(); } catch (e) { }
+        noiseSource = null;
+        noiseFilter = null;
+        noiseGainNode = null;
+      }
       if (audioContext) { audioContext.close(); audioContext = null; }
+      stopBackgroundKeepAlive();
       releaseWakeLock();
       document.getElementById('start_btn').classList.remove('hidden');
       document.getElementById('stop_btn').classList.add('hidden');
@@ -1576,6 +1670,7 @@
       if (audioHeartbeat) return;
 
       const keepAliveCtx = new AudioContext();
+      window.keepAliveCtx = keepAliveCtx;
       const gainNode = keepAliveCtx.createGain();
       gainNode.gain.value = 0;
       gainNode.connect(keepAliveCtx.destination);
@@ -1594,6 +1689,10 @@
       if (audioHeartbeat) {
         audioHeartbeat.stop();
         audioHeartbeat = null;
+      }
+      if (window.keepAliveCtx) {
+        window.keepAliveCtx.close().catch(e => console.warn('keepAliveCtx close failed', e));
+        window.keepAliveCtx = null;
       }
     }
 
@@ -1661,6 +1760,15 @@
       });
       document.getElementById('toggle_settings').onclick = () => { document.getElementById('settings_panel').classList.toggle('hidden'); saveSettings(); };
       document.getElementById('sync_btn').onclick = autoSyncTime;
+
+      const noiseSlider = document.getElementById('noise_volume');
+      if (noiseSlider) {
+        noiseSlider.value = noiseVolume;
+        noiseSlider.addEventListener('input', function (e) {
+          const val = parseFloat(e.target.value);
+          updateNoiseVolume(val);
+        });
+      }
 
       // offset buttons
       document.querySelectorAll('[data-offset]').forEach(btn => {
